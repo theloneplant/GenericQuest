@@ -79,7 +79,7 @@ void MainMenu::start(float delta)
 	{
 		if (temp == 0)
 		{
-			cout << "DSFNBVLSDNFGBLKDFNGB";
+			cout << "NOPE";
 		}
 		if (temp == 1)
 		{
