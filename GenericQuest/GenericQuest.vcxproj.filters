@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Branches">
+      <UniqueIdentifier>{22c7a0ae-6dd0-40f2-94bb-d6c669dd467a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Misc">
+      <UniqueIdentifier>{2dba2d74-fe76-43df-88b8-766321b08bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO">
+      <UniqueIdentifier>{fe432d0f-077f-4a10-9f10-e15fefb9899b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Canvas">
+      <UniqueIdentifier>{fba5594a-d1ae-4f02-bed1-52d193f2f422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branches">
+      <UniqueIdentifier>{960c0431-d5ef-40cc-80a9-da7df1f20b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Canvas">
+      <UniqueIdentifier>{9dafe671-18a4-4258-b401-783233e643e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{a186b4fd-c056-4e4b-b200-9b94201bcecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{d3684304-c641-4594-a4b4-75adf460da49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors">
+      <UniqueIdentifier>{041dc093-2ff9-43c9-8d62-c0c9f0d57246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors\Frames">
+      <UniqueIdentifier>{aade5d5d-3429-41e0-8ebe-291c10c07a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors\Menu">
+      <UniqueIdentifier>{faa273df-2955-4c21-8d38-cf0d1711317f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors">
+      <UniqueIdentifier>{8f2a87ac-ea5d-46a3-b5d2-a662e1e98919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Frames">
+      <UniqueIdentifier>{84001687-4932-4d02-aa1e-138764fc5eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Menu">
+      <UniqueIdentifier>{ae98d7fd-dc8a-4af0-b629-30497fe3c8f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors\Frames\Text">
+      <UniqueIdentifier>{d622194e-0707-4e57-8d14-1b6fea31d8fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors\Frames\Animations">
+      <UniqueIdentifier>{6ca203d4-f4b7-4fe2-b531-63e0daa2a27f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Frames\Animations">
+      <UniqueIdentifier>{fb57c2ce-e4c8-4744-b5e3-0287863b3040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Frames\Text">
+      <UniqueIdentifier>{feb1e865-c9db-4923-a45b-bb40d517f091}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Branches\GenericQuest">
+      <UniqueIdentifier>{c5700cbd-4f5d-468b-a9d3-f42d107022d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Branches\GenericQuest">
+      <UniqueIdentifier>{cd035ac8-9e4b-4c67-8543-4ac365c060b0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Branch.cpp">
+      <Filter>Source Files\Branches</Filter>
+    </ClCompile>
+    <ClCompile Include="BranchManager.cpp">
+      <Filter>Source Files\Branches</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Symbol.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>Source Files\Actors\Frames</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Actors\Frames\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="FileIO.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Actors\Frames\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Actors\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Branch.h">
+      <Filter>Header Files\Branches</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="FileIO.h">
+      <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="BranchManager.h">
+      <Filter>Header Files\Branches</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Dimension.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>Header Files\Actors\Frames</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Actors\Frames\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Symbol.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Tween.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Actors\Frames\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Actors\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

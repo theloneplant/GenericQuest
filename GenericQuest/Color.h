@@ -1,0 +1,45 @@
+#ifndef COLOR
+#define COLOR
+
+enum Color
+{
+	//Foreground Colors
+	FG_BLACK = 0x00,
+	FG_BLUE = 0x01,
+	FG_GREEN = 0x02,
+	FG_CYAN = 0x03,
+	FG_RED = 0x04,
+	FG_MAGENTA = 0x05,
+	FG_BROWN = 0x06,
+	FG_LIGHTGRAY = 0x07,
+	FG_DARKGRAY = 0x08,
+	FG_LIGHTBLUE = 0x09,
+	FG_LIGHTGREEN = 0x0A,
+	FG_LIGHTCYAN = 0x0B,
+	FG_LIGHTRED = 0x0C,
+	FG_LIGHTMAGENTA = 0x0D,
+	FG_YELLOW = 0x0E,
+	FG_WHITE = 0x0F,
+
+	//Background Colors
+	BG_BLACK = 0x00,
+	BG_BLUE = 0x10,
+	BG_GREEN = 0x20,
+	BG_CYAN = 0x30,
+	BG_RED = 0x40,
+	BG_MAGENTA = 0x50,
+	BG_BROWN = 0x60,
+	BG_LIGHTGRAY = 0x70,
+	BG_DARKGRAY = 0x80,
+	BG_LIGHTBLUE = 0x90,
+	BG_LIGHTGREEN = 0xA0,
+	BG_LIGHTCYAN = 0xB0,
+	BG_LIGHTRED = 0xC0,
+	BG_LIGHTMAGENTA = 0xD0,
+	BG_YELLOW = 0xE0,
+	BG_WHITE = 0xF0
+};
+
+int getColor(string c);
+
+#endif
