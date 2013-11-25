@@ -126,6 +126,9 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
     </ClCompile>
+    <ClCompile Include="Tween.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -186,7 +189,7 @@
       <Filter>Header Files\Characters</Filter>
     </ClInclude>
     <ClInclude Include="Tween.h">
-      <Filter>Header Files\Actors</Filter>
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

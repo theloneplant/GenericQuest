@@ -5,6 +5,7 @@
 #include "Text.h"
 #include "Animation.h"
 #include "Menu.h"
+#include "Tween.h"
 #include "BranchManager.h"
 #include "Branch.h"
 #include "MainMenu.h"
@@ -13,7 +14,6 @@ MainMenu::MainMenu(BranchManager* bm)
 {
 	Branch::Branch(bm);
 	/*
-	Text* text = new Text(false, "Test.txt", true, 15, 500, 1, 1);
 	Animation* chest = new Animation("pointer.anim", 15, 10, true, true, 15);
 	chest->play();
 
@@ -24,12 +24,13 @@ MainMenu::MainMenu(BranchManager* bm)
 	chest->setVelocity(0, 0);
 	*/
 
+	Text* text = new Text(true, "Test.txt", true, 15, 500, 1, 1);
 	Frame* title = new Frame("genericquest.fram", 1, 9);
 	Animation* sword = new Animation("genericsword.anim", 37, 1, true, false, 7);
 	sword->play();
 
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
-	Animation* cursor = new Animation("cursor.anim", 15, 10, true, true, 7);
+	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
 	cursor->play();
 	Frame* option1 = new Frame("option1.fram", 0, 0);
 	Frame* option2 = new Frame("option2.fram", 0, 2);
@@ -39,6 +40,10 @@ MainMenu::MainMenu(BranchManager* bm)
 	menu->addMember(option2);
 	menu->addMember(option3);
 
+	Tween* tween = new Tween(SinIn, menu, 50, 16, 1);
+	myTweens.push_back(tween);
+
+	myFrames.push_back(text);
 	myFrames.push_back(title);
 	myFrames.push_back(sword);
 	myFrames.push_back(menu);
@@ -88,6 +93,14 @@ void MainMenu::start(float delta)
 		{
 			exit(EXIT_SUCCESS);
 		}
+	}
+
+	for (int i = 0; i < myTweens.size(); i++)
+	{
+		if (myTweens.at(0)->isFinished())
+			myTweens.at(0)->restart();
+
+		myTweens.at(i)->update();
 	}
 
 	for(int i = 0; i < myFrames.size(); i++)

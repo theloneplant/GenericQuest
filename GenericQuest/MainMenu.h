@@ -8,6 +8,7 @@ class Canvas;
 class Text;
 class Frame;
 class Animation;
+class Menu;
 
 class MainMenu : public Branch
 {

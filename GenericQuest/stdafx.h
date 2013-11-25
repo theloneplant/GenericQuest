@@ -13,6 +13,7 @@
 
 using namespace std;
 
+const double pi = 3.1415926535897;
 const int CONSOLE_WIDTH = 80;
 const int CONSOLE_HEIGHT = 24;
 

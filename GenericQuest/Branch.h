@@ -6,7 +6,7 @@ class Symbol;
 class Timer;
 class Actor;
 class Frame;
-class Menu;
+class Tween;
 class Canvas;
 
 enum State{Start, Input, End}; //Used in main loop to only use a specific update
@@ -26,6 +26,7 @@ class Branch
 	protected:
 		BranchManager* manager;
 		vector<Actor*> myFrames;
+		vector<Tween*> myTweens;
 		State state;
 
 	private:

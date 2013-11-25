@@ -1,32 +1,35 @@
 #ifndef TWEEN
 #define TWEEN
 
-class Actor;
-class Vector;
-class Timer;
+#include "Actor.h"
+#include "Vector.h"
+#include "Timer.h"
 
-enum EaseType  {Linear, //Only one kind of linear easing
-				QuadIn, QuadOut, QuadInOut, 
-				SinIn, SinOut, SinInOut};
+enum EaseType  {Linear, SinIn, SinOut, SinInOut};
 
 static class Tween
 {
 	public:
-		Tween(Actor* myActor, int finalX, int finalY, int duration);
+		Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, int newDuration);
 		void update();
 		void easeLinear();
-		void easeQuadIn();
-		void easeQuadOut();
-		void easeQuadInOut();
 		void easeSinIn();
 		void easeSinOut();
 		void easeSinInOut();
-		void isFinished();
+		void restart();
+		void restart(int startX, int startY);
+		void restart(int startX, int startY, int finishX, int finishY);
+		Vector getStartPos();
+		Vector getFinalPos();
+		Timer getTimer();
+		bool isFinished();
 
 	private:
+		EaseType ease;
 		Actor* actor;
-		Vector startPos, finalPos;
+		Vector startPos, deltaPos;
 		Timer timer;
+		int duration;
 		bool finished;
 };
 
