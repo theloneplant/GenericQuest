@@ -40,7 +40,7 @@ MainMenu::MainMenu(BranchManager* bm)
 	menu->addMember(option2);
 	menu->addMember(option3);
 
-	Tween* tween = new Tween(SinIn, menu, 50, 16, 1);
+	Tween* tween = new Tween(SinInOut, menu, 50, 16, 1);
 	myTweens.push_back(tween);
 
 	myFrames.push_back(text);
