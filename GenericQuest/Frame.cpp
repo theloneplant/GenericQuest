@@ -9,6 +9,7 @@ Frame::Frame()
 
 	setDimension(0, 0);
 	frame.resize(0);
+	hidden = false;
 }
 
 Frame::Frame(int width, int height)
@@ -21,6 +22,7 @@ Frame::Frame(int width, int height)
 	{
 		frame.at(i).resize(width);
 	}
+	hidden = false;
 }
 
 Frame::Frame(string file, int x, int y)
@@ -28,6 +30,7 @@ Frame::Frame(string file, int x, int y)
 	Actor::Actor();
 	setPosition(x, y);
 	FileIO::buildFrame(file, frame, dimension);
+	hidden = false;
 }
 
 Frame::Frame(vector<vector<Symbol>> newFrame, int x, int y)
@@ -35,6 +38,7 @@ Frame::Frame(vector<vector<Symbol>> newFrame, int x, int y)
 	Actor::Actor();
 	setPosition(x, y);
 	frame = newFrame;
+	hidden = false;
 }
 
 Frame::~Frame()
@@ -48,7 +52,8 @@ void Frame::update(float delta)
 
 void Frame::draw(Canvas* canvas)
 {
-	canvas->overwrite(this);
+	if (!hidden)
+		canvas->overwrite(this);
 }
 
 void Frame::setFrame(vector<vector<Symbol>> newFrame)
@@ -86,6 +91,11 @@ void Frame::setAcceleration(float x, float y)
 	Actor::setAcceleration(x, y);
 }
 
+void Frame::setHidden(bool newHidden)
+{
+	hidden = newHidden;
+}
+
 vector<vector<Symbol>> Frame::getFrame()
 {
 	return frame;
@@ -114,4 +124,9 @@ Vector Frame::getVelocity()
 Vector Frame::getAcceleration()
 {
 	return acceleration;
+}
+
+bool Frame::isHidden()
+{
+	return hidden;
 }

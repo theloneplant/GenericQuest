@@ -10,7 +10,7 @@ enum EaseType  {Linear, SinIn, SinOut, SinInOut};
 static class Tween
 {
 	public:
-		Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, int newDuration);
+		Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float newDuration);
 		void update();
 		void easeLinear();
 		void easeSinIn();
@@ -29,7 +29,7 @@ static class Tween
 		Actor* actor;
 		Vector startPos, deltaPos;
 		Timer timer;
-		int duration;
+		float duration;
 		bool finished;
 };
 

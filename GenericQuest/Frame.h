@@ -20,15 +20,18 @@ class Frame : public Actor
 		virtual void setPosition(int x, int y);
 		virtual void setVelocity(float x, float y);
 		virtual void setAcceleration(float x, float y);
+		virtual void setHidden(bool newHidden);
 		virtual Symbol getSymbol(int x, int y);
 		virtual vector<vector<Symbol>> getFrame();
 		virtual Dimension getDimension();
 		virtual Vector getPosition();
 		virtual Vector getVelocity();
 		virtual Vector getAcceleration();
+		virtual bool isHidden();
 
 	protected:
 		vector<vector<Symbol>> frame;
+		bool hidden;
 
 	private:
 		Frame(const Frame&);

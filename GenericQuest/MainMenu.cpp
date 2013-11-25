@@ -13,6 +13,7 @@
 MainMenu::MainMenu(BranchManager* bm)
 {
 	Branch::Branch(bm);
+	timer.reset();
 	/*
 	Animation* chest = new Animation("pointer.anim", 15, 10, true, true, 15);
 	chest->play();
@@ -24,10 +25,9 @@ MainMenu::MainMenu(BranchManager* bm)
 	chest->setVelocity(0, 0);
 	*/
 
-	Text* text = new Text(true, "Test.txt", true, 15, 500, 1, 1);
-	Frame* title = new Frame("genericquest.fram", 1, 9);
-	Animation* sword = new Animation("genericsword.anim", 37, 1, true, false, 7);
-	sword->play();
+	//Text* text = new Text(true, "Test.txt", true, 15, 500, 1, 1);
+	title = new Frame("genericquest.fram", 1, 9);
+	sword = new Animation("genericsword.anim", 37, -40, true, false, 7);
 
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
@@ -39,11 +39,12 @@ MainMenu::MainMenu(BranchManager* bm)
 	menu = new Menu(message, cursor, option1, 20, 16, 72, 80);
 	menu->addMember(option2);
 	menu->addMember(option3);
+	menu->setHidden(true);
 
-	Tween* tween = new Tween(SinInOut, menu, 50, 16, 1);
+	Tween* tween = new Tween(SinIn, sword, 37, 1, .75);
 	myTweens.push_back(tween);
 
-	myFrames.push_back(text);
+	//myFrames.push_back(text);
 	myFrames.push_back(title);
 	myFrames.push_back(sword);
 	myFrames.push_back(menu);
@@ -79,6 +80,34 @@ void MainMenu::draw(Canvas* canvas)
 
 void MainMenu::start(float delta)
 {
+	if (sword->isFinished())
+	{
+		state = Input;
+		menu->setHidden(false);
+
+		while (_kbhit())
+		{
+			_getch();
+		}
+	}
+
+	for (int i = 0; i < myTweens.size(); i++)
+	{
+		if (myTweens.at(0)->isFinished())
+			sword->play();
+
+		myTweens.at(i)->update();
+	}
+
+	for(int i = 0; i < myFrames.size(); i++)
+	{
+		myFrames.at(i)->update(delta);
+		//myFrames.at(i)->setPosition(30 + 5 * (i + 2) * sin(static_cast<double>(GetTickCount()) / 300 + ((i + 1) * 90)), (i) * 3 + 1);
+	}
+}
+
+void MainMenu::input(float delta)
+{
 	int temp = menu->input();
 	if (temp != -1)
 	{
@@ -95,23 +124,11 @@ void MainMenu::start(float delta)
 		}
 	}
 
-	for (int i = 0; i < myTweens.size(); i++)
-	{
-		if (myTweens.at(0)->isFinished())
-			myTweens.at(0)->restart();
-
-		myTweens.at(i)->update();
-	}
-
 	for(int i = 0; i < myFrames.size(); i++)
 	{
 		myFrames.at(i)->update(delta);
 		//myFrames.at(i)->setPosition(30 + 5 * (i + 2) * sin(static_cast<double>(GetTickCount()) / 300 + ((i + 1) * 90)), (i) * 3 + 1);
 	}
-}
-
-void MainMenu::input(float delta)
-{
 }
 
 void MainMenu::end(float delta)

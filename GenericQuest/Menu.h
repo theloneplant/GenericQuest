@@ -17,10 +17,12 @@ class Menu : public Actor
 		virtual void setPosition(int x, int y);
 		virtual void setVelocity(float x, float y);
 		virtual void setAcceleration(float x, float y);
+		virtual void setHidden(bool newHidden);
 		virtual Dimension getDimension();
 		virtual Vector getPosition();
 		virtual Vector getVelocity();
 		virtual Vector getAcceleration();
+		virtual bool isHidden();
 
 	private:
 		vector<Frame*> members;
@@ -28,6 +30,7 @@ class Menu : public Actor
 		Frame* cursor;
 		int focusedMember;
 		char up, down;
+		bool hidden;
 };
 
 #endif

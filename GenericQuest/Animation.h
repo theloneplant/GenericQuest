@@ -19,15 +19,17 @@ class Animation : public Frame
 		virtual void setPosition(int x, int y);
 		virtual void setVelocity(float x, float y);
 		virtual void setAcceleration(float x, float y);
+		virtual void setFinished(bool newFinished);
 		virtual Dimension getDimension();
 		virtual Vector getPosition();
 		virtual Vector getVelocity();
 		virtual Vector getAcceleration();
+		virtual bool isFinished();
 
 	private:
 		vector<Frame*> anim;
 		Timer timer;
 		int fps, currentFrame;
-		bool paused, loop, reverse, reversed;
+		bool paused, loop, reverse, reversed, finished;
 };
 #endif

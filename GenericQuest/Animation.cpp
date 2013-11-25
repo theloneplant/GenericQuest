@@ -16,10 +16,12 @@ Animation::Animation(string file, int x, int y, bool newLoop, bool newReverse, i
 	loop = newLoop; //Does the animation loop?
 	reverse = newReverse; //Does the animation reverse after looping?
 	fps = newFps;
+	finished = false;
 }
 
 Animation::Animation(string file, int x, int y)
 {
+	Actor::Actor();
 	setPosition(x, y);
 	FileIO::buildAnimation(file, anim, dimension);
 	currentFrame = 0;
@@ -28,6 +30,7 @@ Animation::Animation(string file, int x, int y)
 	loop = false;
 	reverse = false;
 	fps = 10;
+	finished = false;
 }
 
 Animation::~Animation()
@@ -57,6 +60,8 @@ void Animation::update(float delta)
 						reversed = true;
 					else if(loop)
 						currentFrame = 0;
+
+					finished = true;
 				}
 			}
 			else
@@ -89,7 +94,8 @@ void Animation::update(float delta)
 
 void Animation::draw(Canvas* canvas)
 {
-	anim.at(currentFrame)->draw(canvas);
+	if (!hidden)
+		anim.at(currentFrame)->draw(canvas);
 }
 
 void Animation::pause()
@@ -127,6 +133,11 @@ void Animation::setAcceleration(float x, float y)
 	Actor::setAcceleration(x, y);
 }
 
+void Animation::setFinished(bool newFinished)
+{
+	finished = newFinished;
+}
+
 Dimension Animation::getDimension()
 {
 	return dimension;
@@ -144,4 +155,9 @@ Vector Animation::getVelocity()
 Vector Animation::getAcceleration()
 {
 	return acceleration;
+}
+
+bool Animation::isFinished()
+{
+	return finished;
 }

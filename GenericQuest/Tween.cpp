@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Tween.h"
 
-Tween::Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, int newDuration)
+Tween::Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float newDuration)
 {
 	ease = newEase;
 	actor = myActor;

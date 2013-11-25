@@ -14,6 +14,7 @@ Menu::Menu(Frame* newMessage, Frame* newCursor, Frame* member, int x, int y, cha
 	focusedMember = 0;
 	up = newUp;
 	down = newDown;
+	hidden = false;
 }
 
 Menu::~Menu()
@@ -70,12 +71,15 @@ int Menu::input()
 
 void Menu::draw(Canvas* canvas)
 {
-	for (int i = 0; i < members.size(); i++)
+	if (!hidden)
 	{
-		canvas->overwrite(members.at(i), position.x, position.y);
+		for (int i = 0; i < members.size(); i++)
+		{
+			canvas->overwrite(members.at(i), position.x, position.y);
+		}
+		canvas->overwrite(message, position.x, position.y);
+		canvas->overwrite(cursor, position.x, position.y);
 	}
-	canvas->overwrite(message, position.x, position.y);
-	canvas->overwrite(cursor, position.x, position.y);
 }
 
 void Menu::addMember(Frame* newFrame)
@@ -103,6 +107,11 @@ void Menu::setAcceleration(float x, float y)
 	Actor::setAcceleration(x, y);
 }
 
+void Menu::setHidden(bool newHidden)
+{
+	hidden = newHidden;
+}
+
 Dimension Menu::getDimension()
 {
 	return dimension;
@@ -121,4 +130,9 @@ Vector Menu::getVelocity()
 Vector Menu::getAcceleration()
 {
 	return acceleration;
+}
+
+bool Menu::isHidden()
+{
+	return hidden;
 }
