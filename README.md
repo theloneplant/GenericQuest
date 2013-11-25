@@ -38,7 +38,7 @@ The goal of this project is to push the console window to its limit, by creating
 * Create Character and Enemy classes
 * Create basic combat system
 * ~~Add setColor() function inside of Frame/inherited classes~~
-* ~~__OPTIONAL__ Create Sequence class to chain movements together~~ __Built into Tween class__
+* ~~__OPTIONAL__ Create Sequence class to chain movements together~~ __Built into Tween class with reset() function__
 * __OPTIONAL__ Create Emitters/Particles
 * __OPTIONAL__ Create Layer system
-* __OPTIONAL__ Give branches the ability to move
+* __OPTIONAL__ ~~Give branches the ability to move~~ __Built into Tween class with add() function__
