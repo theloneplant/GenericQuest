@@ -20,6 +20,7 @@ static class Tween
 		void restart(int finalX, int finalY);
 		void add(Actor* actor);
 		void setEaseType(EaseType newEase);
+		void setDuration(float newDuration);
 		Vector getFinalPos();
 		Timer getTimer();
 		bool isFinished();

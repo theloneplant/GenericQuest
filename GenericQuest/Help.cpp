@@ -17,16 +17,16 @@ Help::Help(BranchManager* bm)
 	manager = bm;
 	timer.reset();
 
-	frame = new Frame("help.fram", 10, -20);
+	frame = new Frame("help.fram", 10, -15);
 
 	Text* message = new Text(false, "", true, 0, 0, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
 	cursor->play();
 	Text* option1 = new Text(false, "Back", true, 0, 0, 0, 0);
 
-	menu = new Menu(message, cursor, option1, 38, -7, 72, 80);
+	menu = new Menu(message, cursor, option1, 38, -2, 72, 80);
 
-	Tween* tween = new Tween(SinOut, frame, 10, 5, .5);
+	Tween* tween = new Tween(SinOut, frame, 10, 5, .75);
 	tween->add(menu);
 
 	myFrames.push_back(frame);
@@ -59,8 +59,9 @@ void Help::start(float delta)
 		if (input == 0)
 		{
 			state = End;
-			myTweens.at(0)->restart(10, -20);
+			myTweens.at(0)->restart(10, -18);
 			myTweens.at(0)->setEaseType(SinOut);
+			myTweens.at(0)->setDuration(.3);
 		}
 	}
 

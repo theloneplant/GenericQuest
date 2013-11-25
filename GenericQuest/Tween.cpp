@@ -124,6 +124,11 @@ void Tween::setEaseType(EaseType newEase)
 	ease = newEase;
 }
 
+void Tween::setDuration(float newDuration)
+{
+	duration = newDuration;
+}
+
 Vector Tween::getFinalPos()
 {
 	Vector final;
