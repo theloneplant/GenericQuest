@@ -35,6 +35,7 @@ The goal of this project is to push the console window to its limit, by creating
 * Create Input class
 * Create Motion Tweening system
 * Create Sequence class to chain movements together
+* Modify BranchManager to behave like a stack, pausing unfocused Branches w/ the ability to push/pop Branches.
 * Create Character and Enemy classes
 * Create basic combat system
 * Add setColor() function inside of Frame/inherited classes
