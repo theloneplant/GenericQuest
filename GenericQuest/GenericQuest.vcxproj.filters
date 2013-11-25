@@ -129,6 +129,9 @@
     <ClCompile Include="Tween.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
+    <ClCompile Include="Help.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Tween.h">
       <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Help.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

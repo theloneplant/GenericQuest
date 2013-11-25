@@ -13,7 +13,8 @@ class BranchManager
 		void update(float delta);
 		void draw(Canvas* canvas);
 		void swap(Branch* newBranch);
-		void add(Branch* newBranch);
+		void push(Branch* newBranch);
+		void pop();
 
 	private:
 		vector<Branch*> branches;

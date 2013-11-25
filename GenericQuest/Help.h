@@ -1,5 +1,5 @@
-#ifndef MAIN_MENU
-#define MAIN_MENU
+#ifndef HELP
+#define HELP
 
 #include "Timer.h"
 
@@ -12,11 +12,11 @@ class Frame;
 class Animation;
 class Menu;
 
-class MainMenu : public Branch
+class Help : public Branch
 {
     public:
-		MainMenu(BranchManager* bm);
-		~MainMenu();
+		Help(BranchManager* bm);
+		~Help();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -26,10 +26,9 @@ class MainMenu : public Branch
 	private:
 		Timer timer;
 		Menu* menu;
-		Frame* title;
-		Animation* sword;
+		Frame* frame;
 
-		MainMenu(const MainMenu&);
-		MainMenu& operator=(const MainMenu&);
+		Help(const Help&);
+		Help& operator=(const Help&);
 };
 #endif

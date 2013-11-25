@@ -4,10 +4,10 @@
 Tween::Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float newDuration)
 {
 	ease = newEase;
-	actor = myActor;
-	startPos = actor->getPosition();
-	deltaPos.x = finalX - startPos.x;
-	deltaPos.y = finalY - startPos.y;
+	actors.push_back(myActor);
+	actorPos.push_back(actors.at(0)->getPosition());
+	deltaPos.x = finalX - actors.at(0)->getPosition().x;
+	deltaPos.y = finalY - actors.at(0)->getPosition().y;
 	timer.reset();
 	duration = newDuration;
 	finished = false;
@@ -46,40 +46,52 @@ void Tween::easeLinear()
 {
 	int x, y;
 
-	x = deltaPos.x * timer.getTime() / duration + startPos.x;
-	y = deltaPos.y * timer.getTime() / duration + startPos.y;
+	x = deltaPos.x * timer.getTime() / duration;
+	y = deltaPos.y * timer.getTime() / duration;
 
-	actor->setPosition(x, y);
+	for (int i = 0; i < actors.size(); i++)
+	{
+		actors.at(i)->setPosition(x + actorPos.at(i).x, y + actorPos.at(i).y);
+	}
 }
 
 void Tween::easeSinIn()
 {
 	int x, y;
 
-	x = -deltaPos.x * (cos(pi / 2 * timer.getTime() / duration)) + deltaPos.x + startPos.x;
-	y = -deltaPos.y * (cos(pi / 2 * timer.getTime() / duration)) + deltaPos.y + startPos.y;
+	x = -deltaPos.x * (cos(pi / 2 * timer.getTime() / duration)) + deltaPos.x;
+	y = -deltaPos.y * (cos(pi / 2 * timer.getTime() / duration)) + deltaPos.y;
 
-	actor->setPosition(x, y);
+	for (int i = 0; i < actors.size(); i++)
+	{
+		actors.at(i)->setPosition(x + actorPos.at(i).x, y + actorPos.at(i).y);
+	}
 }
 
 void Tween::easeSinOut()
 {
 	int x, y;
 
-	x = deltaPos.x * (sin(pi / 2 * timer.getTime() / duration)) + startPos.x;
-	y = deltaPos.y * (sin(pi / 2 * timer.getTime() / duration)) + startPos.y;
+	x = deltaPos.x * (sin(pi / 2 * timer.getTime() / duration));
+	y = deltaPos.y * (sin(pi / 2 * timer.getTime() / duration));
 
-	actor->setPosition(x, y);
+	for (int i = 0; i < actors.size(); i++)
+	{
+		actors.at(i)->setPosition(x + actorPos.at(i).x, y + actorPos.at(i).y);
+	}
 }
 
 void Tween::easeSinInOut()
 {
 	int x, y;
 
-	x = -deltaPos.x / 2 * (cos(pi * timer.getTime() / duration) - 1) + startPos.x;
-	y = -deltaPos.y / 2 * (cos(pi * timer.getTime() / duration) - 1) + startPos.y;
+	x = -deltaPos.x / 2 * (cos(pi * timer.getTime() / duration) - 1);
+	y = -deltaPos.y / 2 * (cos(pi * timer.getTime() / duration) - 1);
 
-	actor->setPosition(x, y);
+	for (int i = 0; i < actors.size(); i++)
+	{
+		actors.at(i)->setPosition(x + actorPos.at(i).x, y + actorPos.at(i).y);
+	}
 }
 
 void Tween::restart()
@@ -88,29 +100,36 @@ void Tween::restart()
 	finished = false;
 }
 
-void Tween::restart(int startX, int startY)
+void Tween::restart(int finalX, int finalY)
 {
 	timer.reset();
 	finished = false;
+	deltaPos.x = finalX - actors.at(0)->getPosition().x;
+	deltaPos.y = finalY - actors.at(0)->getPosition().y;
+
+	for (int i = 0; i < actorPos.size(); i++)
+	{
+		actorPos.at(i) = actors.at(i)->getPosition();
+	}
 }
 
-void Tween::restart(int startX, int startY, int finishX, int finishY)
+void Tween::add(Actor* actor)
 {
-	timer.reset();
-	finished = false;
+	actors.push_back(actor);
+	actorPos.push_back(actor->getPosition());
 }
 
-Vector Tween::getStartPos()
+void Tween::setEaseType(EaseType newEase)
 {
-	return startPos;
+	ease = newEase;
 }
 
 Vector Tween::getFinalPos()
 {
 	Vector final;
 
-	final.x = startPos.x + deltaPos.x;
-	final.y = startPos.y + deltaPos.y;
+	final.x = deltaPos.x + actors.at(0)->getPosition().x;
+	final.y = deltaPos.y + actors.at(0)->getPosition().y;
 
 	return final;
 }

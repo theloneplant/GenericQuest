@@ -2,7 +2,6 @@
 #include "Canvas.h"
 #include "Symbol.h"
 #include "Frame.h"
-#include "Menu.h"
 #include "BranchManager.h"
 #include "Branch.h"
 
@@ -11,9 +10,10 @@ Branch::Branch()
 	state = Start;
 }
 
-Branch::Branch(BranchManager* bm) : manager(bm)
+Branch::Branch(BranchManager* bm)
 {
-	state = Start;
+	Branch::Branch();
+	manager = bm;
 }
 
 Branch::~Branch()

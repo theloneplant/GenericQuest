@@ -9,26 +9,19 @@
 #include "Tween.h"
 #include "BranchManager.h"
 #include "Branch.h"
+#include "Help.h"
 #include "MainMenu.h"
 
 MainMenu::MainMenu(BranchManager* bm)
 {
 	Branch::Branch(bm);
+	manager = bm;
 	timer.reset();
-	/*
-	Animation* chest = new Animation("pointer.anim", 15, 10, true, true, 15);
-	chest->play();
-
-	text->setVelocity(0, 0);
-	title->setAcceleration(0, 0);
-	title->setVelocity(0, 0);
-	chest->setAcceleration(0, 0);
-	chest->setVelocity(0, 0);
-	*/
 
 	//Text* text = new Text(true, "Test.txt", true, 15, 500, 1, 1);
 	title = new Frame("genericquest.fram", 1, 9);
 	sword = new Animation("genericsword.anim", 37, -40, true, false, 7);
+	sword->setForegroundColor(Color::FG_LIGHTMAGENTA);
 
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
@@ -41,12 +34,10 @@ MainMenu::MainMenu(BranchManager* bm)
 	menu->addMember(option2);
 	menu->addMember(option3);
 	menu->setHidden(true);
-	//menu->setForegroundColor(Color::FG_WHITE);
 
 	Tween* tween = new Tween(SinIn, sword, 37, 1, .75);
 	myTweens.push_back(tween);
 
-	//myFrames.push_back(text);
 	myFrames.push_back(title);
 	myFrames.push_back(sword);
 	myFrames.push_back(menu);
@@ -54,30 +45,17 @@ MainMenu::MainMenu(BranchManager* bm)
 
 MainMenu::~MainMenu()
 {
+	delete title, sword, menu;
 }
 
 void MainMenu::update(float delta)
 {
-	switch(state)
-	{
-		case Start:
-			start(delta);
-			break;
-		case Input:
-			input(delta);
-			break;
-		case End:
-			end(delta);
-			break;
-	}
+	Branch::update(delta);
 }
 
 void MainMenu::draw(Canvas* canvas)
 {
-	for(int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->draw(canvas);
-	}
+	Branch::draw(canvas);
 }
 
 void MainMenu::start(float delta)
@@ -119,6 +97,8 @@ void MainMenu::input(float delta)
 		}
 		if (temp == 1)
 		{
+			Help* help = new Help(manager);
+			manager->push(new Help(manager));
 		}
 		if (temp == 2)
 		{

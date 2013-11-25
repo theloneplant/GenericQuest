@@ -17,17 +17,18 @@ static class Tween
 		void easeSinOut();
 		void easeSinInOut();
 		void restart();
-		void restart(int startX, int startY);
-		void restart(int startX, int startY, int finishX, int finishY);
-		Vector getStartPos();
+		void restart(int finalX, int finalY);
+		void add(Actor* actor);
+		void setEaseType(EaseType newEase);
 		Vector getFinalPos();
 		Timer getTimer();
 		bool isFinished();
 
 	private:
 		EaseType ease;
-		Actor* actor;
-		Vector startPos, deltaPos;
+		vector<Actor*> actors;
+		vector<Vector> actorPos;
+		Vector deltaPos;
 		Timer timer;
 		float duration;
 		bool finished;

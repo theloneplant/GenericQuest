@@ -33,7 +33,7 @@ int main()
 
 	BranchManager bm;
 	MainMenu blah(&bm);
-	bm.add(&blah);
+	bm.push(&blah);
 	Canvas canvas;
 	Timer timer;
 	float delta = 0;

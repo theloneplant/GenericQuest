@@ -71,6 +71,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="Frame.cpp" />
+    <ClCompile Include="Help.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="Frame.h" />
+    <ClInclude Include="Help.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
