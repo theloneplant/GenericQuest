@@ -1,6 +1,8 @@
 # Generic Quest
 ######A Text Based Adventure for Windows
 -------------------------------------------
+__Author:__ Michael LaPlante
+
 __Language:__ C/C++
 
 __IDE:__ Microsoft Visual Studio 2010
