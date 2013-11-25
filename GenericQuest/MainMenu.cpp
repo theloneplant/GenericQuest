@@ -93,7 +93,7 @@ void MainMenu::start(float delta)
 	for(int i = 0; i < myFrames.size(); i++)
 	{
 		myFrames.at(i)->update(delta);
-		//myFrames.at(i)->setPosition(0 + 5 * (i + 2) * sin(static_cast<double>(GetTickCount()) / 300 + ((i + 1) * 90)), (i) * 3 + 1);
+		//myFrames.at(i)->setPosition(30 + 5 * (i + 2) * sin(static_cast<double>(GetTickCount()) / 300 + ((i + 1) * 90)), (i) * 3 + 1);
 	}
 }
 

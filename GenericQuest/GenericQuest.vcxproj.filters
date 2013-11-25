@@ -73,6 +73,9 @@
     <Filter Include="Header Files\Branches\GenericQuest">
       <UniqueIdentifier>{cd035ac8-9e4b-4c67-8543-4ac365c060b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Characters">
+      <UniqueIdentifier>{fe278f5e-fcb7-402f-9b23-b6a9d249f225}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -167,9 +170,6 @@
     <ClInclude Include="Actor.h">
       <Filter>Header Files\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="Tween.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Header Files\Actors\Frames\Text</Filter>
     </ClInclude>
@@ -178,6 +178,15 @@
     </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Tween.h">
+      <Filter>Header Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

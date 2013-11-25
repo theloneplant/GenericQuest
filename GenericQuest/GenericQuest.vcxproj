@@ -89,8 +89,10 @@
     <ClInclude Include="Branch.h" />
     <ClInclude Include="BranchManager.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Dimension.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Input.h" />
