@@ -15,6 +15,8 @@ class Animation : public Frame
 		virtual void draw(Canvas* canvas);
 		virtual void pause();
 		virtual void play();
+		virtual void setForegroundColor(int color);
+		virtual void setBackgroundColor(int color);
 		virtual void setDimension(int x, int y);
 		virtual void setPosition(int x, int y);
 		virtual void setVelocity(float x, float y);

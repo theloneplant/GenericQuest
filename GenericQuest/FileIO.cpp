@@ -212,15 +212,18 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 	}
 	else
 	{
-		Symbol symbol;
-		frame.resize(1);
-		for (int i = 0; i < file.length(); i++)
+		if (file.length() > 0)
 		{
-			symbol.setChar(file.at(i));
-			frame.at(0).push_back(symbol);
-		}
+			Symbol symbol;
+			frame.resize(1);
+			for (int i = 0; i < file.length(); i++)
+			{
+				symbol.setChar(file.at(i));
+				frame.at(0).push_back(symbol);
+			}
 
-		dim.x = frame.at(0).size();
-		dim.y = frame.size();
+			dim.x = frame.at(0).size();
+			dim.y = frame.size();
+		}
 	}
 }

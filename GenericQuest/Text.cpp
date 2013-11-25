@@ -9,7 +9,6 @@ Text::Text(bool useFile, string file, bool type, int newSpeed, int newPause, int
 {
 	Actor::Actor();
 	FileIO::buildText(useFile, file, text, dimension);
-	setDimension(text.at(0).size(), text.size());
 	frame.resize(text.size());
 	for (int i = 0; i < text.size(); i++)
 	{

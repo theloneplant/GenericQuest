@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Canvas.h"
 #include "Symbol.h"
+#include "Color.h"
 #include "Frame.h"
 #include "Text.h"
 #include "Animation.h"
@@ -40,6 +41,7 @@ MainMenu::MainMenu(BranchManager* bm)
 	menu->addMember(option2);
 	menu->addMember(option3);
 	menu->setHidden(true);
+	//menu->setForegroundColor(Color::FG_WHITE);
 
 	Tween* tween = new Tween(SinIn, sword, 37, 1, .75);
 	myTweens.push_back(tween);

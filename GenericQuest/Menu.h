@@ -13,6 +13,8 @@ class Menu : public Actor
 		virtual int input();
 		virtual void draw(Canvas* canvas);
 		virtual void addMember(Frame* newFrame);
+		virtual void setForegroundColor(int color);
+		virtual void setBackgroundColor(int color);
 		virtual void setDimension(int x, int y);
 		virtual void setPosition(int x, int y);
 		virtual void setVelocity(float x, float y);

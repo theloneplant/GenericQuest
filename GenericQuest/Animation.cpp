@@ -108,6 +108,22 @@ void Animation::play()
 	paused = false;
 }
 
+void Animation::setForegroundColor(int color)
+{
+	for (int i = 0; i < anim.size(); i++)
+	{
+		anim.at(i)->setForegroundColor(color);
+	}
+}
+
+void Animation::setBackgroundColor(int color)
+{
+	for (int i = 0; i < anim.size(); i++)
+	{
+		anim.at(i)->setBackgroundColor(color);
+	}
+}
+
 void Animation::setDimension(int x, int y)
 {
 	Actor::setDimension(x, y);

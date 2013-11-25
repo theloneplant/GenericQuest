@@ -87,6 +87,25 @@ void Menu::addMember(Frame* newFrame)
 	members.push_back(newFrame);
 }
 
+void Menu::setForegroundColor(int color)
+{
+	for (int i = 0; i < members.size(); i++)
+	{
+		members.at(i)->setForegroundColor(color);
+	}
+	message->setForegroundColor(color);
+	cursor->setForegroundColor(color);
+}
+void Menu::setBackgroundColor(int color)
+{
+	for (int i = 0; i < members.size(); i++)
+	{
+		members.at(i)->setBackgroundColor(color);
+	}
+	message->setBackgroundColor(color);
+	cursor->setBackgroundColor(color);
+}
+
 void Menu::setDimension(int x, int y)
 {
 	Actor::setDimension(x, y);

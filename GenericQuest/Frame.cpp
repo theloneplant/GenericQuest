@@ -61,6 +61,28 @@ void Frame::setFrame(vector<vector<Symbol>> newFrame)
 	frame = newFrame;
 }
 
+void Frame::setForegroundColor(int color)
+{
+	for (int y = 0; y < frame.size(); y++)
+	{
+		for (int x = 0; x < frame.at(y).size(); x++)
+		{
+			frame.at(y).at(x).setForegroundColor(color);
+		}
+	}
+}
+
+void Frame::setBackgroundColor(int color)
+{
+	for (int y = 0; y < frame.size(); y++)
+	{
+		for (int x = 0; x < frame.at(y).size(); x++)
+		{
+			frame.at(y).at(x).setBackgroundColor(color);
+		}
+	}
+}
+
 void Frame::setSymbol(Symbol symbol, int x, int y)
 {
 	frame.at(y).at(x) = symbol;
