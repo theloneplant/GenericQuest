@@ -37,7 +37,7 @@ The goal of this project is to push the console window to its limit, by creating
 * Modify BranchManager to behave like a stack, pausing unfocused Branches w/ the ability to push/pop Branches.
 * Create Character and Enemy classes
 * Create basic combat system
-* Add setColor() function inside of Frame/inherited classes
+* ~~Add setColor() function inside of Frame/inherited classes~~
 * __OPTIONAL__ Create Sequence class to chain movements together
 * __OPTIONAL__ Create Emitters/Particles
 * __OPTIONAL__ Create Layer system
