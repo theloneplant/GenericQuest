@@ -110,7 +110,7 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 	vector<vector<Symbol>> columns;
 	ifstream stream(file);
 	string str;
-	string colorName = "LIGHTGRAY";
+	string tag = "LIGHTGRAY";
 	int width = 0, count = 0;
 
 	if (useFile)
@@ -124,19 +124,26 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 				Symbol symbol;
 				if (str.at(count) == '<') //Build the color
 				{
-					colorName = "";
+					tag = "";
 					str.erase(str.begin() + count);
 					while (str.at(count) != '>' && count < str.size())
 					{
-						colorName.push_back(str.at(count));
+						tag.push_back(str.at(count));
 						str.erase(str.begin() + count); //Makes it easier to keep my place
 					}
 				}
 				else //Build the string
 				{
-					symbol.setChar(str.at(count));
-					symbol.setForegroundColor(getColor(colorName));
-					row.push_back(symbol);
+					if (tag == "HERO")
+					{
+						
+					}
+					else
+					{
+						symbol.setChar(str.at(count));
+						symbol.setForegroundColor(getColor(tag));
+						row.push_back(symbol);
+					}
 				}
 				count++;
 			}

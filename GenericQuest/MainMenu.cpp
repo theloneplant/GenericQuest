@@ -7,6 +7,7 @@
 #include "Animation.h"
 #include "Menu.h"
 #include "Tween.h"
+#include "Input.h"
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
@@ -65,10 +66,7 @@ void MainMenu::start(float delta)
 		state = Input;
 		menu->setHidden(false);
 
-		while (_kbhit())
-		{
-			_getch();
-		}
+		Input::clear();
 	}
 
 	for (int i = 0; i < myTweens.size(); i++)
@@ -93,7 +91,8 @@ void MainMenu::input(float delta)
 	{
 		if (temp == 0)
 		{
-			cout << "NOPE";
+			MainMenu* mainMenu = new MainMenu(manager);
+			manager->swap(mainMenu);
 		}
 		if (temp == 1)
 		{

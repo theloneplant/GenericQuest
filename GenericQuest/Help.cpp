@@ -7,6 +7,7 @@
 #include "Animation.h"
 #include "Menu.h"
 #include "Tween.h"
+#include "Input.h"
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
@@ -17,16 +18,16 @@ Help::Help(BranchManager* bm)
 	manager = bm;
 	timer.reset();
 
-	frame = new Frame("help.fram", 10, -15);
+	frame = new Frame("help.fram", 10, -16);
 
 	Text* message = new Text(false, "", true, 0, 0, 0, 0);
-	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
+	Animation* cursor = new Animation("cursor.anim", 0, 0, true, false, 3);
 	cursor->play();
 	Text* option1 = new Text(false, "Back", true, 0, 0, 0, 0);
 
 	menu = new Menu(message, cursor, option1, 38, -2, 72, 80);
 
-	Tween* tween = new Tween(SinOut, frame, 10, 5, .75);
+	Tween* tween = new Tween(SinOut, frame, 10, 4, .3);
 	tween->add(menu);
 
 	myFrames.push_back(frame);
@@ -43,6 +44,15 @@ Help::~Help()
 void Help::update(float delta)
 {
 	Branch::update(delta);
+	
+	for (int i = 0; i < myTweens.size(); i++)
+	{
+		myTweens.at(i)->update();
+	}
+	for (int i = 0; i < myFrames.size(); i++)
+	{
+		myFrames.at(i)->update(delta);
+	}
 }
 
 void Help::draw(Canvas* canvas)
@@ -64,15 +74,6 @@ void Help::start(float delta)
 			myTweens.at(0)->setDuration(.3);
 		}
 	}
-
-	for (int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-	for (int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-	}
 }
 
 void Help::input(float delta)
@@ -81,22 +82,9 @@ void Help::input(float delta)
 
 void Help::end(float delta)
 {
-	for (int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-	for (int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-	}
-
 	if (myTweens.at(0)->isFinished())
 	{
-		while (_kbhit())
-		{
-			_getch();
-		}
-
+		Input::clear();
 		manager->pop();
 	}
 }

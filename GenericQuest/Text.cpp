@@ -99,7 +99,8 @@ void Text::update(float delta)
 
 void Text::draw(Canvas* canvas)
 {
-	Frame::draw(canvas);
+	if (!hidden)
+		Frame::draw(canvas);
 }
 
 void Text::setSymbol(Symbol symbol, int x, int y)

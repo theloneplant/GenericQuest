@@ -4,9 +4,9 @@
 static class Input
 {
 	public:
-
-	private:
-
+		static void refresh();
+		static void clear();
+		static char get();
+		static bool keyHit();
 };
-
 #endif

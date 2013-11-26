@@ -113,11 +113,6 @@ void Frame::setAcceleration(float x, float y)
 	Actor::setAcceleration(x, y);
 }
 
-void Frame::setHidden(bool newHidden)
-{
-	hidden = newHidden;
-}
-
 vector<vector<Symbol>> Frame::getFrame()
 {
 	return frame;
@@ -146,9 +141,4 @@ Vector Frame::getVelocity()
 Vector Frame::getAcceleration()
 {
 	return acceleration;
-}
-
-bool Frame::isHidden()
-{
-	return hidden;
 }

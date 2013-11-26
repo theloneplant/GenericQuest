@@ -132,6 +132,12 @@
     <ClCompile Include="Help.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
     </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -144,9 +150,6 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="FileIO.h">
-      <Filter>Header Files\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
       <Filter>Header Files\IO</Filter>
     </ClInclude>
     <ClInclude Include="BranchManager.h">
@@ -196,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="Help.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,7 +38,19 @@ void Tween::update()
 			}
 		}
 		else
+		{
 			finished = true;
+
+			for (int i = 0; i < actors.size(); i++)
+			{
+				int x, y;
+
+				x = actorPos.at(i).x + deltaPos.x;
+				y = actorPos.at(i).y + deltaPos.y;
+
+				actors.at(i)->setPosition(x, y);
+			}
+		}
 	}
 }
 

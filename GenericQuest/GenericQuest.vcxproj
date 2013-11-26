@@ -72,9 +72,11 @@
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Help.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -99,6 +101,7 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="stdafx.h" />

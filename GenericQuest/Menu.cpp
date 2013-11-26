@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Input.h"
 #include "Canvas.h"
 #include "Actor.h"
 #include "Menu.h"
@@ -45,10 +46,10 @@ void Menu::update(float delta)
 
 int Menu::input()
 {
-	if (_kbhit())
+	if (Input::keyHit())
 	{
 		char input = '`';
-		input = _getch();
+		input = Input::get();
 
 		if (input == up && focusedMember >= 0)
 		{
@@ -126,11 +127,6 @@ void Menu::setAcceleration(float x, float y)
 	Actor::setAcceleration(x, y);
 }
 
-void Menu::setHidden(bool newHidden)
-{
-	hidden = newHidden;
-}
-
 Dimension Menu::getDimension()
 {
 	return dimension;
@@ -149,9 +145,4 @@ Vector Menu::getVelocity()
 Vector Menu::getAcceleration()
 {
 	return acceleration;
-}
-
-bool Menu::isHidden()
-{
-	return hidden;
 }

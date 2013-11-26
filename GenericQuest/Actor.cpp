@@ -52,6 +52,11 @@ void Actor::setAcceleration(float x, float y)
 	acceleration.y = y;
 }
 
+void Actor::setHidden(bool newHidden)
+{
+	hidden = newHidden;
+}
+
 Dimension Actor::getDimension()
 {
 	return dimension;
@@ -70,4 +75,9 @@ Vector Actor::getVelocity()
 Vector Actor::getAcceleration()
 {
 	return acceleration;
+}
+
+bool Actor::isHidden()
+{
+	return hidden;
 }

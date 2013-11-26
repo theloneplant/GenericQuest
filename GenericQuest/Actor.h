@@ -17,14 +17,17 @@ class Actor
 		virtual void setPosition(int x, int y);
 		virtual void setVelocity(float x, float y);
 		virtual void setAcceleration(float x, float y);
+		virtual void setHidden(bool newHidden);
 		virtual Dimension getDimension();
 		virtual Vector getPosition();
 		virtual Vector getVelocity();
 		virtual Vector getAcceleration();
+		virtual bool isHidden();
 
 	protected:
 		Dimension dimension;
 		Vector position, velocity, acceleration;
+		bool hidden;
 
 	private:
 		Actor(const Actor&);

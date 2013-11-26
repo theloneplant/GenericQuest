@@ -1,15 +1,17 @@
 #ifndef STDAFX
 #define STDAFX
 
-#include <iostream>
 #include <string>
+#include <iostream>
 #include <iomanip>
-#include <cmath>
+#include <stdlib.h>
+#include <conio.h>
+#include <ctype.h>
 #include <fstream>
 #include <vector>
 #include <windows.h>
-#include <conio.h>
-#include <ctype.h>
+#include <cmath>
+#include <time.h>
 
 using namespace std;
 
