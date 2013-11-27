@@ -32,7 +32,7 @@ The goal of this project is to push the console window to its limit, by creating
 * ~~Create FileIO class~~
 * ~~Implement color~~
 * ~~Create Menus for user IO~~
-* Create Input class
+* ~~Create Input class~~
 * ~~Create Motion Tweening system~~
 * ~~Modify BranchManager to behave like a stack, pausing unfocused Branches w/ the ability to push/pop Branches.~~
 * Create Character and Enemy classes
