@@ -79,6 +79,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -106,6 +107,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />

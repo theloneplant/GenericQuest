@@ -13,6 +13,8 @@ class Text : public Frame
 		~Text();
 		virtual void update(float delta);
 		virtual void draw(Canvas* canvas);
+		virtual void setForegroundColor(int color);
+		virtual void setBackgroundColor(int color);
 		virtual void setSymbol(Symbol symbol, int x, int y);
 		virtual void setDimension(int x, int y);
 		virtual void setPosition(float x, float y);

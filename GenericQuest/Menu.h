@@ -28,7 +28,7 @@ class Menu : public Actor
 		vector<Frame*> members;
 		Frame* message;
 		Frame* cursor;
-		unsigned int focusedMember;
+		int focusedMember;
 		char up, down;
 };
 

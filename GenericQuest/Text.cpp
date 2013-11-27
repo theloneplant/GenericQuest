@@ -15,6 +15,11 @@ Text::Text(bool useFile, string file, bool type, int newSpeed, int newPause, flo
 		frame.at(i).resize(text.at(0).size());
 	}
 
+	if (!type)
+	{
+		frame = text;
+	}
+
 	setPosition(x, y);
 	typewriter = type;
 	paused = false; //Doesnt start out pausing for punctuation
@@ -95,12 +100,40 @@ void Text::update(float delta)
 			}
 		}
 	}
+	else
+	{
+
+	}
 }
 
 void Text::draw(Canvas* canvas)
 {
 	if (!hidden)
 		Frame::draw(canvas);
+}
+
+void Text::setForegroundColor(int color)
+{
+	Frame::setForegroundColor(color);
+	for (unsigned int y = 0; y < text.size(); y++)
+	{
+		for (unsigned int x = 0; x < text.at(y).size(); x++)
+		{
+			text.at(y).at(x).setForegroundColor(color);
+		}
+	}
+}
+
+void Text::setBackgroundColor(int color)
+{
+	Frame::setBackgroundColor(color);
+	for (unsigned int y = 0; y < text.size(); y++)
+	{
+		for (unsigned int x = 0; x < text.at(y).size(); x++)
+		{
+			text.at(y).at(x).setBackgroundColor(color);
+		}
+	}
 }
 
 void Text::setSymbol(Symbol symbol, int x, int y)

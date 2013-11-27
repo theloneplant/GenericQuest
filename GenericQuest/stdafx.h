@@ -4,9 +4,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include <stdlib.h>
 #include <conio.h>
-#include <ctype.h>
 #include <fstream>
 #include <vector>
 #include <windows.h>

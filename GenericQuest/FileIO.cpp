@@ -108,6 +108,7 @@ void FileIO::buildAnimation(string file, vector<Frame*>& anim, Dimension& dim)
 void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame, Dimension& dim)
 {
 	vector<vector<Symbol>> columns;
+	frame = columns;
 	ifstream stream(file);
 	string str;
 	string tag = "LIGHTGRAY";

@@ -156,6 +156,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerStats.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStats.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

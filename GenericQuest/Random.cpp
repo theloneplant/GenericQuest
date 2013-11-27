@@ -8,5 +8,7 @@ void Random::init()
 
 int Random::random(int low, int high)
 {
-	return rand() % high + low;
+	int random = rand();
+	int final = random % (high - low + 1) + low;
+	return final;
 }

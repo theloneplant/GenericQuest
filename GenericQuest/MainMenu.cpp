@@ -11,6 +11,7 @@
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
+#include "PlayerStats.h"
 #include "MainMenu.h"
 
 MainMenu::MainMenu(BranchManager* bm)
@@ -19,7 +20,6 @@ MainMenu::MainMenu(BranchManager* bm)
 	manager = bm;
 	timer.reset();
 
-	//Text* text = new Text(true, "Test.txt", true, 15, 500, 1, 1);
 	title = new Frame("genericquest.fram", 1, 9);
 	title->setForegroundColor(FG_BLACK);
 	sword = new Animation("genericsword.anim", 37, -40, true, false, 7);
@@ -28,9 +28,9 @@ MainMenu::MainMenu(BranchManager* bm)
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
 	cursor->play();
-	Frame* option1 = new Frame("option1.fram", 0, 0);
-	Frame* option2 = new Frame("option2.fram", 0, 2);
-	Frame* option3 = new Frame("option3.fram", 0, 4);
+	Text* option1 = new Text(false, "Start", false, 0, 0, 0, 0);
+	Text* option2 = new Text(false, "Help", false, 0, 0, 0, 2);
+	Text* option3 = new Text(false, "Exit", false, 0, 0, 0, 4);
 
 	menu = new Menu(message, cursor, option1, 20, 16, 72, 80);
 	menu->addMember(option2);
@@ -107,7 +107,7 @@ void MainMenu::input(float delta)
 		if (temp == 1)
 		{
 			Help* help = new Help(manager);
-			manager->push(new Help(manager));
+			manager->push(new PlayerStats(manager));
 		}
 		if (temp == 2)
 		{

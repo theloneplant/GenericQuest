@@ -27,7 +27,7 @@ struct Usables
 class Character
 {
 	public:
-		const static Character * player;
+		static Character * player;
 
 		Character();
 		Character(Role myRole);
@@ -39,10 +39,12 @@ class Character
 		void addXP(int exp);
 		void levelUp();
 		void calculateStats();
+		void capStat(int& stat);
 		void earnGold(int g, int s, int c);
 		bool giveGold(int g, int s, int c);
 		void calculateGold();
 		void equip(Item item);
+		void setRole(Role newRole);
 		void setName(string newName);
 		Role getRole();
 		Stats getStats();
@@ -64,7 +66,7 @@ class Character
 		Gold gold;
 		Usables usables;
 		string name;
-		int health, level, xp, xpToLevel;
+		int level, xp, xpToLevel;
 		Item weapon, armor;
 		Inventory inventory;
 };
