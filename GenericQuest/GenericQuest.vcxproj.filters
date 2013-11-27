@@ -76,6 +76,15 @@
     <Filter Include="Header Files\Characters">
       <UniqueIdentifier>{fe278f5e-fcb7-402f-9b23-b6a9d249f225}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Inventory">
+      <UniqueIdentifier>{e259d16f-faa6-4f73-bf03-55fb05d63f9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters">
+      <UniqueIdentifier>{b884e109-2201-418a-940d-60f5a47a3b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Inventory">
+      <UniqueIdentifier>{64b4b45b-133c-415d-89b9-c037b2d03ac1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -138,6 +147,15 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\IO</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -191,9 +209,6 @@
     <ClInclude Include="Character.h">
       <Filter>Header Files\Characters</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="Tween.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
@@ -205,6 +220,15 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

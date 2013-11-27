@@ -5,12 +5,12 @@
 #include "Frame.h"
 #include "Text.h"
 
-Text::Text(bool useFile, string file, bool type, int newSpeed, int newPause, int x, int y)
+Text::Text(bool useFile, string file, bool type, int newSpeed, int newPause, float x, float y)
 {
 	Actor::Actor();
 	FileIO::buildText(useFile, file, text, dimension);
 	frame.resize(text.size());
-	for (int i = 0; i < text.size(); i++)
+	for (unsigned int i = 0; i < text.size(); i++)
 	{
 		frame.at(i).resize(text.at(0).size());
 	}
@@ -113,7 +113,7 @@ void Text::setDimension(int x, int y)
 	Frame::setDimension(x, y);
 }
 
-void Text::setPosition(int x, int y)
+void Text::setPosition(float x, float y)
 {
 	Actor::setPosition(x, y);
 }

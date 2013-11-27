@@ -34,7 +34,7 @@ void Actor::setDimension(int x, int y)
 	dimension.y = y;
 }
 
-void Actor::setPosition(int x, int y)
+void Actor::setPosition(float x, float y)
 {
 	position.x = x;
 	position.y = y;

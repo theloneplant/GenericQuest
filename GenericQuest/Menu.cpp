@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include "Menu.h"
 
-Menu::Menu(Frame* newMessage, Frame* newCursor, Frame* member, int x, int y, char newUp, char newDown)
+Menu::Menu(Frame* newMessage, Frame* newCursor, Frame* member, float x, float y, char newUp, char newDown)
 {
 	Actor::Actor();
 	setPosition(x, y);
@@ -22,7 +22,7 @@ Menu::~Menu()
 {
 	delete message;
 	delete cursor;
-	for (int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); i++)
 	{
 		delete members.at(i);
 	}
@@ -34,7 +34,7 @@ void Menu::update(float delta)
 
 	message->update(delta);
 	cursor->update(delta);
-	for (int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); i++)
 	{
 		members.at(i)->update(delta);
 	}
@@ -74,7 +74,7 @@ void Menu::draw(Canvas* canvas)
 {
 	if (!hidden)
 	{
-		for (int i = 0; i < members.size(); i++)
+		for (unsigned int i = 0; i < members.size(); i++)
 		{
 			canvas->overwrite(members.at(i), position.x, position.y);
 		}
@@ -90,7 +90,7 @@ void Menu::addMember(Frame* newFrame)
 
 void Menu::setForegroundColor(int color)
 {
-	for (int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); i++)
 	{
 		members.at(i)->setForegroundColor(color);
 	}
@@ -99,7 +99,7 @@ void Menu::setForegroundColor(int color)
 }
 void Menu::setBackgroundColor(int color)
 {
-	for (int i = 0; i < members.size(); i++)
+	for (unsigned int i = 0; i < members.size(); i++)
 	{
 		members.at(i)->setBackgroundColor(color);
 	}
@@ -112,7 +112,7 @@ void Menu::setDimension(int x, int y)
 	Actor::setDimension(x, y);
 }
 
-void Menu::setPosition(int x, int y)
+void Menu::setPosition(float x, float y)
 {
 	Actor::setPosition(x, y);
 }

@@ -23,7 +23,7 @@ void BranchManager::update(float delta)
 
 void BranchManager::draw(Canvas* canvas)
 {
-	for (int i = 0; i < branches.size(); i++)
+	for (unsigned int i = 0; i < branches.size(); i++)
 	{
 		branches.at(i)->draw(canvas);
 	}

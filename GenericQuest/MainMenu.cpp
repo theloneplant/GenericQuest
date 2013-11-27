@@ -21,8 +21,9 @@ MainMenu::MainMenu(BranchManager* bm)
 
 	//Text* text = new Text(true, "Test.txt", true, 15, 500, 1, 1);
 	title = new Frame("genericquest.fram", 1, 9);
+	title->setForegroundColor(FG_BLACK);
 	sword = new Animation("genericsword.anim", 37, -40, true, false, 7);
-	sword->setForegroundColor(Color::FG_LIGHTMAGENTA);
+	sword->setForegroundColor(FG_YELLOW);
 
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
@@ -34,14 +35,16 @@ MainMenu::MainMenu(BranchManager* bm)
 	menu = new Menu(message, cursor, option1, 20, 16, 72, 80);
 	menu->addMember(option2);
 	menu->addMember(option3);
-	menu->setHidden(true);
+	menu->setForegroundColor(FG_BLACK);
 
 	Tween* tween = new Tween(SinIn, sword, 37, 1, .75);
-	myTweens.push_back(tween);
+	tween->play();
 
 	myFrames.push_back(title);
 	myFrames.push_back(sword);
 	myFrames.push_back(menu);
+
+	myTweens.push_back(tween);
 }
 
 MainMenu::~MainMenu()
@@ -52,6 +55,16 @@ MainMenu::~MainMenu()
 void MainMenu::update(float delta)
 {
 	Branch::update(delta);
+
+	for (unsigned int i = 0; i < myTweens.size(); i++)
+	{
+		myTweens.at(i)->update();
+	}
+
+	for(unsigned int i = 0; i < myFrames.size(); i++)
+	{
+		myFrames.at(i)->update(delta);
+	}
 }
 
 void MainMenu::draw(Canvas* canvas)
@@ -61,31 +74,28 @@ void MainMenu::draw(Canvas* canvas)
 
 void MainMenu::start(float delta)
 {
-	if (sword->isFinished())
+	if (timer.getTime() > 0.6)
 	{
 		state = Input;
-		menu->setHidden(false);
-
+		title->setForegroundColor(FG_WHITE);
 		Input::clear();
 	}
-
-	for (int i = 0; i < myTweens.size(); i++)
+	else if (timer.getTime() > 0.4)
 	{
-		if (myTweens.at(0)->isFinished())
-			sword->play();
-
-		myTweens.at(i)->update();
+		title->setForegroundColor(FG_LIGHTGRAY);
 	}
-
-	for(int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-		//myFrames.at(i)->setPosition(30 + 5 * (i + 2) * sin(static_cast<double>(GetTickCount()) / 300 + ((i + 1) * 90)), (i) * 3 + 1);
-	}
+	else if (timer.getTime() > 0.2)
+		title->setForegroundColor(FG_DARKGRAY);
 }
 
 void MainMenu::input(float delta)
 {
+	if (myTweens.at(0)->isFinished())
+	{
+		sword->play();
+		menu->setForegroundColor(FG_WHITE);
+	}
+
 	int temp = menu->input();
 	if (temp != -1)
 	{
@@ -101,17 +111,33 @@ void MainMenu::input(float delta)
 		}
 		if (temp == 2)
 		{
-			exit(EXIT_SUCCESS);
+			state = End;
+			timer.reset();
 		}
-	}
-
-	for(int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-		//myFrames.at(i)->setPosition(30 + 5 * (i + 2) * sin(static_cast<double>(GetTickCount()) / 300 + ((i + 1) * 90)), (i) * 3 + 1);
 	}
 }
 
 void MainMenu::end(float delta)
 {
+	if (timer.getTime() > .8)
+	{
+		exit(EXIT_SUCCESS);
+	}
+	else if (timer.getTime() > .4)
+	{
+		title->setForegroundColor(FG_BLACK);
+		menu->setForegroundColor(FG_BLACK);
+		sword->setForegroundColor(FG_BLACK);
+	}
+	else if (timer.getTime() > .2)
+	{
+		title->setForegroundColor(FG_DARKGRAY);
+		menu->setForegroundColor(FG_DARKGRAY);
+	}
+	else if (timer.getTime() > 0)
+	{
+		title->setForegroundColor(FG_LIGHTGRAY);
+		menu->setForegroundColor(FG_LIGHTGRAY);
+		sword->setForegroundColor(FG_BROWN);
+	}
 }

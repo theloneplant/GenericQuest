@@ -1,7 +1,7 @@
 #ifndef INPUT
 #define INPUT
 
-static class Input
+class Input
 {
 	public:
 		static void refresh();

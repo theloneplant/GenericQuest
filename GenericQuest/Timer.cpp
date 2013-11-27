@@ -15,14 +15,14 @@ void Timer::reset()
 
 float Timer::getDelta()
 {
-	float delta = ((GetTickCount() - oldTime) / 1000.0);
+	float delta = ((GetTickCount() - oldTime) / 1000.0f);
 	oldTime = GetTickCount();
 	return delta;
 }
 
 float Timer::getTime()
 {
-	return ((GetTickCount() - start) / 1000.0);
+	return ((GetTickCount() - start) / 1000.0f);
 }
 
 bool Timer::hasElapsed(float elapsed)

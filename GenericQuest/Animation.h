@@ -8,8 +8,8 @@
 class Animation : public Frame
 {
     public:
-		Animation(string file, int x, int y, bool newLoop, bool newReverse, int newFps);
-		Animation(string file, int x, int y);
+		Animation(string file, float x, float y, bool newLoop, bool newReverse, int newFps);
+		Animation(string file, float x, float y);
 		~Animation();
         virtual void update(float delta);
 		virtual void draw(Canvas* canvas);
@@ -18,7 +18,7 @@ class Animation : public Frame
 		virtual void setForegroundColor(int color);
 		virtual void setBackgroundColor(int color);
 		virtual void setDimension(int x, int y);
-		virtual void setPosition(int x, int y);
+		virtual void setPosition(float x, float y);
 		virtual void setVelocity(float x, float y);
 		virtual void setAcceleration(float x, float y);
 		virtual void setFinished(bool newFinished);
@@ -31,7 +31,7 @@ class Animation : public Frame
 	private:
 		vector<Frame*> anim;
 		Timer timer;
-		int fps, currentFrame;
+		unsigned int fps, currentFrame;
 		bool paused, loop, reverse, reversed, finished;
 };
 #endif

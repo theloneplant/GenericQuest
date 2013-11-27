@@ -68,11 +68,14 @@
     <ClCompile Include="Branch.cpp" />
     <ClCompile Include="BranchManager.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Help.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -101,6 +104,8 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Help.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />

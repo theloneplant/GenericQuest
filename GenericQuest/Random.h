@@ -1,7 +1,7 @@
 #ifndef RANDOM
 #define RANDOM
 
-static class Random
+class Random
 {
 	public:
 		static void init();

@@ -7,7 +7,7 @@
 
 enum EaseType  {Linear, SinIn, SinOut, SinInOut};
 
-static class Tween
+class Tween
 {
 	public:
 		Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float newDuration);
@@ -16,7 +16,7 @@ static class Tween
 		void easeSinIn();
 		void easeSinOut();
 		void easeSinInOut();
-		void restart();
+		void play();
 		void restart(int finalX, int finalY);
 		void add(Actor* actor);
 		void setEaseType(EaseType newEase);

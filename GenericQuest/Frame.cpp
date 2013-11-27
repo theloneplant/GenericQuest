@@ -25,7 +25,7 @@ Frame::Frame(int width, int height)
 	hidden = false;
 }
 
-Frame::Frame(string file, int x, int y)
+Frame::Frame(string file, float x, float y)
 {
 	Actor::Actor();
 	setPosition(x, y);
@@ -33,7 +33,7 @@ Frame::Frame(string file, int x, int y)
 	hidden = false;
 }
 
-Frame::Frame(vector<vector<Symbol>> newFrame, int x, int y)
+Frame::Frame(vector<vector<Symbol>> newFrame, float x, float y)
 {
 	Actor::Actor();
 	setPosition(x, y);
@@ -63,9 +63,9 @@ void Frame::setFrame(vector<vector<Symbol>> newFrame)
 
 void Frame::setForegroundColor(int color)
 {
-	for (int y = 0; y < frame.size(); y++)
+	for (unsigned int y = 0; y < frame.size(); y++)
 	{
-		for (int x = 0; x < frame.at(y).size(); x++)
+		for (unsigned int x = 0; x < frame.at(y).size(); x++)
 		{
 			frame.at(y).at(x).setForegroundColor(color);
 		}
@@ -74,9 +74,9 @@ void Frame::setForegroundColor(int color)
 
 void Frame::setBackgroundColor(int color)
 {
-	for (int y = 0; y < frame.size(); y++)
+	for (unsigned int y = 0; y < frame.size(); y++)
 	{
-		for (int x = 0; x < frame.at(y).size(); x++)
+		for (unsigned int x = 0; x < frame.at(y).size(); x++)
 		{
 			frame.at(y).at(x).setBackgroundColor(color);
 		}
@@ -92,13 +92,13 @@ void Frame::setDimension(int x, int y)
 {
 	Actor::setDimension(x, y);
 	frame.resize(y);
-	for (int i = 0; i < frame.size(); i++)
+	for (unsigned int i = 0; i < frame.size(); i++)
 	{
 		frame.at(i).resize(x);
 	}
 }
 
-void Frame::setPosition(int x, int y)
+void Frame::setPosition(float x, float y)
 {
 	Actor::setPosition(x, y);
 }

@@ -27,8 +27,9 @@ Help::Help(BranchManager* bm)
 
 	menu = new Menu(message, cursor, option1, 38, -2, 72, 80);
 
-	Tween* tween = new Tween(SinOut, frame, 10, 4, .3);
+	Tween* tween = new Tween(SinOut, frame, 10, 4, 0.3f);
 	tween->add(menu);
+	tween->play();
 
 	myFrames.push_back(frame);
 	myFrames.push_back(menu);
@@ -45,11 +46,11 @@ void Help::update(float delta)
 {
 	Branch::update(delta);
 	
-	for (int i = 0; i < myTweens.size(); i++)
+	for (unsigned int i = 0; i < myTweens.size(); i++)
 	{
 		myTweens.at(i)->update();
 	}
-	for (int i = 0; i < myFrames.size(); i++)
+	for (unsigned int i = 0; i < myFrames.size(); i++)
 	{
 		myFrames.at(i)->update(delta);
 	}
@@ -70,8 +71,7 @@ void Help::start(float delta)
 		{
 			state = End;
 			myTweens.at(0)->restart(10, -18);
-			myTweens.at(0)->setEaseType(SinOut);
-			myTweens.at(0)->setDuration(.3);
+			myTweens.at(0)->setDuration(0.3f);
 		}
 	}
 }
@@ -82,6 +82,16 @@ void Help::input(float delta)
 
 void Help::end(float delta)
 {
+	int input = menu->input();
+
+	if (input != -1)
+	{
+		if (input == 0)
+		{
+			state = Start;
+			myTweens.at(0)->restart(10, 4);
+		}
+	}
 	if (myTweens.at(0)->isFinished())
 	{
 		Input::clear();

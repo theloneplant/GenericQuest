@@ -22,7 +22,7 @@ void Canvas::overwrite(Frame* frame)
 	overwrite(frame, 0, 0);
 }
 
-void Canvas::overwrite(Frame* frame, int xPos, int yPos)
+void Canvas::overwrite(Frame* frame, float xPos, float yPos)
 {
 	for (int y = 0; y < frame->getDimension().y; y++)
 	{

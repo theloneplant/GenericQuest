@@ -38,7 +38,7 @@ void Branch::update(float delta)
 
 void Branch::draw(Canvas* canvas)
 {
-	for(int i = 0; i < myFrames.size(); i++)
+	for(unsigned int i = 0; i < myFrames.size(); i++)
 	{
 		myFrames.at(i)->draw(canvas);
 	}

@@ -3,7 +3,7 @@
 #include "Frame.h"
 #include "Animation.h"
 
-Animation::Animation(string file, int x, int y, bool newLoop, bool newReverse, int newFps)
+Animation::Animation(string file, float x, float y, bool newLoop, bool newReverse, int newFps)
 {
 	Actor::Actor();
 	setPosition(x, y);
@@ -19,7 +19,7 @@ Animation::Animation(string file, int x, int y, bool newLoop, bool newReverse, i
 	finished = false;
 }
 
-Animation::Animation(string file, int x, int y)
+Animation::Animation(string file, float x, float y)
 {
 	Actor::Actor();
 	setPosition(x, y);
@@ -36,7 +36,7 @@ Animation::Animation(string file, int x, int y)
 Animation::~Animation()
 {
 	//Delete frames
-	for (int i = 0; i < anim.size(); i++)
+	for (unsigned int i = 0; i < anim.size(); i++)
 	{
 		delete anim.at(i);
 	}
@@ -84,7 +84,7 @@ void Animation::update(float delta)
 		timer.reset();
 	}
 
-	for (int i = 0; i < anim.size(); i++)
+	for (unsigned int i = 0; i < anim.size(); i++)
 	{
 		anim.at(i)->setPosition(position.x, position.y);
 	}
@@ -110,7 +110,7 @@ void Animation::play()
 
 void Animation::setForegroundColor(int color)
 {
-	for (int i = 0; i < anim.size(); i++)
+	for (unsigned int i = 0; i < anim.size(); i++)
 	{
 		anim.at(i)->setForegroundColor(color);
 	}
@@ -118,7 +118,7 @@ void Animation::setForegroundColor(int color)
 
 void Animation::setBackgroundColor(int color)
 {
-	for (int i = 0; i < anim.size(); i++)
+	for (unsigned int i = 0; i < anim.size(); i++)
 	{
 		anim.at(i)->setBackgroundColor(color);
 	}
@@ -129,11 +129,11 @@ void Animation::setDimension(int x, int y)
 	Actor::setDimension(x, y);
 }
 
-void Animation::setPosition(int x, int y)
+void Animation::setPosition(float x, float y)
 {
 	Actor::setPosition(x, y);
 	
-	for (int i = 0; i < anim.size(); i++)
+	for (unsigned int i = 0; i < anim.size(); i++)
 	{
 		anim.at(i)->setPosition(position.x, position.y);
 	}

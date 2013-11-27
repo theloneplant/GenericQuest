@@ -8,7 +8,7 @@ void FileIO::buildFrame(string file, vector<vector<Symbol>>& frame, Dimension& d
 	Symbol symbol;
 	ifstream stream(file);
 	string str;
-	int width = 0, height = 0;
+	unsigned int width = 0, height = 0;
 
 	//Calculate width and height
 	while (getline(stream, str))
@@ -23,7 +23,7 @@ void FileIO::buildFrame(string file, vector<vector<Symbol>>& frame, Dimension& d
 
 	//Initialize each symbol
 	frame.resize(height);
-	for (int i = 0; i < height; i++)
+	for (unsigned int i = 0; i < height; i++)
 	{
 		frame.at(i).resize(width);
 	}
@@ -31,10 +31,10 @@ void FileIO::buildFrame(string file, vector<vector<Symbol>>& frame, Dimension& d
 	stream.open(file);
 
 	//Assign each symbol
-	for (int y = 0; y < height; y++)
+	for (unsigned int y = 0; y < height; y++)
 	{
 		getline(stream, str);
-		for (int x = 0; x < width; x++)
+		for (unsigned int x = 0; x < width; x++)
 		{
 			if (x < str.length())
 				frame.at(y).at(x).setChar(str.at(x));
@@ -55,7 +55,7 @@ void FileIO::buildAnimation(string file, vector<Frame*>& anim, Dimension& dim)
 	Symbol symbol;
 	ifstream stream(file);
 	string str;
-	int width = 0, height = 0, size = 0;
+	unsigned int width = 0, height = 0, size = 0;
 
 	//Get the height of each frame
 	stream >> height;
@@ -79,16 +79,16 @@ void FileIO::buildAnimation(string file, vector<Frame*>& anim, Dimension& dim)
 	getline(stream, str); 
 
 	//Build the frames
-	for (int i = 0; i < size; i++)
+	for (unsigned int i = 0; i < size; i++)
 	{
 		Frame* frame = new Frame();
 		frame->setDimension(width, height);
 
-		for (int y = 0; y < height; y++)
+		for (unsigned int y = 0; y < height; y++)
 		{
 			getline(stream, str); //New string every line
 
-			for(int x = 0; x < width; x++)
+			for(unsigned int x = 0; x < width; x++)
 			{
 				if (x < str.length())
 					symbol.setChar(str.at(x));
@@ -111,7 +111,7 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 	ifstream stream(file);
 	string str;
 	string tag = "LIGHTGRAY";
-	int width = 0, count = 0;
+	unsigned int width = 0, count = 0;
 
 	if (useFile)
 	{
@@ -152,9 +152,9 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 		}
 
 		//Word Wrap
-		int begin = 0, end = 0;
+		unsigned int begin = 0, end = 0;
 
-		for (int y = 0; y < columns.size(); y++) //For each row
+		for (unsigned int y = 0; y < columns.size(); y++) //For each row
 		{
 			begin = 0;
 			end = 0;
@@ -175,7 +175,7 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 						}
 
 						//Build the new row
-						for (int i = begin; i < end; i++)
+						for (unsigned int i = begin; i < end; i++)
 						{
 							temp.push_back(columns.at(y).at(i));
 						}
@@ -186,7 +186,7 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 					else
 					{
 						//Build the remaining row
-						for (int i = begin; i < columns.at(y).size(); i++)
+						for (unsigned int i = begin; i < columns.at(y).size(); i++)
 						{
 							temp.push_back(columns.at(y).at(i));
 						}
@@ -201,16 +201,16 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 		}
 
 		//Adjust the size of the frame
-		for (int y = 0; y < frame.size(); y++)
+		for (unsigned int y = 0; y < frame.size(); y++)
 		{
-			for (int x = 0; x < frame.at(y).size(); x++)
+			for (unsigned int x = 0; x < frame.at(y).size(); x++)
 			{
 				if (width < frame.at(y).size()) //Find the max width
 					width = frame.at(y).size();
 			}
 		}
 
-		for (int i = 0; i < frame.size(); i++)
+		for (unsigned int i = 0; i < frame.size(); i++)
 		{
 			frame.at(i).resize(width); //Set everything to that length with default params
 		}
@@ -223,7 +223,7 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 		{
 			Symbol symbol;
 			frame.resize(1);
-			for (int i = 0; i < file.length(); i++)
+			for (unsigned int i = 0; i < file.length(); i++)
 			{
 				symbol.setChar(file.at(i));
 				frame.at(0).push_back(symbol);
