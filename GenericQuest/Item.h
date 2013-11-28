@@ -16,10 +16,7 @@ class Item
 {
     public:
 		Item();
-		Item(string myName, ItemType myType, 
-			int newHealth, int newStr, int newDex, int newInt, 
-			int newArmor, int newDodge, int newResist, 
-			int newMelee, int newRange, int newMagic);
+		Item(string myName, ItemType myType, int newStr, int newDex, int newInt);
 		~Item();
 		void setName(string myName);
 		string getName();

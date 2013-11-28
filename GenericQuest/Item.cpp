@@ -4,6 +4,7 @@
 Item::Item()
 {
 	name = "NULL";
+	type = Weapon;
 	stats.health = 0;
 	stats.strength = 0;
 	stats.dexterity = 0;
@@ -16,22 +17,33 @@ Item::Item()
 	stats.magic = 0;
 }
 
-Item::Item(string myName, ItemType myType, 
-		int newHealth, int newStr, int newDex, int newInt, 
-		int newArmor, int newDodge, int newResist, 
-		int newMelee, int newRange, int newMagic)
+Item::Item(string myName, ItemType myType, int newStr, int newDex, int newInt)
 {
 	name = myName;
-	stats.health = newHealth;
-	stats.strength = newStr;
-	stats.dexterity = newDex;
-	stats.intelligence = newInt;
-	stats.armor = newArmor;
-	stats.dodge = newDodge;
-	stats.resist = newResist;
-	stats.melee = newMelee;
-	stats.range = newRange;
-	stats.magic = newMagic;
+	type = myType;
+	stats.health = 0;
+	stats.strength = 0;
+	stats.dexterity = 0;
+	stats.intelligence = 0;
+	
+	if (type == Weapon)
+	{
+		stats.melee = newStr;
+		stats.range = newDex;
+		stats.magic = newInt;
+		stats.armor = 0;
+		stats.dodge = 0;
+		stats.resist = 0;
+	}
+	else if (type == Armor)
+	{
+		stats.armor = newStr;
+		stats.dodge = newDex;
+		stats.resist = newInt;
+		stats.melee = 0;
+		stats.range = 0;
+		stats.magic = 0;
+	}
 }
 
 Item::~Item()

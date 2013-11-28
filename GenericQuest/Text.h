@@ -13,6 +13,7 @@ class Text : public Frame
 		~Text();
 		virtual void update(float delta);
 		virtual void draw(Canvas* canvas);
+		virtual void setText(bool useFile, string file);
 		virtual void setForegroundColor(int color);
 		virtual void setBackgroundColor(int color);
 		virtual void setSymbol(Symbol symbol, int x, int y);

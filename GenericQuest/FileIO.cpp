@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Character.h"
 #include "Color.h"
 #include "FileIO.h"
 
@@ -120,9 +121,9 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 		while (getline(stream, str))
 		{
 			vector<Symbol> row;
+			Symbol symbol;
 			while (count < str.length())
 			{
-				Symbol symbol;
 				if (str.at(count) == '<') //Build the color
 				{
 					tag = "";
@@ -132,19 +133,22 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 						tag.push_back(str.at(count));
 						str.erase(str.begin() + count); //Makes it easier to keep my place
 					}
+					if (tag == "HERO")
+					{
+						string playerName = Character::player->getName();
+						for (int i = 0; i < playerName.length(); i++)
+						{
+							symbol.setChar(playerName.at(i));
+							row.push_back(symbol);
+						}
+					}
 				}
 				else //Build the string
 				{
-					if (tag == "HERO")
-					{
-						
-					}
-					else
-					{
-						symbol.setChar(str.at(count));
+					symbol.setChar(str.at(count));
+					if (tag != "HERO")
 						symbol.setForegroundColor(getColor(tag));
-						row.push_back(symbol);
-					}
+					row.push_back(symbol);
 				}
 				count++;
 			}
@@ -226,8 +230,22 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 			frame.resize(1);
 			for (unsigned int i = 0; i < file.length(); i++)
 			{
-				symbol.setChar(file.at(i));
-				frame.at(0).push_back(symbol);
+				if (file.at(i) == '<') //Build the color
+				{
+					tag = "";
+					file.erase(file.begin() + i);
+					while (file.at(i) != '>' && i < file.size())
+					{
+						tag.push_back(file.at(i));
+						file.erase(file.begin() + i); //Makes it easier to keep my place
+					}
+				}
+				else
+				{
+					symbol.setChar(file.at(i));
+					symbol.setForegroundColor(getColor(tag));
+					frame.at(0).push_back(symbol);
+				}
 			}
 
 			dim.x = frame.at(0).size();

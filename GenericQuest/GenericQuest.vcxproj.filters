@@ -85,6 +85,12 @@
     <Filter Include="Source Files\Inventory">
       <UniqueIdentifier>{64b4b45b-133c-415d-89b9-c037b2d03ac1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Actors\StatusBar">
+      <UniqueIdentifier>{8d56d81e-0bff-450d-80a0-474176c6d62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\StatusBar">
+      <UniqueIdentifier>{a6747b9f-740f-451f-88af-08328e7dc56f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -158,6 +164,12 @@
     </ClCompile>
     <ClCompile Include="PlayerStats.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusBar.cpp">
+      <Filter>Source Files\Actors\StatusBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="PlayerStats.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <Filter>Header Files\Actors\StatusBar</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

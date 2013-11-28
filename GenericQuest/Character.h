@@ -36,6 +36,7 @@ class Character
 		void attack(Enemy enemy);
 		void damage(int damage);
 		void heal(int heal);
+		void reward(int cr);
 		void addXP(int exp);
 		void levelUp();
 		void calculateStats();
@@ -44,6 +45,8 @@ class Character
 		bool giveGold(int g, int s, int c);
 		void calculateGold();
 		void equip(Item item);
+		void addItem(Item newItem);
+		void removeItem(string itemName);
 		void setRole(Role newRole);
 		void setName(string newName);
 		Role getRole();
@@ -59,6 +62,7 @@ class Character
 		Item getWeapon();
 		Item getArmor();
 		Inventory getInventory();
+		bool isDead();
 
 	private:
 		Role role;

@@ -36,10 +36,10 @@ void Character::init(Role myRole)
 		baseStats.strength = 10;
 		baseStats.dexterity = 5;
 		baseStats.intelligence = 2;
-		Item sword("Longsword", Weapon, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0);
-		weapon = sword;
-		Item mail("Chain Mail", Armor, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0);
-		armor = mail;
+		Item atk("Iron Longsword", Weapon, 1, 0, 0);
+		weapon = atk;
+		Item def("Chain Mail", Armor, 1, 0, 0);
+		armor = def;
 	}
 	else if (role == Ranger)
 	{
@@ -48,10 +48,10 @@ void Character::init(Role myRole)
 		baseStats.strength = 5;
 		baseStats.dexterity = 11;
 		baseStats.intelligence = 4;
-		Item sword("Longsword", Weapon, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0);
-		weapon = sword;
-		Item mail("Chain Mail", Armor, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0);
-		armor = mail;
+		Item atk("Oak Longbow", Weapon, 0, 1, 0);
+		weapon = atk;
+		Item def("Leather Armor", Armor, 0, 1, 0);
+		armor = def;
 	}
 	else if (role == Wizard)
 	{
@@ -60,10 +60,10 @@ void Character::init(Role myRole)
 		baseStats.strength = 3;
 		baseStats.dexterity = 7;
 		baseStats.intelligence = 12;
-		Item sword("Longsword", Weapon, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0);
-		weapon = sword;
-		Item mail("Chain Mail", Armor, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0);
-		armor = mail;
+		Item atk("Spellbook", Weapon, 0, 0, 1);
+		weapon = atk;
+		Item def("Blue Robe", Armor, 0, 0, 1);
+		armor = def;
 	}
 
 	gold.gold = 0;
@@ -80,6 +80,11 @@ void Character::init(Role myRole)
 
 void Character::attack(Enemy enemy)
 {
+	//Attack and get damaged
+	enemy.inflict(stats.melee, stats.range, stats.magic);
+	damage((enemy.getStats().melee - stats.armor) 
+		 + (enemy.getStats().range - stats.armor) 
+		 + (enemy.getStats().magic - stats.resist));
 }
 
 void Character::damage(int damage)
@@ -90,6 +95,14 @@ void Character::damage(int damage)
 void Character::heal(int heal)
 {
 	stats.health += heal;
+}
+
+void Character::reward(int cr)
+{
+	addXP(EXPERIENCE_MODIFIER * cr / level);
+	int avgCopper = 5 * cr;
+	earnGold(0, 0, Random::random(avgCopper * 0.7, avgCopper * 1.3));
+	calculateGold();
 }
 
 void Character::addXP(int exp)
@@ -105,24 +118,24 @@ void Character::levelUp()
 
 	if (role == Knight)
 	{
-		baseStats.health += Random::random(2, 4);
-		baseStats.strength += Random::random(2, 5);
-		baseStats.dexterity += Random::random(0, 2);
-		baseStats.intelligence += Random::random(0, 1);
+		baseStats.health += 4;
+		baseStats.strength += 5;
+		baseStats.dexterity += 2;
+		baseStats.intelligence += 1;
 	}
 	else if (role == Ranger)
 	{
-		baseStats.health += Random::random(2, 3);
-		baseStats.strength += Random::random(0, 2);
-		baseStats.dexterity += Random::random(2, 5);
-		baseStats.intelligence += Random::random(0, 2);
+		baseStats.health += 3;
+		baseStats.strength += 2;
+		baseStats.dexterity += 5;
+		baseStats.intelligence += 2;
 	}
 	else if (role == Wizard)
 	{
-		baseStats.health += Random::random(1, 2);
-		baseStats.strength += Random::random(0, 1);
-		baseStats.dexterity += Random::random(2, 3);
-		baseStats.intelligence += Random::random(2, 5);
+		baseStats.health += 2;
+		baseStats.strength += 1;
+		baseStats.dexterity += 3;
+		baseStats.intelligence += 6;
 	}
 
 	stats.health = baseStats.health;
@@ -137,14 +150,14 @@ void Character::calculateStats()
 
 	stats.armor = stats.strength / 5 + armor.getStats().armor + weapon.getStats().armor;
 	float bonusDodge = (stats.dexterity + armor.getStats().dodge + weapon.getStats().dodge);
-	float cap = 99;
+	float cap = 78;
 	float modifier = 0.986;
-	stats.dodge = (bonusDodge * cap) / (bonusDodge + modifier * cap); //Uses diminishing returns
+	stats.dodge = (bonusDodge * cap) / (bonusDodge + modifier * cap) + 8; //Uses diminishing returns
 	stats.resist = stats.intelligence / 5 + armor.getStats().resist + weapon.getStats().resist;
 
-	stats.melee = stats.strength / 4 + armor.getStats().melee + weapon.getStats().melee;
-	stats.range = stats.dexterity / 4 + armor.getStats().range + weapon.getStats().range;
-	stats.magic = stats.intelligence / 4 + armor.getStats().magic + weapon.getStats().magic;
+	stats.melee = (stats.strength / 4) * (armor.getStats().melee + weapon.getStats().melee);
+	stats.range = (stats.dexterity / 4) * (armor.getStats().range + weapon.getStats().range);
+	stats.magic = (stats.intelligence / 4) * (armor.getStats().magic + weapon.getStats().magic);
 
 	//Check current stats
 	capStat(stats.health);
@@ -237,6 +250,16 @@ void Character::equip(Item item)
 	calculateStats();
 }
 
+void Character::addItem(Item newItem)
+{
+	inventory.add(newItem);
+}
+
+void Character::removeItem(string itemName)
+{
+	inventory.remove(itemName);
+}
+
 void Character::setRole(Role newRole)
 {
 	role = newRole;
@@ -279,7 +302,7 @@ string Character::getName()
 
 int Character::getHealth()
 {
-	return stats.health;
+	return baseStats.health;
 }
 
 int Character::getLevel()
@@ -310,4 +333,12 @@ Item Character::getArmor()
 Inventory Character::getInventory()
 {
 	return inventory;
+}
+
+bool Character::isDead()
+{
+	if (stats.health <= 0)
+		return true;
+	else
+		return false;
 }

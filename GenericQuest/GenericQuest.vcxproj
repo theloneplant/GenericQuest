@@ -70,6 +70,7 @@
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Help.cpp" />
@@ -81,6 +82,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -111,6 +113,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="StatusBar.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Symbol.h" />
     <ClInclude Include="Text.h" />

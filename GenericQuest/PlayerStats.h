@@ -11,6 +11,7 @@ class Text;
 class Frame;
 class Animation;
 class Menu;
+class StatusBar;
 
 class PlayerStats : public Branch
 {
@@ -27,6 +28,9 @@ class PlayerStats : public Branch
 		Timer timer;
 		Menu* menu;
 		Frame* frame;
+		StatusBar* hpBar;
+		StatusBar* xpBar;
+
 
 		PlayerStats(const PlayerStats&);
 		PlayerStats& operator=(const PlayerStats&);

@@ -112,6 +112,13 @@ void Text::draw(Canvas* canvas)
 		Frame::draw(canvas);
 }
 
+void Text::setText(bool useFile, string file)
+{
+	vector<vector<Symbol>> temp;
+	FileIO::buildText(useFile, file, temp, dimension);
+	text = temp;
+}
+
 void Text::setForegroundColor(int color)
 {
 	Frame::setForegroundColor(color);
