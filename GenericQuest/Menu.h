@@ -9,20 +9,24 @@ class Menu : public Actor
 	public:
 		Menu(Frame* newMessage, Frame* newCursor, Frame* member, float x, float y, char newUp, char newDown);
 		~Menu();
-		virtual void update(float delta);
-		virtual int input();
-		virtual void draw(Canvas* canvas);
-		virtual void addMember(Frame* newFrame);
-		virtual void setForegroundColor(int color);
-		virtual void setBackgroundColor(int color);
-		virtual void setDimension(int x, int y);
-		virtual void setPosition(float x, float y);
-		virtual void setVelocity(float x, float y);
-		virtual void setAcceleration(float x, float y);
-		virtual Dimension getDimension();
-		virtual Vector getPosition();
-		virtual Vector getVelocity();
-		virtual Vector getAcceleration();
+		void update(float delta);
+		int input();
+		void draw(Canvas* canvas);
+		void addMember(Frame* newFrame);
+		void setForegroundColor(int color);
+		void setBackgroundColor(int color);
+		void setDimension(int x, int y);
+		void setPosition(float x, float y);
+		void setVelocity(float x, float y);
+		void setAcceleration(float x, float y);
+		Frame* getMember(int i);
+		Frame* getFocused();
+		int getFocusedIndex();
+		int getSize();
+		Dimension getDimension();
+		Vector getPosition();
+		Vector getVelocity();
+		Vector getAcceleration();
 
 	private:
 		vector<Frame*> members;

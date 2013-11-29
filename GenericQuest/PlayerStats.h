@@ -17,7 +17,9 @@ class PlayerStats : public Branch
 {
     public:
 		PlayerStats(BranchManager* bm);
+		PlayerStats(BranchManager* bm, float x, float y);
 		~PlayerStats();
+		void init(bool animate);
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -26,7 +28,6 @@ class PlayerStats : public Branch
 
 	private:
 		Timer timer;
-		Menu* menu;
 		Frame* frame;
 		StatusBar* hpBar;
 		StatusBar* xpBar;

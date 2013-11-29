@@ -55,3 +55,8 @@ void Branch::input(float delta)
 void Branch::end(float delta)
 {
 }
+
+void Branch::setState(State newState)
+{
+	state = newState;
+}

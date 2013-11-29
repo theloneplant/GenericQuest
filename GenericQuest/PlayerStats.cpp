@@ -13,41 +13,35 @@
 #include "Character.h"
 #include "BranchManager.h"
 #include "Branch.h"
+#include "PlayerInventory.h"
 #include "PlayerStats.h"
+
+PlayerStats::PlayerStats(BranchManager* bm, float x, float y)
+{
+	Branch::Branch(bm);
+	manager = bm;
+	timer.reset();
+	frame = new Frame("stats.fram", x, y);
+	init(false);
+}
 
 PlayerStats::PlayerStats(BranchManager* bm)
 {
 	Branch::Branch(bm);
 	manager = bm;
 	timer.reset();
-
-	int randRole = Random::random(1, 3);
-	if (randRole == 1)
-		Character::player->init(Knight);
-	else if (randRole == 2)
-		Character::player->init(Ranger);
-	else if (randRole == 3)
-		Character::player->init(Wizard);
-
-	float randomNum = Random::random(1, 100);
-	for (int i = 0; i < 0; i++)
-		Character::player->levelUp();
-	Character::player->addXP(23);
-	Character::player->damage(2);
-	Character::player->earnGold(Random::random(0, 30), Random::random(0, 30), Random::random(0, 30));
-
 	frame = new Frame("stats.fram", 10, -20);
+	init(true);
+}
 
-	Text* message = new Text(false, "", false, 0, 0, 0, 0);
-	Animation* cursor = new Animation("cursor.anim", 0, 0, true, false, 3);
-	cursor->play();
-	Text* option1 = new Text(false, "Back", true, 0, 0, 0, 0);
+PlayerStats::~PlayerStats()
+{
+}
 
-	menu = new Menu(message, cursor, option1, frame->getPosition().x + 28, frame->getPosition().y + 17, 72, 80);
-	menu->setHidden(true);
-
+void PlayerStats::init(bool animate)
+{
 	//PLAYER INFO
-	Text* name = new Text(false, Character::player->getName() + "'s Stats", false, 0, 0, 
+	Text* name = new Text(false, Character::player->getName(), false, 0, 0, 
 		frame->getPosition().x + 2, frame->getPosition().y + 2);
 
 	string str = "";
@@ -116,20 +110,7 @@ PlayerStats::PlayerStats(BranchManager* bm)
 	Text* eq2Def = new Text(false, "Resist: " + to_string(static_cast<long long>(Character::player->getArmor().getStats().resist)), 
 		false, 0, 0, frame->getPosition().x + 42, frame->getPosition().y + 15);
 
-	/*//GOLD
-	Text* gold = new Text(false, to_string(static_cast<long long>(Character::player->getGold().gold)) + "g", 
-		false, 0, 0, frame->getPosition().x + 48, frame->getPosition().y + 18);
-	gold->setForegroundColor(FG_YELLOW);
-	Text* silver= new Text(false, to_string(static_cast<long long>(Character::player->getGold().silver)) + "s", 
-		false, 0, 0, frame->getPosition().x + 52, frame->getPosition().y + 18);
-	silver->setForegroundColor(FG_WHITE);
-	Text* copper= new Text(false, to_string(static_cast<long long>(Character::player->getGold().copper)) + "c", 
-		false, 0, 0, frame->getPosition().x + 56, frame->getPosition().y + 18);
-	copper->setForegroundColor(FG_RED);
-	*/
-
 	Tween* tween = new Tween(SinOut, frame, 10, 3, 0.3f);
-	tween->add(menu);
 	tween->add(name);
 	tween->add(level);
 	tween->add(hp);
@@ -156,7 +137,6 @@ PlayerStats::PlayerStats(BranchManager* bm)
 	tween->play();
 
 	myFrames.push_back(frame);
-	myFrames.push_back(menu);
 	myFrames.push_back(name);
 	myFrames.push_back(level);
 	myFrames.push_back(hp);
@@ -180,12 +160,8 @@ PlayerStats::PlayerStats(BranchManager* bm)
 	myFrames.push_back(eq2Base);
 	myFrames.push_back(eq2Atk);
 	myFrames.push_back(eq2Def);
+
 	myTweens.push_back(tween);
-}
-
-PlayerStats::~PlayerStats()
-{
-
 }
 
 void PlayerStats::update(float delta)
@@ -216,16 +192,15 @@ void PlayerStats::draw(Canvas* canvas)
 
 void PlayerStats::start(float delta)
 {
-	int input = menu->input();
-
-	if (input != -1)
+	if (Input::keyHit() && (Input::get() == 's' || Input::get() == 'p'))
 	{
-		if (input == 0)
-		{
-			state = End;
-			myTweens.at(0)->restart(10, -22);
-			myTweens.at(0)->setDuration(0.3f);
-		}
+		state = End;
+		myTweens.at(0)->restart(10, -22);
+		myTweens.at(0)->setDuration(0.3f);
+	}
+	else if (Input::get() == 'i' || Input::get() == 'b')
+	{
+		manager->swap(new PlayerInventory(manager, frame->getPosition().x, frame->getPosition().y));
 	}
 }
 
@@ -235,19 +210,16 @@ void PlayerStats::input(float delta)
 
 void PlayerStats::end(float delta)
 {
-	int input = menu->input();
-
-	if (input != -1)
+	if (Input::keyHit() && (Input::get() == 's' || Input::get() == 'p'))
 	{
-		if (input == 0)
-		{
-			state = Start;
-			myTweens.at(0)->restart(10, 3);
-		}
+		state = Start;
+		myTweens.at(0)->restart(10, 3);
 	}
+	
 	if (myTweens.at(0)->isFinished())
 	{
 		Input::clear();
+		manager->setInMenu(false);
 		manager->pop();
 	}
 }

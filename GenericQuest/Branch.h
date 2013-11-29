@@ -22,6 +22,7 @@ class Branch
         virtual void start(float delta);
 		virtual void input(float delta);
 		virtual void end(float delta);
+		virtual void setState(State newState);
 
 	protected:
 		BranchManager* manager;

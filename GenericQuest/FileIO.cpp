@@ -136,7 +136,7 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 					if (tag == "HERO")
 					{
 						string playerName = Character::player->getName();
-						for (int i = 0; i < playerName.length(); i++)
+						for (unsigned int i = 0; i < playerName.length(); i++)
 						{
 							symbol.setChar(playerName.at(i));
 							row.push_back(symbol);

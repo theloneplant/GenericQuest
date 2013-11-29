@@ -2,7 +2,7 @@
 #include "Frame.h"
 #include "StatusBar.h"
 
-StatusBar::StatusBar(unsigned int newWidth, Color fg, Color fill, Color empt, int x, int y)
+StatusBar::StatusBar(unsigned int newWidth, Color fg, Color fill, Color empt, float x, float y)
 {
 	Actor::setPosition(x, y);
 	bar = new Frame(newWidth, 1);
@@ -33,8 +33,8 @@ void StatusBar::calculateBar(string text, int value, int max)
 	Symbol symbol;
 	if (value < 0)
 		value = 0;
-	int valueWidth = width * value / (max + 0.0f);
-	int textPos = (width - text.length()) / 2;
+	unsigned int valueWidth = static_cast<int>(width * value / (max + 0.0f));
+	unsigned int textPos = (width - text.length()) / 2;
 	unsigned int count = 0;
 
 	symbol.setForegroundColor(textColor);

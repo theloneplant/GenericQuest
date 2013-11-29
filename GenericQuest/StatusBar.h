@@ -9,7 +9,7 @@ class Frame;
 class StatusBar : public Actor
 {
 	public:
-		StatusBar(unsigned int newWidth, Color fg, Color fill, Color empt, int x, int y);
+		StatusBar(unsigned int newWidth, Color fg, Color fill, Color empt, float x, float y);
 		~StatusBar();
 		virtual void update(float delta);
 		virtual void draw(Canvas* canvas);

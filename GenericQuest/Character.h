@@ -11,7 +11,7 @@ class Enemy;
 
 enum Role
 {
-	Knight, Ranger, Wizard
+	Knight, Ranger, Wizard, None
 };
 
 struct Gold

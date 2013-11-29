@@ -12,6 +12,7 @@ class Inventory
 		bool remove(string itemName);
 		Item getItem(unsigned int index);
 		Item getItem(string name);
+		int getSize();
 
 	private:
 		const unsigned int SIZE;

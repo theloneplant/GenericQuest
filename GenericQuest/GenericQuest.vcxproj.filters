@@ -91,6 +91,12 @@
     <Filter Include="Source Files\Actors\StatusBar">
       <UniqueIdentifier>{a6747b9f-740f-451f-88af-08328e7dc56f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Actors\Emitters/Particles">
+      <UniqueIdentifier>{245af0f2-d2c4-4868-90d9-9fdc510ae5b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors\Emitters/Particles">
+      <UniqueIdentifier>{eadf3bc4-239c-4382-92ea-cc9441538bea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -171,6 +177,12 @@
     <ClCompile Include="StatusBar.cpp">
       <Filter>Source Files\Actors\StatusBar</Filter>
     </ClCompile>
+    <ClCompile Include="MultiMenu.cpp">
+      <Filter>Source Files\Actors\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInventory.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -250,6 +262,12 @@
     </ClInclude>
     <ClInclude Include="StatusBar.h">
       <Filter>Header Files\Actors\StatusBar</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiMenu.h">
+      <Filter>Header Files\Actors\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInventory.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

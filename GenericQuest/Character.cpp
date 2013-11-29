@@ -9,7 +9,7 @@ Character * Character::player = new Character();
 
 Character::Character()
 {
-	init(Knight);
+	init(None);
 }
 
 Character::Character(Role myRole)
@@ -40,6 +40,8 @@ void Character::init(Role myRole)
 		weapon = atk;
 		Item def("Chain Mail", Armor, 1, 0, 0);
 		armor = def;
+		inventory.add(atk);
+		inventory.add(def);
 	}
 	else if (role == Ranger)
 	{
@@ -52,6 +54,8 @@ void Character::init(Role myRole)
 		weapon = atk;
 		Item def("Leather Armor", Armor, 0, 1, 0);
 		armor = def;
+		inventory.add(atk);
+		inventory.add(def);
 	}
 	else if (role == Wizard)
 	{
@@ -64,6 +68,16 @@ void Character::init(Role myRole)
 		weapon = atk;
 		Item def("Blue Robe", Armor, 0, 0, 1);
 		armor = def;
+		inventory.add(def);
+		inventory.add(atk);
+	}
+
+	if (role != None)
+	{
+		Item thing1("Staff", Weapon, 1, 0, 3);
+		Item thing2("Purple Robe", Armor, 1, 0, 5);
+		inventory.add(thing1);
+		inventory.add(thing2);
 	}
 
 	gold.gold = 0;
@@ -100,8 +114,8 @@ void Character::heal(int heal)
 void Character::reward(int cr)
 {
 	addXP(EXPERIENCE_MODIFIER * cr / level);
-	int avgCopper = 5 * cr;
-	earnGold(0, 0, Random::random(avgCopper * 0.7, avgCopper * 1.3));
+	unsigned int avgCopper = 5 * cr;
+	earnGold(0, 0, Random::random(static_cast<int>(avgCopper * 0.7), static_cast<int>(avgCopper * 1.3)));
 	calculateGold();
 }
 
@@ -144,15 +158,15 @@ void Character::levelUp()
 
 void Character::calculateStats()
 {
-	stats.strength = baseStats.strength + armor.getStats().strength + weapon.getStats().strength;
-	stats.dexterity = baseStats.dexterity + armor.getStats().dexterity + weapon.getStats().dexterity;
-	stats.intelligence = baseStats.intelligence + armor.getStats().intelligence + weapon.getStats().intelligence;
+	stats.strength = baseStats.strength;
+	stats.dexterity = baseStats.dexterity;
+	stats.intelligence = baseStats.intelligence;
 
 	stats.armor = stats.strength / 5 + armor.getStats().armor + weapon.getStats().armor;
-	float bonusDodge = (stats.dexterity + armor.getStats().dodge + weapon.getStats().dodge);
+	float bonusDodge = static_cast<float>(stats.dexterity + armor.getStats().dodge + weapon.getStats().dodge);
 	float cap = 78;
-	float modifier = 0.986;
-	stats.dodge = (bonusDodge * cap) / (bonusDodge + modifier * cap) + 8; //Uses diminishing returns
+	float modifier = 0.986f;
+	stats.dodge = static_cast<int>((bonusDodge * cap) / (bonusDodge + modifier * cap) + 8); //Uses diminishing returns
 	stats.resist = stats.intelligence / 5 + armor.getStats().resist + weapon.getStats().resist;
 
 	stats.melee = (stats.strength / 4) * (armor.getStats().melee + weapon.getStats().melee);

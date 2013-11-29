@@ -55,3 +55,8 @@ Item Inventory::getItem(string name)
 	Item temp;
 	return temp;
 }
+
+int Inventory::getSize()
+{
+	return items.size();
+}

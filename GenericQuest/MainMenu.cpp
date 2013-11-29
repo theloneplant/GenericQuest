@@ -8,6 +8,8 @@
 #include "Menu.h"
 #include "Tween.h"
 #include "Input.h"
+#include "Random.h"
+#include "Character.h"
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
@@ -19,6 +21,22 @@ MainMenu::MainMenu(BranchManager* bm)
 	Branch::Branch(bm);
 	manager = bm;
 	timer.reset();
+
+	int randRole = Random::random(1, 3);
+	if (randRole == 1)
+		Character::player->init(Knight);
+	else if (randRole == 2)
+		Character::player->init(Ranger);
+	else if (randRole == 3)
+		Character::player->init(Wizard);
+
+	int randomNum = Random::random(1, 100);
+	for (int i = 0; i < 0; i++)
+		Character::player->levelUp();
+	Character::player->addXP(23);
+	Character::player->damage(2);
+	Character::player->earnGold(Random::random(0, 30), Random::random(0, 30), Random::random(0, 30));
+	bm->setGameStart(true);
 
 	title = new Frame("genericquest.fram", 1, 9);
 	title->setForegroundColor(FG_BLACK);
@@ -107,7 +125,7 @@ void MainMenu::input(float delta)
 		if (temp == 1)
 		{
 			Help* help = new Help(manager);
-			manager->push(new PlayerStats(manager));
+			manager->push(help);
 		}
 		if (temp == 2)
 		{

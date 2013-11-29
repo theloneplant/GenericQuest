@@ -51,7 +51,7 @@ int Menu::input()
 		char input = '`';
 		input = Input::get();
 
-		if (input == up && focusedMember >= 0)
+		if (input == up)
 		{
 			focusedMember--;
 			if (focusedMember < 0)
@@ -125,6 +125,29 @@ void Menu::setVelocity(float x, float y)
 void Menu::setAcceleration(float x, float y)
 {
 	Actor::setAcceleration(x, y);
+}
+
+Frame* Menu::getMember(int i)
+{
+	if (i >= 0 && i < members.size())
+		return members.at(i);
+	else
+		return new Frame();
+}
+
+Frame* Menu::getFocused()
+{
+	return members.at(focusedMember);
+}
+
+int Menu::getFocusedIndex()
+{
+	return focusedMember;
+}
+
+int Menu::getSize()
+{
+	return members.size();
 }
 
 Dimension Menu::getDimension()
