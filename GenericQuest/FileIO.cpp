@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Character.h"
+#include "Enemy.h"
 #include "Color.h"
 #include "FileIO.h"
 
@@ -136,17 +137,30 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 					if (tag == "HERO")
 					{
 						string playerName = Character::player->getName();
+						symbol.setForegroundColor(getColor("YELLOW"));
 						for (unsigned int i = 0; i < playerName.length(); i++)
 						{
 							symbol.setChar(playerName.at(i));
 							row.push_back(symbol);
 						}
+						symbol.setForegroundColor(getColor("LIGHTGRAY"));
+					}
+					else if (tag == "AREA")
+					{
+						string playerArea = Character::player->getArea();
+						symbol.setForegroundColor(getColor("LIGHTGREEN"));
+						for (unsigned int i = 0; i < playerArea.length(); i++)
+						{
+							symbol.setChar(playerArea.at(i));
+							row.push_back(symbol);
+						}
+						symbol.setForegroundColor(getColor("LIGHTGRAY"));
 					}
 				}
 				else //Build the string
 				{
 					symbol.setChar(str.at(count));
-					if (tag != "HERO")
+					if (tag != "HERO" && tag != "AREA")
 						symbol.setForegroundColor(getColor(tag));
 					row.push_back(symbol);
 				}

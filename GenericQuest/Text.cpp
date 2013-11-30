@@ -15,18 +15,20 @@ Text::Text(bool useFile, string file, bool type, int newSpeed, int newPause, flo
 		frame.at(i).resize(text.at(0).size());
 	}
 
-	if (!type)
-	{
-		frame = text;
-	}
-
 	setPosition(x, y);
 	typewriter = type;
 	paused = false; //Doesnt start out pausing for punctuation
+	finished = false;
 	cursorX = 0;
 	cursorY = 0;
 	typeSpeed = newSpeed; //Used for slowly typing out characters
 	pause = newPause; //Used for pausing at punctuation and new lines
+
+	if (!type)
+	{
+		frame = text;
+		finished = true;
+	}
 }
 
 Text::~Text()
@@ -80,7 +82,7 @@ void Text::update(float delta)
 					}
 					else //It's the end of the line
 					{
-						if (timer.getTime() >= pause / 1000.0)
+						//if (timer.getTime() >= pause / 1000.0)
 						{
 							cursorX = 0;
 							cursorY++;
@@ -90,7 +92,7 @@ void Text::update(float delta)
 				}
 				else //CursorX is out of bounds, wrap around
 				{
-					if (timer.getTime() >= pause / 1000.0)
+					//if (timer.getTime() >= pause / 1000.0)
 					{
 						cursorX = 0;
 						cursorY++;
@@ -98,11 +100,18 @@ void Text::update(float delta)
 					}
 				}
 			}
+			else
+			{
+				if (!finished)
+					finished = true;
+			}
 		}
 	}
 	else
 	{
-
+		frame = text;
+		if (!finished)
+			finished = true;
 	}
 }
 
@@ -115,7 +124,12 @@ void Text::draw(Canvas* canvas)
 void Text::setText(bool useFile, string file)
 {
 	FileIO::buildText(useFile, file, text, dimension);
-	frame = text;
+	frame.resize(text.size());
+	for (unsigned int i = 0; i < text.size(); i++)
+	{
+		frame.at(i).resize(text.at(0).size());
+	}
+	finished = false;
 }
 
 void Text::setForegroundColor(int color)
@@ -190,4 +204,9 @@ Vector Text::getVelocity()
 Vector Text::getAcceleration()
 {
 	return acceleration;
+}
+
+bool Text::isFinished()
+{
+	return finished;
 }

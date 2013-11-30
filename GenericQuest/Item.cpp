@@ -55,6 +55,16 @@ void Item::setName(string myName)
 	name = myName;
 }
 
+void Item::setStats(Stats newStats)
+{
+	stats = newStats;
+}
+
+void Item::setItemType(ItemType newItemType)
+{
+	type = newItemType;
+}
+
 string Item::getName()
 {
 	return name;

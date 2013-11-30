@@ -6,7 +6,6 @@
 #include "Text.h"
 #include "Animation.h"
 #include "Menu.h"
-#include "MultiMenu.h"
 #include "Tween.h"
 #include "Input.h"
 #include "Character.h"
@@ -19,7 +18,6 @@ PlayerInventory::PlayerInventory(BranchManager* bm, float x, float y)
 {
 	Branch::Branch(bm);
 	manager = bm;
-	timer.reset();
 	frame = new Frame("inventory.fram", x, y);
 	init(false);
 }
@@ -28,28 +26,29 @@ PlayerInventory::PlayerInventory(BranchManager* bm)
 {
 	Branch::Branch(bm);
 	manager = bm;
-	timer.reset();
 	frame = new Frame("inventory.fram", 10, -20);
 	init(true);
 }
 
 PlayerInventory::~PlayerInventory()
 {
+	delete frame, items, currentName, currentDex, currentStr, currentInt,
+		selectedName, selectedStr, selectedDex, selectedInt;
 }
 
 void PlayerInventory::init(bool animate)
 {
 	//PLAYER INFO
-	Text* name = new Text(false, Character::player->getName(), false, 0, 0, 
+	Text* name = new Text(false, "<YELLOW>" + Character::player->getName(), false, 0, 0, 
 		frame->getPosition().x + 2, frame->getPosition().y + 2);
 
 	//EQUIPMENT
 	Text* message = new Text(false, "", false, 0, 0, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 0, 0, true, false, 3);
 	cursor->play();
-	Text* eq1 = new Text(false, Character::player->getInventory().getItem(0).getName(), false, 0, 0, 0, 0);
-	items = new Menu(message, cursor, eq1, frame->getPosition().x + 23, frame->getPosition().y + 7, 72, 80);
-	for (unsigned int i = 1; i < Character::player->getInventory().getSize(); i++)
+
+	items = new Menu(message, cursor, frame->getPosition().x + 23, frame->getPosition().y + 7, 72, 80);
+	for (unsigned int i = 0; i < Character::player->getInventory().getSize(); i++)
 	{
 		Text* eqi = new Text(false, Character::player->getInventory().getItem(i).getName(), false, 0, 0, 0, i);
 		items->addMember(eqi);
@@ -164,15 +163,6 @@ void PlayerInventory::init(bool animate)
 void PlayerInventory::update(float delta)
 {
 	Branch::update(delta);
-
-	for (unsigned int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-	for (unsigned int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-	}
 }
 
 void PlayerInventory::draw(Canvas* canvas)

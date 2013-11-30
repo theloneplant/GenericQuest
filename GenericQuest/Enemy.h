@@ -17,17 +17,22 @@ enum EnemyType
 class Enemy
 {
 	public:
+		Enemy();
 		Enemy(int level);
 		~Enemy();
 		void inflict (int melee, int ranged, int magic);
+		void changeEnemy(int level);
+		void calculateStats();
 		Stats getStats();
+		Stats getBaseStats();
+		string getName();
 		int getCR();
 		bool isDead();
 	private:
 		string name;
 		EnemyType type;
 		Item weapon, armor;
-		Stats stats;
+		Stats stats, baseStats;
 		int cr;
 };
 

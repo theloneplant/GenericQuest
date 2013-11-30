@@ -4,14 +4,13 @@
 #include "Actor.h"
 #include "Menu.h"
 
-Menu::Menu(Frame* newMessage, Frame* newCursor, Frame* member, float x, float y, char newUp, char newDown)
+Menu::Menu(Frame* newMessage, Frame* newCursor, float x, float y, char newUp, char newDown)
 {
 	Actor::Actor();
 	setPosition(x, y);
 
 	message = newMessage;
 	cursor = newCursor;
-	members.push_back(member);
 	focusedMember = 0;
 	up = newUp;
 	down = newDown;
@@ -88,6 +87,20 @@ void Menu::addMember(Frame* newFrame)
 	members.push_back(newFrame);
 }
 
+void Menu::clear()
+{
+	for (unsigned int i = 0; i < members.size(); i++)
+	{
+		members.at(i) = NULL;
+	}
+	members.resize(0);
+}
+
+void Menu::setFocusedIndex(int index)
+{
+	focusedMember = index;
+}
+
 void Menu::setForegroundColor(int color)
 {
 	for (unsigned int i = 0; i < members.size(); i++)
@@ -132,7 +145,7 @@ Frame* Menu::getMember(int i)
 	if (i >= 0 && i < members.size())
 		return members.at(i);
 	else
-		return new Frame();
+		return NULL;
 }
 
 Frame* Menu::getFocused()

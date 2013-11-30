@@ -63,7 +63,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MultiMenu.cpp" />
+    <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Branch.cpp" />
@@ -96,7 +96,7 @@
     <ClCompile Include="Tween.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MultiMenu.h" />
+    <ClInclude Include="Combat.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Branch.h" />

@@ -13,6 +13,7 @@
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
+#include "Combat.h"
 #include "PlayerStats.h"
 #include "MainMenu.h"
 
@@ -22,7 +23,7 @@ MainMenu::MainMenu(BranchManager* bm)
 	manager = bm;
 	timer.reset();
 
-	int randRole = Random::random(1, 3);
+	int randRole = Random::random(2, 2);
 	if (randRole == 1)
 		Character::player->init(Knight);
 	else if (randRole == 2)
@@ -30,11 +31,7 @@ MainMenu::MainMenu(BranchManager* bm)
 	else if (randRole == 3)
 		Character::player->init(Wizard);
 
-	int randomNum = Random::random(1, 100);
-	for (int i = 0; i < 0; i++)
-		Character::player->levelUp();
 	Character::player->addXP(23);
-	Character::player->damage(2);
 	Character::player->earnGold(Random::random(0, 30), Random::random(0, 30), Random::random(0, 30));
 	bm->setGameStart(true);
 
@@ -50,7 +47,8 @@ MainMenu::MainMenu(BranchManager* bm)
 	Text* option2 = new Text(false, "Help", false, 0, 0, 0, 2);
 	Text* option3 = new Text(false, "Exit", false, 0, 0, 0, 4);
 
-	menu = new Menu(message, cursor, option1, 20, 16, 72, 80);
+	menu = new Menu(message, cursor, 20, 16, 72, 80);
+	menu->addMember(option1);
 	menu->addMember(option2);
 	menu->addMember(option3);
 	menu->setForegroundColor(FG_BLACK);
@@ -119,8 +117,8 @@ void MainMenu::input(float delta)
 	{
 		if (temp == 0)
 		{
-			MainMenu* mainMenu = new MainMenu(manager);
-			manager->swap(mainMenu);
+			Combat* combat = new Combat(manager);
+			manager->swap(combat);
 		}
 		if (temp == 1)
 		{

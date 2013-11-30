@@ -25,6 +25,9 @@ void Character::init(Role myRole)
 {
 	role = myRole;
 	name = "Hero";
+	area = "The Plains of Blahtharz'ghazamor";
+	pet = "None";
+	petDmg = 0;
 	level = 1;
 	xp = 0;
 	xpToLevel = EXPERIENCE_MODIFIER;
@@ -45,6 +48,8 @@ void Character::init(Role myRole)
 	}
 	else if (role == Ranger)
 	{
+		pet = "Bear Companion";
+		setPetDmg(1);
 		stats.health = 7;
 		baseStats.health = 7;
 		baseStats.strength = 5;
@@ -75,7 +80,7 @@ void Character::init(Role myRole)
 	if (role != None)
 	{
 		Item thing1("Staff", Weapon, 1, 0, 3);
-		Item thing2("Purple Robe", Armor, 1, 0, 5);
+		Item thing2("Purple Robe", Armor, 1, 5, 5);
 		inventory.add(thing1);
 		inventory.add(thing2);
 	}
@@ -84,7 +89,7 @@ void Character::init(Role myRole)
 	gold.silver = 0;
 	gold.copper = 1;
 
-	usables.hpPotions = 0;
+	usables.hpPotions = 1;
 	usables.strPotions = 0;
 	usables.dexPotions = 0;
 	usables.intPotions = 0;
@@ -92,23 +97,36 @@ void Character::init(Role myRole)
 	calculateStats();
 }
 
-void Character::attack(Enemy enemy)
+void Character::inflict (int melee, int ranged, int magic)
 {
-	//Attack and get damaged
-	enemy.inflict(stats.melee, stats.range, stats.magic);
-	damage((enemy.getStats().melee - stats.armor) 
-		 + (enemy.getStats().range - stats.armor) 
-		 + (enemy.getStats().magic - stats.resist));
-}
+	int hp = stats.health;
+	int meleeDmg = melee - stats.armor;
+	if (meleeDmg > 0)
+	hp -= meleeDmg;
+	int rangedDmg = ranged - stats.armor;
+	if (rangedDmg > 0)
+	hp -= rangedDmg;
+	int magicDmg = magic - stats.resist;
+	if (magicDmg > 0)
+	hp -= magicDmg;
 
-void Character::damage(int damage)
-{
-	stats.health -= damage;
+	if (hp > 0)
+		stats.health = hp;
+	else
+		stats.health = 0;
 }
 
 void Character::heal(int heal)
 {
 	stats.health += heal;
+	if (stats.health > baseStats.health)
+		stats.health = baseStats.health;
+}
+
+void Character::useHPPotion()
+{
+	usables.hpPotions--;
+	heal(baseStats.health / 2);
 }
 
 void Character::reward(int cr)
@@ -162,16 +180,25 @@ void Character::calculateStats()
 	stats.dexterity = baseStats.dexterity;
 	stats.intelligence = baseStats.intelligence;
 
-	stats.armor = stats.strength / 5 + armor.getStats().armor + weapon.getStats().armor;
-	float bonusDodge = static_cast<float>(stats.dexterity + armor.getStats().dodge + weapon.getStats().dodge);
-	float cap = 78;
+	stats.armor = stats.strength / 5 + armor.getStats().armor;
+	float bonusDodge = static_cast<float>(stats.dexterity + armor.getStats().dodge) * 2;
+	float cap = 95;
 	float modifier = 0.986f;
-	stats.dodge = static_cast<int>((bonusDodge * cap) / (bonusDodge + modifier * cap) + 8); //Uses diminishing returns
-	stats.resist = stats.intelligence / 5 + armor.getStats().resist + weapon.getStats().resist;
+	stats.dodge = static_cast<int>((bonusDodge * cap) / (bonusDodge + modifier * cap) + 5); //Uses diminishing returns
+	stats.resist = stats.intelligence / 5 + armor.getStats().resist;
 
-	stats.melee = (stats.strength / 4) * (armor.getStats().melee + weapon.getStats().melee);
-	stats.range = (stats.dexterity / 4) * (armor.getStats().range + weapon.getStats().range);
-	stats.magic = (stats.intelligence / 4) * (armor.getStats().magic + weapon.getStats().magic);
+	if (weapon.getStats().melee == 0)
+		stats.melee = 0;
+	else
+		stats.melee = stats.strength / 4 + weapon.getStats().melee;
+	if (weapon.getStats().range == 0)
+		stats.range = 0;
+	else
+		stats.range = stats.dexterity / 4 + weapon.getStats().range;
+	if (weapon.getStats().magic == 0)
+		stats.magic = 0;
+	else
+		stats.magic = stats.intelligence / 4 + weapon.getStats().magic;
 
 	//Check current stats
 	capStat(stats.health);
@@ -257,9 +284,17 @@ void Character::calculateGold()
 void Character::equip(Item item)
 {
 	if (item.getItemType() == Weapon)
-		weapon = item;
+	{
+		weapon.setName(item.getName());
+		weapon.setStats(item.getStats());
+		weapon.setItemType(item.getItemType());
+	}
 	else if (item.getItemType() == Armor)
-		armor = item;
+	{
+		armor.setName(item.getName());
+		armor.setStats(item.getStats());
+		armor.setItemType(item.getItemType());
+	}
 
 	calculateStats();
 }
@@ -282,6 +317,21 @@ void Character::setRole(Role newRole)
 void Character::setName(string newName)
 {
 	name = newName;
+}
+
+void Character::setArea(string newArea)
+{
+	area = newArea;
+}
+
+void Character::setPet(string newPet)
+{
+	pet = newPet;
+}
+
+void Character::setPetDmg(int cr)
+{
+	petDmg = cr * 3;
 }
 
 Role Character::getRole()
@@ -312,6 +362,21 @@ Usables Character::getUsables()
 string Character::getName()
 {
 	return name;
+}
+
+string Character::getArea()
+{
+	return area;
+}
+
+string Character::getPet()
+{
+	return pet;
+}
+
+int Character::getPetDmg()
+{
+	return petDmg;
 }
 
 int Character::getHealth()

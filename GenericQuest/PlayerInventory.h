@@ -11,7 +11,7 @@ class Canvas;
 class Text;
 class Frame;
 class Animation;
-class MultiMenu;
+class Menu;
 class StatusBar;
 
 class PlayerInventory : public Branch
@@ -28,7 +28,6 @@ class PlayerInventory : public Branch
 		void end(float delta);
 
 	private:
-		Timer timer;
 		Menu* items;
 		Frame* frame;
 		Item selected;

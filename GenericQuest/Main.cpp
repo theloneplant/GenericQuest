@@ -25,15 +25,13 @@ int main()
 	bm.push(&blah);
 	Canvas canvas;
 	Timer timer;
-	float delta = 0;
-	COORD pos = {0, 23};
+	srand(time(0));
 
 	while(true)
 	{
-		delta = timer.getDelta();
 		Input::refresh();
 
-		bm.update(delta);
+		bm.update(timer.getDelta());
 		bm.draw(&canvas);
 
 		canvas.draw(screen);

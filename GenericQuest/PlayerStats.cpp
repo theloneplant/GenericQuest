@@ -36,12 +36,13 @@ PlayerStats::PlayerStats(BranchManager* bm)
 
 PlayerStats::~PlayerStats()
 {
+	delete frame, hpBar, xpBar;
 }
 
 void PlayerStats::init(bool animate)
 {
 	//PLAYER INFO
-	Text* name = new Text(false, Character::player->getName(), false, 0, 0, 
+	Text* name = new Text(false, "<YELLOW>" + Character::player->getName(), false, 0, 0, 
 		frame->getPosition().x + 2, frame->getPosition().y + 2);
 
 	string str = "";
@@ -57,29 +58,35 @@ void PlayerStats::init(bool animate)
 	{
 		str = "Wizard";
 	}
-	Text* level = new Text(false, "<YELLOW>Lvl " + to_string(static_cast<long long>(Character::player->getLevel())) + " " + str, 
+	Text* level = new Text(false, "Lvl " + to_string(static_cast<long long>(Character::player->getLevel())) + " " + str, 
 		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 7);
 
 	//HP AND XP
-	Text* hp = new Text(false, "HP ", false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 13);
-	Text* xp = new Text(false, "XP ", false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 15);
-	hpBar = new StatusBar(14, FG_WHITE, BG_RED, BG_DARKGRAY, frame->getPosition().x + 5, frame->getPosition().y + 13);
-	xpBar = new StatusBar(14, FG_WHITE, BG_BROWN, BG_DARKGRAY, frame->getPosition().x + 5, frame->getPosition().y + 15);
+	Text* hp = new Text(false, "HP ", false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 12);
+	Text* xp = new Text(false, "XP ", false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 13);
+	hpBar = new StatusBar(14, FG_WHITE, BG_RED, BG_DARKGRAY, frame->getPosition().x + 5, frame->getPosition().y + 12);
+	xpBar = new StatusBar(14, FG_WHITE, BG_BROWN, BG_DARKGRAY, frame->getPosition().x + 5, frame->getPosition().y + 13);
+
+	//PET
+	Text* pet = new Text(false, "Pet: " + Character::player->getPet(), 
+		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 15);
 
 	//BASE STATS
 	Text* strength = new Text(false, "Str: " + to_string(static_cast<long long>(Character::player->getStats().strength)), 
-		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 9);
+		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 8);
 	Text* dexterity = new Text(false, "Dex: " + to_string(static_cast<long long>(Character::player->getStats().dexterity)), 
-		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 10);
+		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 9);
 	Text* intelligence = new Text(false, "Int: " + to_string(static_cast<long long>(Character::player->getStats().intelligence)), 
-		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 11);
+		false, 0, 0, frame->getPosition().x + 2, frame->getPosition().y + 10);
 
 	//OFFENSE STATS
 	Text* melee = new Text(false, "Melee: " + to_string(static_cast<long long>(Character::player->getStats().melee)), 
-		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 7);
+		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 6);
 	Text* range = new Text(false, "Ranged: " + to_string(static_cast<long long>(Character::player->getStats().range)), 
-		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 8);
+		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 7);
 	Text* magic = new Text(false, "Magic: " + to_string(static_cast<long long>(Character::player->getStats().magic)), 
+		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 8);
+	Text* petDmg = new Text(false, "Pet: " + to_string(static_cast<long long>(Character::player->getPetDmg())),
 		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 9);
 
 	//DEFENSE STATS
@@ -117,6 +124,7 @@ void PlayerStats::init(bool animate)
 	tween->add(xp);
 	tween->add(hpBar);
 	tween->add(xpBar);
+	tween->add(pet);
 	tween->add(strength);
 	tween->add(dexterity);
 	tween->add(intelligence);
@@ -126,6 +134,7 @@ void PlayerStats::init(bool animate)
 	tween->add(melee);
 	tween->add(range);
 	tween->add(magic);
+	tween->add(petDmg);
 	tween->add(eq1Name);
 	tween->add(eq1Base);
 	tween->add(eq1Atk);
@@ -143,6 +152,7 @@ void PlayerStats::init(bool animate)
 	myFrames.push_back(xp);
 	myFrames.push_back(hpBar);
 	myFrames.push_back(xpBar);
+	myFrames.push_back(pet);
 	myFrames.push_back(strength);
 	myFrames.push_back(dexterity);
 	myFrames.push_back(intelligence);
@@ -152,6 +162,7 @@ void PlayerStats::init(bool animate)
 	myFrames.push_back(melee);
 	myFrames.push_back(range);
 	myFrames.push_back(magic);
+	myFrames.push_back(petDmg);
 	myFrames.push_back(eq1Name);
 	myFrames.push_back(eq1Base);
 	myFrames.push_back(eq1Atk);
@@ -167,15 +178,6 @@ void PlayerStats::init(bool animate)
 void PlayerStats::update(float delta)
 {
 	Branch::update(delta);
-	
-	for (unsigned int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-	for (unsigned int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-	}
 
 	string hpText = to_string(static_cast<long long>(Character::player->getStats().health))
 		+ "/" + to_string(static_cast<long long>(Character::player->getHealth()));

@@ -19,6 +19,8 @@ class Item
 		Item(string myName, ItemType myType, int newStr, int newDex, int newInt);
 		~Item();
 		void setName(string myName);
+		void setStats(Stats newStats);
+		void setItemType(ItemType newItemType);
 		string getName();
 		Stats getStats();
 		ItemType getItemType();

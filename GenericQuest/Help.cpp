@@ -25,7 +25,8 @@ Help::Help(BranchManager* bm)
 	cursor->play();
 	Text* option1 = new Text(false, "Back", true, 0, 0, 0, 0);
 
-	menu = new Menu(message, cursor, option1, 38, -2, 72, 80);
+	menu = new Menu(message, cursor, 38, -2, 72, 80);
+	menu->addMember(option1);
 
 	Tween* tween = new Tween(SinOut, frame, 10, 4, 0.3f);
 	tween->add(menu);
@@ -39,7 +40,8 @@ Help::Help(BranchManager* bm)
 
 Help::~Help()
 {
-
+	delete menu;
+	delete frame;
 }
 
 void Help::update(float delta)

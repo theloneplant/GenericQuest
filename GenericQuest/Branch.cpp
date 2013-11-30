@@ -2,6 +2,7 @@
 #include "Canvas.h"
 #include "Symbol.h"
 #include "Frame.h"
+#include "Tween.h"
 #include "BranchManager.h"
 #include "Branch.h"
 
@@ -18,6 +19,10 @@ Branch::Branch(BranchManager* bm)
 
 Branch::~Branch()
 {
+	for (unsigned int i = 0; i < myFrames.size(); i++)
+		delete myFrames.at(i);
+	for (unsigned int i = 0; i < myTweens.size(); i++)
+		delete myTweens.at(i);
 }
 
 void Branch::update(float delta)
@@ -33,6 +38,14 @@ void Branch::update(float delta)
 		case End:
 			end(delta);
 			break;
+	}
+	for (unsigned int i = 0; i < myTweens.size(); i++)
+	{
+		myTweens.at(i)->update();
+	}
+	for (unsigned int i = 0; i < myFrames.size(); i++)
+	{
+		myFrames.at(i)->update(delta);
 	}
 }
 

@@ -177,10 +177,10 @@
     <ClCompile Include="StatusBar.cpp">
       <Filter>Source Files\Actors\StatusBar</Filter>
     </ClCompile>
-    <ClCompile Include="MultiMenu.cpp">
-      <Filter>Source Files\Actors\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerInventory.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
     </ClCompile>
   </ItemGroup>
@@ -263,10 +263,10 @@
     <ClInclude Include="StatusBar.h">
       <Filter>Header Files\Actors\StatusBar</Filter>
     </ClInclude>
-    <ClInclude Include="MultiMenu.h">
-      <Filter>Header Files\Actors\Menu</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerInventory.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="Combat.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,12 +7,14 @@
 class Menu : public Actor
 {
 	public:
-		Menu(Frame* newMessage, Frame* newCursor, Frame* member, float x, float y, char newUp, char newDown);
+		Menu(Frame* newMessage, Frame* newCursor, float x, float y, char newUp, char newDown);
 		~Menu();
 		void update(float delta);
 		int input();
 		void draw(Canvas* canvas);
 		void addMember(Frame* newFrame);
+		void clear();
+		void setFocusedIndex(int index);
 		void setForegroundColor(int color);
 		void setBackgroundColor(int color);
 		void setDimension(int x, int y);

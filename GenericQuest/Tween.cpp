@@ -13,6 +13,10 @@ Tween::Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float new
 	finished = true;
 }
 
+Tween::~Tween()
+{
+}
+
 void Tween::update()
 {
 	if (!finished)

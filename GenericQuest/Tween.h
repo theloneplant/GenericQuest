@@ -11,6 +11,7 @@ class Tween
 {
 	public:
 		Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float newDuration);
+		~Tween();
 		void update();
 		void easeLinear();
 		void easeSinIn();

@@ -26,12 +26,13 @@ class Text : public Frame
 		virtual Vector getPosition();
 		virtual Vector getVelocity();
 		virtual Vector getAcceleration();
+		virtual bool isFinished();
 
 	private:
 		vector<vector<Symbol>> text; //Holds the text
 		Timer timer;
 		unsigned int typeSpeed, pause, cursorX, cursorY;
-		bool typewriter, paused;
+		bool typewriter, paused, finished;
 };
 
 #endif
