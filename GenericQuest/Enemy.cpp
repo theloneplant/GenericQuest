@@ -228,6 +228,7 @@ void Enemy::calculateStats()
 	float modifier = 0.986f;
 	stats.dodge = static_cast<int>((bonusDodge * cap) / (bonusDodge + modifier * cap) + 5); //Uses diminishing returns
 	stats.resist = stats.intelligence / 5 + armor.getStats().resist;
+	stats.speed = 10 + stats.dexterity / 5 - stats.armor;
 
 	if (weapon.getStats().melee == 0)
 		stats.melee = 0;
@@ -251,6 +252,16 @@ Stats Enemy::getStats()
 Stats Enemy::getBaseStats()
 {
 	return baseStats;
+}
+
+Item Enemy::getWeapon()
+{
+	return weapon;
+}
+
+Item Enemy::getArmor()
+{
+	return armor;
 }
 
 string Enemy::getName()

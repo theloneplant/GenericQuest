@@ -91,10 +91,12 @@ void PlayerStats::init(bool animate)
 
 	//DEFENSE STATS
 	Text* armor = new Text(false, "Armor: " + to_string(static_cast<long long>(Character::player->getStats().armor)), 
-		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 13);
+		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 12);
 	Text* dodge = new Text(false, "Dodge: " + to_string(static_cast<long long>(Character::player->getStats().dodge)) + "%", 
-		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 14);
+		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 13);
 	Text* resist = new Text(false, "Resist: " + to_string(static_cast<long long>(Character::player->getStats().resist)), 
+		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 14);
+	Text* speed = new Text(false, "Speed: " + to_string(static_cast<long long>(Character::player->getStats().speed)), 
 		false, 0, 0, frame->getPosition().x + 22, frame->getPosition().y + 15);
 
 	//WEAPON
@@ -131,6 +133,7 @@ void PlayerStats::init(bool animate)
 	tween->add(armor);
 	tween->add(dodge);
 	tween->add(resist);
+	tween->add(speed);
 	tween->add(melee);
 	tween->add(range);
 	tween->add(magic);
@@ -159,6 +162,7 @@ void PlayerStats::init(bool animate)
 	myFrames.push_back(armor);
 	myFrames.push_back(dodge);
 	myFrames.push_back(resist);
+	myFrames.push_back(speed);
 	myFrames.push_back(melee);
 	myFrames.push_back(range);
 	myFrames.push_back(magic);

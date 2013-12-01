@@ -32,23 +32,30 @@ class Combat : public Branch
 		Timer timer;
 		Enemy* enemy;
 		Menu* choice;
-		Text* text, *text1; //*dist,
-			//*playerStatus, *enemyStatus;
+		Text* enemyDesc, *playerDesc, *petDesc, //*dist,
+			*playerName, *enemyName, *distance;
+		Animation* playerStunFrame, *playerRootFrame,
+			*enemyStunFrame, *enemyRootFrame, 
+			*pHit;
 		StatusBar *playerHP, *enemyHP;
 		int distance;
+		bool playerHit, petHit, enemyHit;
 		bool playerRooted, enemyRooted;
 		bool playerStunned, enemyStunned;
-		bool playerMiss, enemyMiss;
+		int pStunCounter, eStunCounter,
+			pRootCounter, eRootCounter;
 		Text *melee, *range, *magic,
 			*bash, *charge,
 			*stun,
 			*freeze, *shock,
-			*backUp, *moveIn, *potions;
+			*backUp, *moveIn, *potions,
+			*nothing;
 		int meleeChoice, rangeChoice, magicChoice,
 			knightBash, knightCharge,
 			rangerStun,
 			wizardFreeze, wizardShock,
-			backUpChoice, moveInChoice, potionsChoice;
+			backUpChoice, moveInChoice, potionsChoice,
+			nothingChoice;
 		
 		Combat(const Combat&);
 		Combat& operator=(const Combat&);

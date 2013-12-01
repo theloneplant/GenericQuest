@@ -9,7 +9,7 @@ enum ItemType
 struct Stats
 {
 	int health, strength, dexterity, intelligence,
-		armor, dodge, resist, melee, range, magic;
+		armor, dodge, resist, melee, range, magic, speed;
 };
 
 class Item

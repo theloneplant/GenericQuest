@@ -89,10 +89,6 @@ void Menu::addMember(Frame* newFrame)
 
 void Menu::clear()
 {
-	for (unsigned int i = 0; i < members.size(); i++)
-	{
-		members.at(i) = NULL;
-	}
 	members.resize(0);
 }
 

@@ -15,7 +15,6 @@ class StatusBar : public Actor
 		virtual void draw(Canvas* canvas);
 		virtual void calculateBar(string text, int myValue, int maxValue);
 
-
 	private:
 		Frame* bar;
 		Color textColor, filled, empty;

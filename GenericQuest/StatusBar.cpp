@@ -5,6 +5,7 @@
 StatusBar::StatusBar(unsigned int newWidth, Color fg, Color fill, Color empt, float x, float y)
 {
 	Actor::setPosition(x, y);
+	Actor::setDimension(newWidth, 1);
 	bar = new Frame(newWidth, 1);
 	width = newWidth;
 	textColor = fg;

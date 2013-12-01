@@ -39,7 +39,7 @@ void Text::update(float delta)
 {
 	Actor::update(delta);
 
-	if (typewriter) //If it's animated
+	if (typewriter && !paused) //If it's animated
 	{
 		if (timer.getTime() >= typeSpeed / 1000.0) //Check the delay
 		{
@@ -107,7 +107,7 @@ void Text::update(float delta)
 			}
 		}
 	}
-	else
+	else if (!typewriter)
 	{
 		frame = text;
 		if (!finished)
@@ -124,12 +124,21 @@ void Text::draw(Canvas* canvas)
 void Text::setText(bool useFile, string file)
 {
 	FileIO::buildText(useFile, file, text, dimension);
+	cursorX = 0;
+	cursorY = 0;
+	if (typewriter)
+		frame.resize(0);
 	frame.resize(text.size());
 	for (unsigned int i = 0; i < text.size(); i++)
 	{
 		frame.at(i).resize(text.at(0).size());
 	}
 	finished = false;
+}
+
+void Text::setPaused( bool newPaused)
+{
+	paused = newPaused;
 }
 
 void Text::setForegroundColor(int color)

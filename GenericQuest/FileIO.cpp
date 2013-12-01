@@ -169,79 +169,13 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 			columns.push_back(row);
 			count = 0;
 		}
-
-		//Word Wrap
-		unsigned int begin = 0, end = 0;
-
-		for (unsigned int y = 0; y < columns.size(); y++) //For each row
-		{
-			begin = 0;
-			end = 0;
-
-			if (columns.at(y).size() > CONSOLE_WIDTH) //If big enough to justify word wrapping
-			{
-				while(end < columns.at(y).size()) //For each "line"
-				{
-					vector<Symbol> temp; //Temporary row for final array
-					Symbol symbol;
-					end = begin + CONSOLE_WIDTH - 1; //Keeps track of the chunks that will be rows
-
-					if (end < columns.at(y).size())
-					{
-						while (!isspace(columns.at(y).at(end).getChar()))
-						{
-							end--; //Avoid words
-						}
-
-						//Build the new row
-						for (unsigned int i = begin; i < end; i++)
-						{
-							temp.push_back(columns.at(y).at(i));
-						}
-
-						begin = end + 1; //Avoid that stupid space
-						frame.push_back(temp);
-					}
-					else
-					{
-						//Build the remaining row
-						for (unsigned int i = begin; i < columns.at(y).size(); i++)
-						{
-							temp.push_back(columns.at(y).at(i));
-						}
-						frame.push_back(temp);
-					}
-				}
-			}
-			else
-			{
-				frame.push_back(columns.at(y));
-			}
-		}
-
-		//Adjust the size of the frame
-		for (unsigned int y = 0; y < frame.size(); y++)
-		{
-			for (unsigned int x = 0; x < frame.at(y).size(); x++)
-			{
-				if (width < frame.at(y).size()) //Find the max width
-					width = frame.at(y).size();
-			}
-		}
-
-		for (unsigned int i = 0; i < frame.size(); i++)
-		{
-			frame.at(i).resize(width); //Set everything to that length with default params
-		}
-		dim.x = width;
-		dim.y = frame.size();
 	}
 	else
 	{
 		if (file.length() > 0)
 		{
 			Symbol symbol;
-			frame.resize(1);
+			columns.resize(1);
 			for (unsigned int i = 0; i < file.length(); i++)
 			{
 				if (file.at(i) == '<') //Build the color
@@ -253,17 +187,103 @@ void FileIO::buildText(bool useFile, string file, vector<vector<Symbol>>& frame,
 						tag.push_back(file.at(i));
 						file.erase(file.begin() + i); //Makes it easier to keep my place
 					}
+					if (tag == "HERO")
+					{
+						string playerName = Character::player->getName();
+						symbol.setForegroundColor(getColor("YELLOW"));
+						for (unsigned int i = 0; i < playerName.length(); i++)
+						{
+							symbol.setChar(playerName.at(i));
+							columns.at(0).push_back(symbol);
+						}
+						symbol.setForegroundColor(getColor("LIGHTGRAY"));
+					}
+					else if (tag == "AREA")
+					{
+						string playerArea = Character::player->getArea();
+						symbol.setForegroundColor(getColor("LIGHTGREEN"));
+						for (unsigned int i = 0; i < playerArea.length(); i++)
+						{
+							symbol.setChar(playerArea.at(i));
+							columns.at(0).push_back(symbol);
+						}
+						symbol.setForegroundColor(getColor("LIGHTGRAY"));
+					}
 				}
 				else
 				{
 					symbol.setChar(file.at(i));
-					symbol.setForegroundColor(getColor(tag));
-					frame.at(0).push_back(symbol);
+					if (tag != "HERO" && tag != "AREA")
+						symbol.setForegroundColor(getColor(tag));
+					columns.at(0).push_back(symbol);
 				}
 			}
-
-			dim.x = frame.at(0).size();
-			dim.y = frame.size();
 		}
 	}
+
+	//Word Wrap
+	unsigned int begin = 0, end = 0;
+
+	for (unsigned int y = 0; y < columns.size(); y++) //For each row
+	{
+		begin = 0;
+		end = 0;
+
+		if (columns.at(y).size() > CONSOLE_WIDTH) //If big enough to justify word wrapping
+		{
+			while(end < columns.at(y).size()) //For each "line"
+			{
+				vector<Symbol> temp; //Temporary row for final array
+				Symbol symbol;
+				end = begin + CONSOLE_WIDTH - 1; //Keeps track of the chunks that will be rows
+
+				if (end < columns.at(y).size())
+				{
+					while (!isspace(columns.at(y).at(end).getChar()))
+					{
+						end--; //Avoid words
+					}
+
+					//Build the new row
+					for (unsigned int i = begin; i < end; i++)
+					{
+						temp.push_back(columns.at(y).at(i));
+					}
+
+					begin = end + 1; //Avoid that stupid space
+					frame.push_back(temp);
+				}
+				else
+				{
+					//Build the remaining row
+					for (unsigned int i = begin; i < columns.at(y).size(); i++)
+					{
+						temp.push_back(columns.at(y).at(i));
+					}
+					frame.push_back(temp);
+				}
+			}
+		}
+		else
+		{
+			frame.push_back(columns.at(y));
+		}
+	}
+
+	//Adjust the size of the frame
+	for (unsigned int y = 0; y < frame.size(); y++)
+	{
+		for (unsigned int x = 0; x < frame.at(y).size(); x++)
+		{
+			if (width < frame.at(y).size()) //Find the max width
+				width = frame.at(y).size();
+		}
+	}
+
+	for (unsigned int i = 0; i < frame.size(); i++)
+	{
+		frame.at(i).resize(width); //Set everything to that length with default params
+	}
+	dim.x = width;
+	dim.y = frame.size();
 }

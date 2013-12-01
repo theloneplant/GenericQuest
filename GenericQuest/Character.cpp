@@ -48,7 +48,7 @@ void Character::init(Role myRole)
 	}
 	else if (role == Ranger)
 	{
-		pet = "Bear Companion";
+		pet = "Bear Bro";
 		setPetDmg(1);
 		stats.health = 7;
 		baseStats.health = 7;
@@ -186,6 +186,7 @@ void Character::calculateStats()
 	float modifier = 0.986f;
 	stats.dodge = static_cast<int>((bonusDodge * cap) / (bonusDodge + modifier * cap) + 5); //Uses diminishing returns
 	stats.resist = stats.intelligence / 5 + armor.getStats().resist;
+	stats.speed = 10 + stats.dexterity / 5 - stats.armor;
 
 	if (weapon.getStats().melee == 0)
 		stats.melee = 0;

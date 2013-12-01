@@ -63,6 +63,8 @@ void Animation::update(float delta)
 
 					finished = true;
 				}
+				else
+					finished = true;
 			}
 			else
 			{
@@ -75,6 +77,8 @@ void Animation::update(float delta)
 					else if (loop)
 						currentFrame = anim.size() - 1;
 				}
+				else
+					finished = true;
 			}
 			timer.reset();
 		}
@@ -106,6 +110,14 @@ void Animation::pause()
 void Animation::play()
 {
 	paused = false;
+}
+
+void Animation::restart()
+{
+	currentFrame = 0;
+	timer.reset();
+	paused = false;
+	finished = false;
 }
 
 void Animation::setForegroundColor(int color)

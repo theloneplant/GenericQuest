@@ -25,6 +25,8 @@ class Enemy
 		void calculateStats();
 		Stats getStats();
 		Stats getBaseStats();
+		Item getWeapon();
+		Item getArmor();
 		string getName();
 		int getCR();
 		bool isDead();
