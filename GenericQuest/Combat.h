@@ -27,13 +27,14 @@ class Combat : public Branch
 		void input(float delta);
 		void end(float delta);
 		void updateMenu();
+		void fadeOut();
 
 	private:
 		Timer timer;
 		Enemy* enemy;
 		Menu* choice;
 		Text* enemyDesc, *playerDesc, *petDesc, //*dist,
-			*playerName, *enemyName, *distance;
+			*playerName, *enemyName, *dist;
 		Animation* playerStunFrame, *playerRootFrame,
 			*enemyStunFrame, *enemyRootFrame, 
 			*pHit;

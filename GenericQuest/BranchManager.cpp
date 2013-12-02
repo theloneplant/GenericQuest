@@ -50,8 +50,16 @@ void BranchManager::update(float delta)
 		}
 		else if (input == 27)
 		{
-			_CrtDumpMemoryLeaks();
-			exit(EXIT_SUCCESS);
+			if (inMenu)
+			{
+				pop();
+				inMenu = false;
+			}
+			else
+			{
+				_CrtDumpMemoryLeaks();
+				exit(EXIT_SUCCESS);
+			}
 		}
 	}
 }

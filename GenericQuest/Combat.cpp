@@ -11,6 +11,7 @@
 #include "StatusBar.h"
 #include "BranchManager.h"
 #include "Branch.h"
+#include "MainMenu.h"
 #include "Combat.h"
 
 Combat::Combat(BranchManager* bm)
@@ -20,10 +21,10 @@ Combat::Combat(BranchManager* bm)
 
 	enemy = new Enemy(Character::player->getLevel());
 	string fileName = "combat/" + enemy->getName() + "Intro.txt";
-	playerDesc = new Text(false, fileName, true, 10, 250, 0, 1);
-	petDesc = new Text(false, "Message 1", true, 10, 250, 0, 1);
+	playerDesc = new Text(true, fileName, true, 10, 250, 0, 1);
+	petDesc = new Text(false, "", true, 10, 250, 0, 1);
 	petDesc->setPaused(true);
-	enemyDesc = new Text(false, "Message 2", true, 10, 250, 0, 1);
+	enemyDesc = new Text(false, "", true, 10, 250, 0, playerDesc->getPosition().y + playerDesc->getDimension().y);
 	enemyDesc->setPaused(true);
 
 	meleeChoice = rangeChoice = magicChoice = knightBash = knightCharge = rangerStun
@@ -98,15 +99,14 @@ Combat::Combat(BranchManager* bm)
 	enemyName = new Text(false, enemy->getName(), false, 0, 0, 0, 0);
 	enemyName->setPosition(enemyHP->getPosition().x,
 		enemyHP->getPosition().y - 1);
-	dist = new Text(false, to_string(static_cast<long long>(distance)), false, 0, 0, 0, 0);
+	dist = new Text(false, "Distance: " + to_string(static_cast<long long>(distance)) + "ft", false, 0, 0, 0, 0);
+	dist->setPosition(CONSOLE_WIDTH / 2 - dist->getDimension().x / 2, 23);
 
 	//ANIMATIONS FOR HIT/MISS
 	pHit = new Animation("combat/hit.anim", 0, 0, false, false, 30);
 	pHit->setPosition(enemyHP->getPosition().x + enemyHP->getDimension().x / 2 - pHit->getDimension().x / 2, 
 		enemyHP->getPosition().y - pHit->getDimension().y / 2);
 	pHit->setHidden(true);
-
-	playerRooted = true;
 
 	myFrames.push_back(enemyDesc);
 	myFrames.push_back(petDesc);
@@ -121,13 +121,14 @@ Combat::Combat(BranchManager* bm)
 	myFrames.push_back(playerName);
 	myFrames.push_back(enemyName);
 	myFrames.push_back(pHit);
+	myFrames.push_back(dist);
 }
 
 Combat::~Combat()
 {
 	delete enemy, enemyDesc, petDesc, playerDesc, choice, melee, range, magic, bash, 
 		charge, stun, freeze, shock, potions, backUp, moveIn, playerHP, 
-		enemyHP, playerStunFrame, playerRootFrame, enemyStunFrame, enemyStunFrame;
+		enemyHP, playerStunFrame, playerRootFrame, enemyStunFrame, enemyStunFrame, pHit, dist;
 }
 
 void Combat::update(float delta)
@@ -153,6 +154,7 @@ void Combat::start(float delta)
 			pHit->setHidden(false);
 			if (pHit->isFinished())
 			{
+				timer.reset();
 				string hpText2 = to_string(static_cast<long long>(enemy->getStats().health))
 					+ "/" + to_string(static_cast<long long>(enemy->getBaseStats().health));
 				enemyHP->calculateBar(hpText2, enemy->getStats().health, enemy->getBaseStats().health);
@@ -174,6 +176,7 @@ void Combat::start(float delta)
 			pHit->setHidden(false);
 			if (pHit->isFinished())
 			{
+				timer.reset();
 				enemy->inflict(Character::player->getPetDmg(), 0, 0);
 				string hpText2 = to_string(static_cast<long long>(enemy->getStats().health))
 					+ "/" + to_string(static_cast<long long>(enemy->getBaseStats().health));
@@ -196,6 +199,7 @@ void Combat::start(float delta)
 			pHit->setHidden(false);
 			if (pHit->isFinished())
 			{
+				timer.reset();
 				string hpText1 = to_string(static_cast<long long>(Character::player->getStats().health))
 					+ "/" + to_string(static_cast<long long>(Character::player->getHealth()));
 				playerHP->calculateBar(hpText1, Character::player->getStats().health, Character::player->getHealth());
@@ -208,18 +212,30 @@ void Combat::start(float delta)
 	}
 	else
 	{
-		if (playerDesc->isFinished())
+		if (enemyDesc->isFinished() && petDesc->isFinished() && playerDesc->isFinished())
 		{
-			petDesc->setPaused(false);
+			if (Character::player->getStats().health <= 0)
+			{
+				fadeOut();
+				//manager->swap(new MainMenu(manager));
+			}
+			else if (enemy->getStats().health <= 0)
+			{
+				fadeOut();
+			}
+			else
+			{
+				state = Input;
+				choice->setHidden(false);
+			}
 		}
-		if (petDesc->isFinished() && playerDesc->isFinished())
+		else if (petDesc->isFinished() && playerDesc->isFinished())
 		{
 			enemyDesc->setPaused(false);
 		}
-		if (enemyDesc->isFinished() && petDesc->isFinished() && playerDesc->isFinished())
+		else if (playerDesc->isFinished())
 		{
-			state = Input;
-			choice->setHidden(false);
+			petDesc->setPaused(false);
 		}
 	}
 }
@@ -231,6 +247,7 @@ void Combat::input(float delta)
 
 	if (input != -1)
 	{
+		const int CRIT = 95;
 		state = End;
 		hitRoll = Random::random(1, 100);
 		if (input == backUpChoice)
@@ -270,78 +287,181 @@ void Combat::input(float delta)
 				+ "/" + to_string(static_cast<long long>(Character::player->getHealth()));
 			playerHP->calculateBar(hpText1, Character::player->getStats().health, Character::player->getHealth());
 		}
+		else if (input == nothingChoice)
+		{
+			playerHit = false;
+			playerDesc->setText(false, "You sit on your ass and do nothing because you're <YELLOW>Stunned<LIGHTGRAY>.");
+		}
 		else if (hitRoll > enemy->getStats().dodge)
 		{
 			playerHit = true;
 
 			if (input == meleeChoice)
 			{
-				if (hitRoll > 50)
+				if (hitRoll > CRIT)
 				{
 					enemy->inflict(Character::player->getStats().melee * 2, 0, 0);
 					playerDesc->setText(false, "You hit with your <LIGHTCYAN>" 
 						+ Character::player->getWeapon().getName() + "<LIGHTGRAY> right in the <LIGHTMAGENTA>"
-						+ enemy->getName() + "'s<LIGHTGRAY> knee, dealing " 
-						+ to_string(static_cast<long long>(Character::player->getStats().melee * 2)) + " damage!");
+						+ enemy->getName() + "'s<LIGHTGRAY> knee, dealing <LIGHTRED>double damage<LIGHTGRAY>!");
 				}
 				else
 				{
 					enemy->inflict(Character::player->getStats().melee, 0, 0);
 					playerDesc->setText(false, "You swing with your <LIGHTCYAN>" 
 						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, striking the <LIGHTMAGENTA>"
-						+ enemy->getName() + "<LIGHTGRAY> for " + to_string(static_cast<long long>(Character::player->getStats().melee)) 
-						+ " damage.");
+						+ enemy->getName() + "<LIGHTGRAY>.");
 				}
 			}
 			else if (input == rangeChoice)
 			{
-				enemy->inflict(0, Character::player->getStats().range, 0);
+				if (hitRoll > CRIT)
+				{
+					enemy->inflict(0, Character::player->getStats().range * 2, 0);
+					playerDesc->setText(false, "You shoot with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, and the arrow hits the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY> right in its knee, dealing <LIGHTRED>double damage<LIGHTGRAY>!");
+				}
+				else
+				{
+					enemy->inflict(0, Character::player->getStats().range, 0);
+					playerDesc->setText(false, "You shoot with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, and get a good hit on the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY>.");
+				}
 			}
 			else if (input == magicChoice)
 			{
-				enemy->inflict(0, 0, Character::player->getStats().magic);
+				if (hitRoll > CRIT)
+				{
+					enemy->inflict(0, 0, Character::player->getStats().magic * 2);
+					playerDesc->setText(false, "You cast a fireball with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, hitting the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY> right in its knee, dealing <LIGHTRED>double damage<LIGHTGRAY>!");
+				}
+				else
+				{
+					enemy->inflict(0, 0, Character::player->getStats().magic);
+					playerDesc->setText(false, "You cast fire with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, and the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY> gets enveloped in flames.");
+				}
 			}
 			else if (input == knightBash)
 			{
-				enemy->inflict(Character::player->getStats().melee / 2, 0, 0);
-
-				if (Random::random(1, 100) > 25)
+				if (hitRoll > CRIT)
 				{
 					enemyStunned = true;
 					eStunCounter = 2;
+					enemy->inflict(Character::player->getStats().melee, 0, 0);
+					playerDesc->setText(false, "You bash the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY> with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
+						+ "<LIGHTGRAY>, shattering its knee, dealing <LIGHTRED>double damage<LIGHTGRAY>!");
+				}
+				else
+				{
+					if (Random::random(1, 100) > 25)
+					{
+						enemyStunned = true;
+						eStunCounter = 2;
+					}
+					enemy->inflict(Character::player->getStats().melee / 2, 0, 0);
+					playerDesc->setText(false, "You bash the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY> with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
+						+ "<LIGHTGRAY>.");
 				}
 			}
 			else if (input == knightCharge)
 			{
-				enemy->inflict(Character::player->getStats().melee * 2 / 3, 0, 0);
-				distance = 0;
+				if (hitRoll > CRIT)
+				{
+					enemy->inflict(Character::player->getStats().melee * 4 / 3, 0, 0);
+					distance = 0;
+					playerDesc->setText(false, "You charge the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY> with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
+						+ "<LIGHTGRAY>, closing your distance and hitting it right in its knee, dealing <LIGHTRED>double damage<LIGHTGRAY>!");
+				}
+				else
+				{
+					enemy->inflict(Character::player->getStats().melee * 2 / 3, 0, 0);
+					distance = 0;
+					playerDesc->setText(false, "You charge  the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY> with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
+						+ "<LIGHTGRAY>, and manage to hit it as you run in, closing your distance.");
+				}
 			}
 			else if (input == rangerStun)
 			{
-				enemy->inflict(Character::player->getPetDmg() / 2, 0, 0);
-
-				if (Random::random(1, 100) > 50)
+				if (hitRoll > CRIT)
 				{
 					enemyStunned = true;
 					eStunCounter = 2;
+					enemy->inflict(Character::player->getPetDmg(), 0, 0);
+					distance = 0;
+					playerDesc->setText(false,  "Your <YELLOW>" + Character::player->getPet() 
+						+ "<LIGHTGRAY> attacks the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY>, biting it in the knee, dealing <LIGHTRED>double damage<LIGHTGRAY>.");
+				}
+				else
+				{
+					if (Random::random(1, 100) > 50)
+					{
+						enemyStunned = true;
+						eStunCounter = 2;
+					}
+					enemy->inflict(Character::player->getPetDmg() / 2, 0, 0);
+					distance = 0;
+					playerDesc->setText(false,  "Your <YELLOW>" + Character::player->getPet() 
+						+ "<LIGHTGRAY> attempts to stun the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY> with its <LIGHTCYAN>Swipe<LIGHTGRAY>.");
 				}
 			}
 			else if (input == wizardFreeze)
 			{
-				if (Random::random(1, 100) > 25)
+				if (hitRoll > CRIT)
 				{
 					enemyRooted = true;
 					eRootCounter = 2;
+					playerDesc->setText(false, "You cast a ray of frost with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, hitting the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY> right in its knee, freezing it completely!");
+				}
+				else
+				{
+					if (Random::random(1, 100) > 25)
+					{
+						enemyRooted = true;
+						eRootCounter = 2;
+					}
+					playerDesc->setText(false, "You cast frost with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, and the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY> gets hit with an intense cold.");
 				}
 			}
 			else if (input == wizardShock)
 			{
 				enemy->inflict(0, 0, Character::player->getStats().magic / 2);
 
-				if (Random::random(1, 100) > 50)
+				if (hitRoll > CRIT)
 				{
 					enemyStunned = true;
 					eStunCounter = 2;
+					enemy->inflict(0, 0, Character::player->getStats().magic);
+					playerDesc->setText(false, "You cast a lightning bolt with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, hitting the <LIGHTMAGENTA>" + enemy->getName() 
+						+ "<LIGHTGRAY> right in its knee, causing it to spasm uncontrollably and dealing <LIGHTRED>double damage<LIGHTGRAY>!");
+				}
+				else
+				{
+					if (Random::random(1, 100) > 50)
+					{
+						enemyStunned = true;
+						eStunCounter = 2;
+					}
+					enemy->inflict(0, 0, Character::player->getStats().magic / 2);
+					playerDesc->setText(false, "You cast lightning with your <LIGHTCYAN>" 
+						+ Character::player->getWeapon().getName() + "<LIGHTGRAY>, and the <LIGHTMAGENTA>"
+						+ enemy->getName() + "<LIGHTGRAY> gets an intense electric jolt sent through it.");
 				}
 			}
 		}
@@ -356,7 +476,7 @@ void Combat::input(float delta)
 						+ Character::player->getWeapon().getName() + "<LIGHTGRAY> in hopes that it might hit something."
 						+ " You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else if (hitRoll < enemy->getStats().dodge / 2)
 				{
@@ -378,7 +498,7 @@ void Combat::input(float delta)
 						+ "<LIGHTGRAY>, but it backfires and you get hit in your beautiful face."
 						+ " You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else if (hitRoll < enemy->getStats().dodge / 2)
 				{
@@ -401,7 +521,7 @@ void Combat::input(float delta)
 						+ "<LIGHTGRAY>, but the spell backfires and you get shot backwards onto your back."
 						+ " You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else if (hitRoll < enemy->getStats().dodge / 2)
 				{
@@ -424,7 +544,7 @@ void Combat::input(float delta)
 						+ "<LIGHTGRAY>, but you instead hit a tree and get knocked onto your back."
 						+ " You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else if (hitRoll < enemy->getStats().dodge / 2)
 				{
@@ -446,13 +566,13 @@ void Combat::input(float delta)
 					distance = 0;
 					playerDesc->setText(false, "You manage to close the gap, but you stumble and foll onto the ground. You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else if (hitRoll < enemy->getStats().dodge / 2)
 				{
 					distance = 0;
 					playerDesc->setText(false, "You close the gap and attack with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
-						+ "<LIGHTGRAY>, but your foot catches on a rock,  causing your weapon to miss the<LIGHTMAGENTA>"
+						+ "<LIGHTGRAY>, but your foot catches on a rock,  causing your weapon to miss the <LIGHTMAGENTA>"
 						+ enemy->getName() + "<LIGHTGRAY>.");
 				}
 				else
@@ -465,7 +585,7 @@ void Combat::input(float delta)
 			}
 			else if (input == rangerStun)
 			{
-				if (hitRoll < 5)
+				if (hitRoll < 10)
 				{
 					playerDesc->setText(false, "Your <YELLOW>" + Character::player->getPet() 
 						+ "<LIGHTGRAY> is oblivious to your command and continues on its merry way, attacking the enemy.");
@@ -479,13 +599,13 @@ void Combat::input(float delta)
 			}
 			else if (input == wizardFreeze)
 			{
-				if (hitRoll < 5)
+				if (hitRoll < 10)
 				{
 					playerDesc->setText(false, "You try to cast a frost spell with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
 						+ "<LIGHTGRAY>, but the spell backfires and you get shot backwards onto your back."
 						+ " You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else
 				{
@@ -496,13 +616,13 @@ void Combat::input(float delta)
 			}
 			else if (input == wizardShock)
 			{
-				if (hitRoll < 5)
+				if (hitRoll < 10)
 				{
 					playerDesc->setText(false, "You try to cast lightning with your <LIGHTCYAN>" + Character::player->getWeapon().getName() 
 						+ "<LIGHTGRAY>, but the spell backfires and you get shot backwards onto your back."
 						+ " You are stunned the next round.");
 					playerStunned = true;
-					pStunCounter = 1;
+					pStunCounter = 2;
 				}
 				else
 				{
@@ -514,21 +634,35 @@ void Combat::input(float delta)
 		}
 	}
 }
+
 void Combat::end(float delta)
 {
 	const int CRIT = 95;
 	//CALCULATE PET HIT
+	int randHit = Random::random(1, 100);
 	if (Character::player->getRole() == Ranger)
 	{
 		if (Random::random(1, 100) > enemy->getStats().dodge)
 		{
 			petHit = true;
-			petDesc->setText(false, "Dat pet hit yo");
+			if (randHit > CRIT)
+			{
+				Character::player->inflict(enemy->getStats().melee * 2, enemy->getStats().range * 2, enemy->getStats().magic * 2);
+				enemyDesc->setText(false, "Your " + Character::player->getPet() + " lets out a roar as it attacks the <LIGHTMAGENTA>" + enemy->getName() 
+					+ "<LIGHTGRAY>, ripping its knee apart and dealing <LIGHTRED>double damage<LIGHTGRAY>!");
+			}
+			else
+			{
+				Character::player->inflict(enemy->getStats().melee, enemy->getStats().range, enemy->getStats().magic);
+				enemyDesc->setText(false, "Your " + Character::player->getPet() + " attacks the <LIGHTMAGENTA>" + enemy->getName() 
+					+ "<LIGHTGRAY>, hitting it in its side.");
+			}
 		}
 		else
 		{
 			petHit = false;
-			petDesc->setText(false, "Dat pet missed yo");
+			petDesc->setText(false, "Your " + Character::player->getPet() + " stumbles as it swipes at the <LIGHTMAGENTA>" + enemy->getName() 
+					+ "<LIGHTGRAY> and misses.");
 		}
 	}
 	else
@@ -554,9 +688,8 @@ void Combat::end(float delta)
 		}
 	}
 
-	int randHit = Random::random(1, 100);
-
 	//CALCULATE ENEMY HIT
+	randHit = Random::random(1, 100);
 	if (enemyStunned)
 	{
 		enemyDesc->setText(false, "The <LIGHTMAGENTA>" + enemy->getName() 
@@ -633,9 +766,8 @@ void Combat::end(float delta)
 			}
 		}
 	}
-	else if (randHit > Character::player->getStats().dodge)
+	else
 	{
-		enemyHit = true;
 		if (enemy->getStats().melee >= enemy->getStats().range && enemy->getStats().melee >= enemy->getStats().magic)
 		{
 			if (distance <= 0)
@@ -686,12 +818,30 @@ void Combat::end(float delta)
 		}
 		else
 		{
+			if (randHit > Character::player->getStats().dodge)
+			{
+				if (randHit > CRIT)
+				{
+					enemyHit = true;
+					Character::player->inflict(enemy->getStats().melee * 2, enemy->getStats().range * 2, enemy->getStats().magic * 2);
+					enemyDesc->setText(false, "The <LIGHTMAGENTA>" + enemy->getName() + "<LIGHTGRAY> shoots you in the knee with its <LIGHTCYAN>"
+						+ enemy->getWeapon().getName() + "<LIGHTGRAY>, dealing <LIGHTRED>double damage<LIGHTGRAY>.");
+				}
+				else
+				{
+					enemyHit = true;
+					Character::player->inflict(enemy->getStats().melee, enemy->getStats().range, enemy->getStats().magic);
+					enemyDesc->setText(false, "The <LIGHTMAGENTA>" + enemy->getName() + "<LIGHTGRAY> shoots you with its <LIGHTCYAN>"
+						+ enemy->getWeapon().getName() + "<LIGHTGRAY>.");
+				}
+			}
+			else
+			{
+				enemyHit = false;
+				enemyDesc->setText(false, "The <LIGHTMAGENTA>" + enemy->getName() + "<LIGHTGRAY> attempts to shoot you with its <LIGHTCYAN>"
+					+ enemy->getWeapon().getName() + "<LIGHTGRAY>, but it curves to one side and misses.");
+			}
 		}
-	}
-	else
-	{
-		enemyHit = false;
-		enemyDesc->setText(false, "The <LIGHTMAGENTA>" + enemy->getName() + "<LIGHTGRAY> misses you");
 	}
 
 	if (enemyRooted)
@@ -714,7 +864,7 @@ void Combat::end(float delta)
 	}
 
 	choice->setPosition(enemyDesc->getPosition().x + 3, enemyDesc->getPosition().y + enemyDesc->getDimension().y + 1);
-
+	
 	//UPDATE STATUS ICONS
 	if (playerStunned)
 		playerStunFrame->setHidden(false);
@@ -754,6 +904,9 @@ void Combat::end(float delta)
 		enemyRootFrame->setPosition(enemyStunFrame->getPosition().x - enemyStunFrame->getDimension().x, 
 		enemyStunFrame->getPosition().y);
 	}
+
+	//UPDATE DISTANCE
+	dist->setText(false, "Distance: " + to_string(static_cast<long long>(distance)) + "ft");
 
 	petDesc->setPaused(true);
 	enemyDesc->setPaused(true);
@@ -902,4 +1055,10 @@ void Combat::updateMenu()
 
 	if (choice->getFocusedIndex() >= count)
 		choice->setFocusedIndex(0);
+}
+
+void Combat::fadeOut()
+{
+	if (timer.getTime() > 1)
+		manager->swap(new MainMenu(manager));
 }

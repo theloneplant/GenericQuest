@@ -36,9 +36,9 @@ void Character::init(Role myRole)
 	{
 		stats.health = 10;
 		baseStats.health = 10;
-		baseStats.strength = 10;
-		baseStats.dexterity = 5;
-		baseStats.intelligence = 2;
+		baseStats.strength = 12;
+		baseStats.dexterity = 4;
+		baseStats.intelligence = 1;
 		Item atk("Iron Longsword", Weapon, 1, 0, 0);
 		weapon = atk;
 		Item def("Chain Mail", Armor, 1, 0, 0);
@@ -191,7 +191,7 @@ void Character::calculateStats()
 	if (weapon.getStats().melee == 0)
 		stats.melee = 0;
 	else
-		stats.melee = stats.strength / 4 + weapon.getStats().melee;
+		stats.melee = stats.strength / 3 + weapon.getStats().melee;
 	if (weapon.getStats().range == 0)
 		stats.range = 0;
 	else

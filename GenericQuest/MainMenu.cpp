@@ -23,7 +23,7 @@ MainMenu::MainMenu(BranchManager* bm)
 	manager = bm;
 	timer.reset();
 
-	int randRole = Random::random(3, 3);
+	int randRole = Random::random(1, 1);
 	if (randRole == 1)
 		Character::player->init(Knight);
 	else if (randRole == 2)
