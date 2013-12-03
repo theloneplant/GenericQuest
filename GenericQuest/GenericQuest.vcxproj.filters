@@ -183,6 +183,9 @@
     <ClCompile Include="Combat.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
     </ClCompile>
+    <ClCompile Include="Reward.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -267,6 +270,9 @@
       <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
     <ClInclude Include="Combat.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="Reward.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
   </ItemGroup>

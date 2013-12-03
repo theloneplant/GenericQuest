@@ -84,6 +84,7 @@
     <ClCompile Include="PlayerInventory.cpp" />
     <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Reward.cpp" />
     <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -117,6 +118,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Reward.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Symbol.h" />

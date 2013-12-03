@@ -18,8 +18,7 @@ class StatusBar;
 class Combat : public Branch
 {
     public:
-		Combat(BranchManager* bm);
-		Combat(BranchManager* bm, float x, float y);
+		Combat(BranchManager* bm, Branch* newLink);
 		~Combat();
 		void update(float delta);
 		void draw(Canvas* canvas);
@@ -30,6 +29,7 @@ class Combat : public Branch
 		void fadeOut();
 
 	private:
+		Branch* link;
 		Timer timer;
 		Enemy* enemy;
 		Menu* choice;
@@ -57,6 +57,8 @@ class Combat : public Branch
 			wizardFreeze, wizardShock,
 			backUpChoice, moveInChoice, potionsChoice,
 			nothingChoice;
+		float time;
+		bool ending;
 		
 		Combat(const Combat&);
 		Combat& operator=(const Combat&);

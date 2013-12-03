@@ -24,7 +24,7 @@ class Help : public Branch
 		void end(float delta);
 
 	private:
-		Timer timer;
+		Tween* tween;
 		Menu* menu;
 		Frame* frame;
 

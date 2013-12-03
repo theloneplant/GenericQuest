@@ -12,10 +12,8 @@
 #include "Branch.h"
 #include "Help.h"
 
-Help::Help(BranchManager* bm)
+Help::Help(BranchManager* bm) : Branch(bm)
 {
-	Branch::Branch(bm);
-	manager = bm;
 	timer.reset();
 
 	frame = new Frame("help.fram", 10, -16);
@@ -28,7 +26,7 @@ Help::Help(BranchManager* bm)
 	menu = new Menu(message, cursor, 38, -2, 72, 80);
 	menu->addMember(option1);
 
-	Tween* tween = new Tween(SinOut, frame, 10, 4, 0.3f);
+	tween = new Tween(SinOut, frame, 10, 4, 0.3f);
 	tween->add(menu);
 	tween->play();
 
@@ -40,8 +38,6 @@ Help::Help(BranchManager* bm)
 
 Help::~Help()
 {
-	delete menu;
-	delete frame;
 }
 
 void Help::update(float delta)

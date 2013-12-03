@@ -6,7 +6,6 @@
 
 Menu::Menu(Frame* newMessage, Frame* newCursor, float x, float y, char newUp, char newDown)
 {
-	Actor::Actor();
 	setPosition(x, y);
 
 	message = newMessage;

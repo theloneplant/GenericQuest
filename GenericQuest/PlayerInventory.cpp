@@ -14,29 +14,17 @@
 #include "PlayerStats.h"
 #include "PlayerInventory.h"
 
-PlayerInventory::PlayerInventory(BranchManager* bm, float x, float y)
+PlayerInventory::PlayerInventory(BranchManager* bm, float x, float y) : Branch(bm)
 {
-	Branch::Branch(bm);
-	manager = bm;
 	frame = new Frame("inventory.fram", x, y);
-	init(false);
-}
-
-PlayerInventory::PlayerInventory(BranchManager* bm)
-{
-	Branch::Branch(bm);
-	manager = bm;
-	frame = new Frame("inventory.fram", 10, -20);
-	init(true);
+	init(false, x, y);
 }
 
 PlayerInventory::~PlayerInventory()
 {
-	delete frame, items, currentName, currentDex, currentStr, currentInt,
-		selectedName, selectedStr, selectedDex, selectedInt;
 }
 
-void PlayerInventory::init(bool animate)
+void PlayerInventory::init(bool animate, int x, int y)
 {
 	//PLAYER INFO
 	Text* name = new Text(false, "<YELLOW>" + Character::player->getName(), false, 0, 0, 
@@ -171,17 +159,6 @@ void PlayerInventory::draw(Canvas* canvas)
 }
 void PlayerInventory::start(float delta)
 {
-	if (Input::keyHit() && (Input::get() == 'i' || Input::get() == 'b'))
-	{
-		state = End;
-		myTweens.at(0)->restart(10, -22);
-		myTweens.at(0)->setDuration(0.3f);
-	}
-	else if (Input::get() == 's' || Input::get() == 'p')
-	{
-		manager->swap(new PlayerStats(manager, frame->getPosition().x, frame->getPosition().y));
-	}
-
 	selected = Character::player->getInventory().getItem(items->getFocusedIndex());
 	if (selected.getItemType() == Weapon)
 	{
@@ -212,6 +189,17 @@ void PlayerInventory::start(float delta)
 	if (Input::keyHit() && Input::get() == 13)
 	{
 		Character::player->equip(selected);
+	}
+
+	if (Input::keyHit() && (Input::get() == 'i' || Input::get() == 'b'))
+	{
+		state = End;
+		myTweens.at(0)->restart(10, -22);
+		myTweens.at(0)->setDuration(0.3f);
+	}
+	else if (Input::get() == 's' || Input::get() == 'p')
+	{
+		manager->swap(new PlayerStats(manager, frame->getPosition().x, frame->getPosition().y));
 	}
 }
 

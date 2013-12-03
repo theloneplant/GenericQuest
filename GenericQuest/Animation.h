@@ -32,7 +32,7 @@ class Animation : public Frame
 	private:
 		vector<Frame*> anim;
 		Timer timer;
-		unsigned int fps, currentFrame;
+		int fps, currentFrame;
 		bool paused, loop, reverse, reversed, finished;
 };
 #endif

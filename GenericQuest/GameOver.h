@@ -1,7 +1,8 @@
-#ifndef MAIN_MENU
-#define MAIN_MENU
+#ifndef GAME_OVER
+#define GAME_OVER
 
 #include "Timer.h"
+#include "Character.h"
 
 class BranchManager;
 class Branch;
@@ -10,13 +11,14 @@ class Canvas;
 class Text;
 class Frame;
 class Animation;
+class StatusBar;
 class Menu;
 
-class MainMenu : public Branch
+class GameOver : public Branch
 {
     public:
-		MainMenu(BranchManager* bm);
-		~MainMenu();
+		GameOver(BranchManager* bm, Branch* newLink,  int cr);
+		~GameOver();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -24,11 +26,11 @@ class MainMenu : public Branch
 		void end(float delta);
 
 	private:
-		Menu* menu;
-		Frame* title;
-		Animation* sword;
+		Frame *frame;
+		Tween *tween;
+		Menu *menu;
 
-		MainMenu(const MainMenu&);
-		MainMenu& operator=(const MainMenu&);
+		GameOver(const GameOver&);
+		GameOver& operator=(const GameOver&);
 };
 #endif

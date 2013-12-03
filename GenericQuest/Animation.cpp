@@ -5,7 +5,6 @@
 
 Animation::Animation(string file, float x, float y, bool newLoop, bool newReverse, int newFps)
 {
-	Actor::Actor();
 	setPosition(x, y);
 	FileIO::buildAnimation(file, anim, dimension);
 	currentFrame = 0;
@@ -21,7 +20,6 @@ Animation::Animation(string file, float x, float y, bool newLoop, bool newRevers
 
 Animation::Animation(string file, float x, float y)
 {
-	Actor::Actor();
 	setPosition(x, y);
 	FileIO::buildAnimation(file, anim, dimension);
 	currentFrame = 0;

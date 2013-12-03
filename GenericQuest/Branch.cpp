@@ -6,14 +6,9 @@
 #include "BranchManager.h"
 #include "Branch.h"
 
-Branch::Branch()
-{
-	state = Start;
-}
-
 Branch::Branch(BranchManager* bm)
 {
-	Branch::Branch();
+	state = Start;
 	manager = bm;
 }
 
@@ -72,4 +67,9 @@ void Branch::end(float delta)
 void Branch::setState(State newState)
 {
 	state = newState;
+}
+
+void Branch::resetTimer()
+{
+	timer.reset();
 }

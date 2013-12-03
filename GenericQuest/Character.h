@@ -38,6 +38,7 @@ class Character
 		void useHPPotion();
 		void reward(int cr);
 		void addXP(int exp);
+		void setXP(int exp);
 		void levelUp();
 		void calculateStats();
 		void capStat(int& stat);
@@ -79,6 +80,7 @@ class Character
 		int level, xp, xpToLevel, petDmg;
 		Item weapon, armor;
 		Inventory inventory;
+		bool initialized;
 };
 
 #endif

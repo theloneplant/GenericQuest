@@ -8,6 +8,7 @@ class Canvas
 {
 	public:
 		Canvas();
+		~Canvas();
 		void overwrite(Frame* frame);
 		void overwrite(Frame* frame, float xPos, float yPos);
 		void draw(HANDLE screen);

@@ -21,6 +21,8 @@ BranchManager::BranchManager(Branch* branch)
 
 BranchManager::~BranchManager()
 {
+	for (unsigned int i = 0; i < branches.size(); i++)
+		pop();
 }
 
 void BranchManager::update(float delta)
@@ -43,8 +45,8 @@ void BranchManager::update(float delta)
 		{
 			if (!inMenu)
 			{
-				PlayerInventory* stats = new PlayerInventory(this);
-				push(stats);
+				PlayerInventory* inv = new PlayerInventory(this);
+				push(inv);
 				inMenu = true;
 			}
 		}
@@ -52,8 +54,7 @@ void BranchManager::update(float delta)
 		{
 			if (inMenu)
 			{
-				pop();
-				inMenu = false;
+				branches.back()->setState(End);
 			}
 			else
 			{
@@ -74,8 +75,8 @@ void BranchManager::draw(Canvas* canvas)
 
 void BranchManager::swap(Branch* newBranch)
 {
-	branches.pop_back();
-	branches.push_back(newBranch);
+	pop();
+	push(newBranch);
 }
 
 void BranchManager::push(Branch* newBranch)
@@ -85,7 +86,12 @@ void BranchManager::push(Branch* newBranch)
 
 void BranchManager::pop()
 {
-	branches.pop_back();
+	if (branches.size() > 0)
+	{
+		Branch *old = branches.back();
+		branches.pop_back();
+		delete old;
+	}
 }
 
 void BranchManager::setGameStart(bool started)

@@ -17,6 +17,12 @@ Canvas::Canvas()
 	}
 }
 
+Canvas::~Canvas()
+{
+	delete canvas;
+	delete prev;
+}
+
 void Canvas::overwrite(Frame* frame)
 {
 	overwrite(frame, 0, 0);

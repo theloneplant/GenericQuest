@@ -27,7 +27,6 @@ class PlayerStats : public Branch
 		void end(float delta);
 
 	private:
-		Timer timer;
 		Frame* frame;
 		StatusBar* hpBar;
 		StatusBar* xpBar;

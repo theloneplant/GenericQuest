@@ -11,7 +11,7 @@ class Frame : public Actor
 		Frame(int width, int height);
 		Frame(string file, float x, float y);
 		Frame(vector<vector<Symbol>> newFrame, float x, float y);
-		~Frame();
+		virtual ~Frame();
 		virtual void update(float delta);
 		virtual void draw(Canvas* canvas);
 		virtual void setFrame(vector<vector<Symbol>> newFrame);

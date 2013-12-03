@@ -5,8 +5,6 @@
 
 Frame::Frame()
 {
-	Actor::Actor();
-
 	setDimension(0, 0);
 	frame.resize(0);
 	hidden = false;
@@ -14,7 +12,6 @@ Frame::Frame()
 
 Frame::Frame(int width, int height)
 {
-	Actor::Actor();
 	setDimension(width, height);
 
 	frame.resize(height);

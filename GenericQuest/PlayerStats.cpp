@@ -16,19 +16,15 @@
 #include "PlayerInventory.h"
 #include "PlayerStats.h"
 
-PlayerStats::PlayerStats(BranchManager* bm, float x, float y)
+PlayerStats::PlayerStats(BranchManager* bm, float x, float y) : Branch(bm)
 {
-	Branch::Branch(bm);
-	manager = bm;
 	timer.reset();
 	frame = new Frame("stats.fram", x, y);
 	init(false);
 }
 
-PlayerStats::PlayerStats(BranchManager* bm)
+PlayerStats::PlayerStats(BranchManager* bm) : Branch(bm)
 {
-	Branch::Branch(bm);
-	manager = bm;
 	timer.reset();
 	frame = new Frame("stats.fram", 10, -20);
 	init(true);
@@ -36,7 +32,6 @@ PlayerStats::PlayerStats(BranchManager* bm)
 
 PlayerStats::~PlayerStats()
 {
-	delete frame, hpBar, xpBar;
 }
 
 void PlayerStats::init(bool animate)
@@ -181,14 +176,14 @@ void PlayerStats::init(bool animate)
 
 void PlayerStats::update(float delta)
 {
-	Branch::update(delta);
-
 	string hpText = to_string(static_cast<long long>(Character::player->getStats().health))
 		+ "/" + to_string(static_cast<long long>(Character::player->getHealth()));
 	hpBar->calculateBar(hpText, Character::player->getStats().health, Character::player->getHealth());
 	string xpText = to_string(static_cast<long long>(Character::player->getXP()))
 		+ "/" + to_string(static_cast<long long>(Character::player->getXPToLevel()));
 	xpBar->calculateBar(xpText, Character::player->getXP(), Character::player->getXPToLevel());
+
+	Branch::update(delta);
 }
 
 void PlayerStats::draw(Canvas* canvas)

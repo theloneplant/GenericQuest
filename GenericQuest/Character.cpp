@@ -3,17 +3,18 @@
 #include "Enemy.h"
 #include "Character.h"
 
-const int EXPERIENCE_MODIFIER = 100;
-const int MAX_STAT = 9999;
-Character * Character::player = new Character();
+static Character playerValue;
+Character* Character::player = &playerValue;
 
 Character::Character()
 {
+	initialized = false;
 	init(None);
 }
 
 Character::Character(Role myRole)
 {
+	initialized = false;
 	init(myRole);
 }
 
@@ -39,12 +40,15 @@ void Character::init(Role myRole)
 		baseStats.strength = 12;
 		baseStats.dexterity = 4;
 		baseStats.intelligence = 1;
-		Item atk("Iron Longsword", Weapon, 1, 0, 0);
-		weapon = atk;
-		Item def("Chain Mail", Armor, 1, 0, 0);
-		armor = def;
-		inventory.add(atk);
-		inventory.add(def);
+		if (!initialized)
+		{
+			Item atk("Iron Longsword", Weapon, 1, 0, 0);
+			weapon = atk;
+			Item def("Chain Mail", Armor, 1, 0, 0);
+			armor = def;
+			inventory.add(atk);
+			inventory.add(def);
+		}
 	}
 	else if (role == Ranger)
 	{
@@ -55,12 +59,15 @@ void Character::init(Role myRole)
 		baseStats.strength = 5;
 		baseStats.dexterity = 11;
 		baseStats.intelligence = 4;
-		Item atk("Oak Longbow", Weapon, 0, 1, 0);
-		weapon = atk;
-		Item def("Leather Armor", Armor, 0, 1, 0);
-		armor = def;
-		inventory.add(atk);
-		inventory.add(def);
+		if (!initialized)
+		{
+			Item atk("Oak Longbow", Weapon, 0, 1, 0);
+			weapon = atk;
+			Item def("Leather Armor", Armor, 0, 1, 0);
+			armor = def;
+			inventory.add(atk);
+			inventory.add(def);
+		}
 	}
 	else if (role == Wizard)
 	{
@@ -69,20 +76,15 @@ void Character::init(Role myRole)
 		baseStats.strength = 3;
 		baseStats.dexterity = 7;
 		baseStats.intelligence = 12;
-		Item atk("Spellbook", Weapon, 0, 0, 1);
-		weapon = atk;
-		Item def("Blue Robe", Armor, 0, 0, 1);
-		armor = def;
-		inventory.add(def);
-		inventory.add(atk);
-	}
-
-	if (role != None)
-	{
-		Item thing1("Staff", Weapon, 1, 0, 3);
-		Item thing2("Purple Robe", Armor, 1, 5, 5);
-		inventory.add(thing1);
-		inventory.add(thing2);
+		if (!initialized)
+		{
+			Item atk("Spellbook", Weapon, 0, 0, 1);
+			weapon = atk;
+			Item def("Blue Robe", Armor, 0, 0, 1);
+			armor = def;
+			inventory.add(def);
+			inventory.add(atk);
+		}
 	}
 
 	gold.gold = 0;
@@ -95,6 +97,8 @@ void Character::init(Role myRole)
 	usables.intPotions = 0;
 
 	calculateStats();
+	if (role != None)
+		initialized = true;
 }
 
 void Character::inflict (int melee, int ranged, int magic)
@@ -140,12 +144,19 @@ void Character::reward(int cr)
 void Character::addXP(int exp)
 {
 	xp += exp;
+	while (xp >= xpToLevel)
+		levelUp();
+}
+
+void Character::setXP(int exp)
+{
+	xp = exp;
 }
 
 void Character::levelUp()
 {
 	level++;
-	xp = 0;
+	xp -= xpToLevel;
 	xpToLevel += EXPERIENCE_MODIFIER;
 
 	if (role == Knight)
@@ -280,6 +291,7 @@ void Character::calculateGold()
 
 	gold.copper = copper;
 	gold.silver = silver;
+
 }
 
 void Character::equip(Item item)

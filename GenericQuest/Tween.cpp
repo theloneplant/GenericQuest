@@ -15,11 +15,6 @@ Tween::Tween(EaseType newEase, Actor* myActor, int finalX, int finalY, float new
 
 Tween::~Tween()
 {
-	for (unsigned int i = 0; i < actors.size(); i++)
-	{
-		if (actors.at(i) != NULL)
-			delete actors.at(i);
-	}
 }
 
 void Tween::update()

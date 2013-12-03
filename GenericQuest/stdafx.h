@@ -24,6 +24,8 @@
 
 using namespace std;
 
+const int EXPERIENCE_MODIFIER = 100;
+const int MAX_STAT = 9999;
 const double pi = 3.1415926535897;
 const int CONSOLE_WIDTH = 80;
 const int CONSOLE_HEIGHT = 24;

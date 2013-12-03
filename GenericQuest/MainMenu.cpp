@@ -13,14 +13,13 @@
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
+#include "Reward.h"
 #include "Combat.h"
 #include "PlayerStats.h"
 #include "MainMenu.h"
 
-MainMenu::MainMenu(BranchManager* bm)
+MainMenu::MainMenu(BranchManager* bm) : Branch(bm)
 {
-	Branch::Branch(bm);
-	manager = bm;
 	timer.reset();
 
 	int randRole = Random::random(1, 1);
@@ -31,9 +30,7 @@ MainMenu::MainMenu(BranchManager* bm)
 	else if (randRole == 3)
 		Character::player->init(Wizard);
 
-	Character::player->addXP(23);
-	Character::player->earnGold(Random::random(0, 30), Random::random(0, 30), Random::random(0, 30));
-	bm->setGameStart(true);
+	manager->setGameStart(true);
 
 	title = new Frame("genericquest.fram", 1, 9);
 	title->setForegroundColor(FG_BLACK);
@@ -65,7 +62,6 @@ MainMenu::MainMenu(BranchManager* bm)
 
 MainMenu::~MainMenu()
 {
-	delete title, sword, menu;
 }
 
 void MainMenu::update(float delta)
@@ -117,7 +113,8 @@ void MainMenu::input(float delta)
 	{
 		if (temp == 0)
 		{
-			Combat* combat = new Combat(manager);
+			MainMenu* link = new MainMenu(manager);
+			Reward* combat = new Reward(manager, link, 4);
 			manager->swap(combat);
 		}
 		if (temp == 1)

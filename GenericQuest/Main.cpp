@@ -21,8 +21,8 @@ int main()
     SetConsoleCursorInfo(screen, &cursorInfo);
 
 	BranchManager bm;
-	MainMenu blah(&bm);
-	bm.push(&blah);
+	MainMenu *blah = new MainMenu(&bm);
+	bm.push(blah);
 	Canvas canvas;
 	Timer timer;
 	srand(time(0));

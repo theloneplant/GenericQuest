@@ -11,13 +11,13 @@
 #include "StatusBar.h"
 #include "BranchManager.h"
 #include "Branch.h"
+#include "Reward.h"
 #include "MainMenu.h"
 #include "Combat.h"
 
-Combat::Combat(BranchManager* bm)
+Combat::Combat(BranchManager* bm, Branch* newLink) : Branch(bm)
 {
-	Branch::Branch(bm);
-	manager = bm;
+	link = newLink;
 
 	enemy = new Enemy(Character::player->getLevel());
 	string fileName = "combat/" + enemy->getName() + "Intro.txt";
@@ -32,6 +32,8 @@ Combat::Combat(BranchManager* bm)
 	pStunCounter = eStunCounter = pRootCounter = eRootCounter = 0;
 	distance = 10;
 	playerHit = false;
+	time = 0;
+	ending = false;
 
 	//MENU INIT
 	Text* message = new Text(false, "What do you do?", false, 0, 0, -2, 0);
@@ -126,15 +128,12 @@ Combat::Combat(BranchManager* bm)
 
 Combat::~Combat()
 {
-	delete enemy, enemyDesc, petDesc, playerDesc, choice, melee, range, magic, bash, 
-		charge, stun, freeze, shock, potions, backUp, moveIn, playerHP, 
-		enemyHP, playerStunFrame, playerRootFrame, enemyStunFrame, enemyStunFrame, pHit, dist;
 }
 
 void Combat::update(float delta)
 {
-	Branch::update(delta);
 	updateMenu();
+	Branch::update(delta);
 }
 
 void Combat::draw(Canvas* canvas)
@@ -152,9 +151,9 @@ void Combat::start(float delta)
 				enemyHP->getPosition().y - pHit->getDimension().y / 2);
 			pHit->play();
 			pHit->setHidden(false);
+			timer.reset();
 			if (pHit->isFinished())
 			{
-				timer.reset();
 				string hpText2 = to_string(static_cast<long long>(enemy->getStats().health))
 					+ "/" + to_string(static_cast<long long>(enemy->getBaseStats().health));
 				enemyHP->calculateBar(hpText2, enemy->getStats().health, enemy->getBaseStats().health);
@@ -174,9 +173,9 @@ void Combat::start(float delta)
 				enemyHP->getPosition().y - pHit->getDimension().y / 2);
 			pHit->play();
 			pHit->setHidden(false);
+			timer.reset();
 			if (pHit->isFinished())
 			{
-				timer.reset();
 				enemy->inflict(Character::player->getPetDmg(), 0, 0);
 				string hpText2 = to_string(static_cast<long long>(enemy->getStats().health))
 					+ "/" + to_string(static_cast<long long>(enemy->getBaseStats().health));
@@ -197,9 +196,9 @@ void Combat::start(float delta)
 				playerHP->getPosition().y - pHit->getDimension().y / 2);
 			pHit->play();
 			pHit->setHidden(false);
+			timer.reset();
 			if (pHit->isFinished())
 			{
-				timer.reset();
 				string hpText1 = to_string(static_cast<long long>(Character::player->getStats().health))
 					+ "/" + to_string(static_cast<long long>(Character::player->getHealth()));
 				playerHP->calculateBar(hpText1, Character::player->getStats().health, Character::player->getHealth());
@@ -216,11 +215,16 @@ void Combat::start(float delta)
 		{
 			if (Character::player->getStats().health <= 0)
 			{
+				if (!ending)
+					timer.reset();
+				ending = true;
 				fadeOut();
-				//manager->swap(new MainMenu(manager));
 			}
 			else if (enemy->getStats().health <= 0)
 			{
+				if (!ending)
+					timer.reset();
+				ending = true;
 				fadeOut();
 			}
 			else
@@ -247,6 +251,7 @@ void Combat::input(float delta)
 
 	if (input != -1)
 	{
+		Character::player->calculateStats();
 		const int CRIT = 95;
 		state = End;
 		hitRoll = Random::random(1, 100);
@@ -911,14 +916,16 @@ void Combat::end(float delta)
 	petDesc->setPaused(true);
 	enemyDesc->setPaused(true);
 	state = Start;
+	timer.reset();
 }
 
 void Combat::updateMenu()
 {
+	choice->clear();
+	
 	meleeChoice = rangeChoice = magicChoice = knightBash = knightCharge = rangerStun
 		= wizardFreeze = wizardShock = backUpChoice = moveInChoice = potionsChoice = nothingChoice = -1;
 
-	choice->clear();
 	int count = 0;
 
 	if (!playerStunned)
@@ -1059,6 +1066,8 @@ void Combat::updateMenu()
 
 void Combat::fadeOut()
 {
-	if (timer.getTime() > 1)
-		manager->swap(new MainMenu(manager));
+	if (timer.getTime() > 0.5f)
+	{
+		manager->swap(new Reward(manager, link, enemy->getCR()));
+	}
 }

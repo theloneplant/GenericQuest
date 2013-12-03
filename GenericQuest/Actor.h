@@ -10,7 +10,7 @@ class Actor
 {
     public:
 		Actor();
-		~Actor();
+		virtual ~Actor();
 		virtual void update(float delta);
 		virtual void draw(Canvas* canvas);
 		virtual void setDimension(int x, int y);
