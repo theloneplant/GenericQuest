@@ -13,6 +13,7 @@ class BranchManager
 		void update(float delta);
 		void draw(Canvas* canvas);
 		void swap(Branch* newBranch);
+		void cleanSwap(Branch* newBranch);
 		void push(Branch* newBranch);
 		void pop();
 		void setGameStart(bool started);

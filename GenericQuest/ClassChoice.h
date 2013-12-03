@@ -1,8 +1,7 @@
-#ifndef GAME_OVER
-#define GAME_OVER
+#ifndef CLASS_CHOICE
+#define CLASS_CHOICE
 
 #include "Timer.h"
-#include "Character.h"
 
 class BranchManager;
 class Branch;
@@ -11,14 +10,13 @@ class Canvas;
 class Text;
 class Frame;
 class Animation;
-class StatusBar;
 class Menu;
 
-class GameOver : public Branch
+class ClassChoice : public Branch
 {
     public:
-		GameOver(BranchManager* bm, Branch* newLink);
-		~GameOver();
+		ClassChoice(BranchManager* bm);
+		~ClassChoice();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -26,11 +24,11 @@ class GameOver : public Branch
 		void end(float delta);
 
 	private:
-		Frame *gameOver, *death;
-		Tween *tween;
-		Menu *menu;
+		Menu* menu;
+		Frame* title, *knight, *ranger, *wizard;
+		Animation *kAnim, *rAnim, *wAnim;
 
-		GameOver(const GameOver&);
-		GameOver& operator=(const GameOver&);
+		ClassChoice(const ClassChoice&);
+		ClassChoice& operator=(const ClassChoice&);
 };
 #endif

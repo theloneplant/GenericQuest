@@ -4,6 +4,7 @@
 #include "Branch.h"
 #include "PlayerStats.h"
 #include "PlayerInventory.h"
+#include "PauseMenu.h"
 #include "BranchManager.h"
 
 BranchManager::BranchManager()
@@ -58,8 +59,9 @@ void BranchManager::update(float delta)
 			}
 			else
 			{
-				_CrtDumpMemoryLeaks();
-				exit(EXIT_SUCCESS);
+				PauseMenu* pause = new PauseMenu(this);
+				push(pause);
+				inMenu = true;
 			}
 		}
 	}
@@ -76,6 +78,16 @@ void BranchManager::draw(Canvas* canvas)
 void BranchManager::swap(Branch* newBranch)
 {
 	pop();
+	push(newBranch);
+}
+
+void BranchManager::cleanSwap(Branch* newBranch)
+{
+	for (unsigned int i = 0; i < branches.size(); )
+	{
+		pop();
+		inMenu = false;
+	}
 	push(newBranch);
 }
 

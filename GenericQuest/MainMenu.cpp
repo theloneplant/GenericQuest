@@ -13,7 +13,7 @@
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Help.h"
-#include "Reward.h"
+#include "ClassChoice.h"
 #include "Combat.h"
 #include "PlayerStats.h"
 #include "MainMenu.h"
@@ -36,6 +36,7 @@ MainMenu::MainMenu(BranchManager* bm) : Branch(bm)
 	title->setForegroundColor(FG_BLACK);
 	sword = new Animation("genericsword.anim", 37, -40, true, false, 7);
 	sword->setForegroundColor(FG_YELLOW);
+	sword->setHidden(true);
 
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
@@ -98,6 +99,8 @@ void MainMenu::start(float delta)
 	}
 	else if (timer.getTime() > 0.2)
 		title->setForegroundColor(FG_DARKGRAY);
+	else
+		sword->setHidden(false);
 }
 
 void MainMenu::input(float delta)
@@ -114,7 +117,7 @@ void MainMenu::input(float delta)
 		if (temp == 0)
 		{
 			MainMenu* link = new MainMenu(manager);
-			Reward* combat = new Reward(manager, link, 4);
+			ClassChoice* combat = new ClassChoice(manager);
 			manager->swap(combat);
 		}
 		if (temp == 1)

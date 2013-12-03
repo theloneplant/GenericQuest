@@ -22,6 +22,15 @@ Branch::~Branch()
 
 void Branch::update(float delta)
 {
+	for (unsigned int i = 0; i < myTweens.size(); i++)
+	{
+		myTweens.at(i)->update();
+	}
+	for (unsigned int i = 0; i < myFrames.size(); i++)
+	{
+		myFrames.at(i)->update(delta);
+	}
+
 	switch(state)
 	{
 		case Start:
@@ -33,14 +42,6 @@ void Branch::update(float delta)
 		case End:
 			end(delta);
 			break;
-	}
-	for (unsigned int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-	for (unsigned int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
 	}
 }
 

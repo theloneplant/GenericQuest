@@ -15,6 +15,7 @@
 Help::Help(BranchManager* bm) : Branch(bm)
 {
 	timer.reset();
+	manager->setInMenu(true);
 
 	frame = new Frame("help.fram", 10, -16);
 
@@ -43,15 +44,6 @@ Help::~Help()
 void Help::update(float delta)
 {
 	Branch::update(delta);
-	
-	for (unsigned int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-	for (unsigned int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-	}
 }
 
 void Help::draw(Canvas* canvas)
@@ -93,6 +85,7 @@ void Help::end(float delta)
 	if (myTweens.at(0)->isFinished())
 	{
 		Input::clear();
+		manager->setInMenu(false);
 		manager->pop();
 	}
 }

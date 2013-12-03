@@ -186,6 +186,15 @@
     <ClCompile Include="Reward.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassChoice.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -273,6 +282,15 @@
       <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
     <ClInclude Include="Reward.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassChoice.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
     </ClInclude>
   </ItemGroup>
