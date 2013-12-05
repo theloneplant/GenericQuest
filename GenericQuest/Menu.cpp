@@ -38,8 +38,11 @@ void Menu::update(float delta)
 	}
 
 	//Update cursor position
-	cursor->setPosition(members.at(focusedMember)->getPosition().x - cursor->getDimension().x, 
-		members.at(focusedMember)->getPosition().y + members.at(focusedMember)->getDimension().y / 2 - cursor->getDimension().y / 2);
+	if (members.size() > 0)
+	{
+		cursor->setPosition(members.at(focusedMember)->getPosition().x - cursor->getDimension().x, 
+			members.at(focusedMember)->getPosition().y + members.at(focusedMember)->getDimension().y / 2 - cursor->getDimension().y / 2);
+	}
 }
 
 int Menu::input()

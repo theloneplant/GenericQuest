@@ -664,13 +664,13 @@ void Combat::end(float delta)
 			petHit = true;
 			if (randHit > CRIT)
 			{
-				Character::player->inflict(enemy->getStats().melee * 2, enemy->getStats().range * 2, enemy->getStats().magic * 2);
+				enemy->inflict(Character::player->getPetDmg(), 0, 0);
 				petDesc->setText(false, "Your " + Character::player->getPet() + " lets out a roar as it attacks the <LIGHTMAGENTA>" + enemy->getName() 
 					+ "<LIGHTGRAY>, ripping its knee apart and dealing <LIGHTRED>double damage<LIGHTGRAY>!");
 			}
 			else
 			{
-				Character::player->inflict(enemy->getStats().melee, enemy->getStats().range, enemy->getStats().magic);
+				//enemy->inflict(Character::player->getPetDmg(), 0, 0); Damage happens later
 				petDesc->setText(false, "Your " + Character::player->getPet() + " attacks the <LIGHTMAGENTA>" + enemy->getName() 
 					+ "<LIGHTGRAY>, hitting it in its side.");
 			}
