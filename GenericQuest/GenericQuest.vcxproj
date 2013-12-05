@@ -63,6 +63,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdventureStart.cpp" />
+    <ClCompile Include="Chapter1.cpp" />
     <ClCompile Include="ClassChoice.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Actor.cpp" />
@@ -83,6 +85,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="NameChoice.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlayerInventory.cpp" />
     <ClCompile Include="PlayerStats.cpp" />
@@ -100,6 +103,8 @@
     <ClCompile Include="Tween.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdventureStart.h" />
+    <ClInclude Include="Chapter1.h" />
     <ClInclude Include="ClassChoice.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Actor.h" />
@@ -118,6 +123,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="NameChoice.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PlayerInventory.h" />
     <ClInclude Include="PlayerStats.h" />

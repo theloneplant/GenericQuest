@@ -22,11 +22,15 @@ class ClassChoice : public Branch
         void start(float delta);
 		void input(float delta);
 		void end(float delta);
+		void updateColors();
 
 	private:
 		Menu* menu;
 		Frame* title, *knight, *ranger, *wizard;
 		Animation *kAnim, *rAnim, *wAnim;
+		Tween *kTween, *rTween, *wTween;
+		bool kPlayed, rPlayed, wPlayed;
+		int selected;
 
 		ClassChoice(const ClassChoice&);
 		ClassChoice& operator=(const ClassChoice&);

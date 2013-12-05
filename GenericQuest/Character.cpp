@@ -26,12 +26,14 @@ void Character::init(Role myRole)
 {
 	role = myRole;
 	name = "Hero";
-	area = "The Plains of Blahtharz'ghazamor";
+	area = "Foggybottom";
 	pet = "None";
 	petDmg = 0;
 	level = 1;
 	xp = 0;
 	xpToLevel = EXPERIENCE_MODIFIER;
+
+	inventory.clear();
 
 	if (role == Knight)
 	{
@@ -345,6 +347,11 @@ void Character::setPet(string newPet)
 void Character::setPetDmg(int cr)
 {
 	petDmg = cr * 3;
+}
+
+void Character::setInit(bool newInit)
+{
+	initialized = newInit;
 }
 
 Role Character::getRole()

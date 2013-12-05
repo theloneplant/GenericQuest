@@ -1,5 +1,5 @@
-#ifndef MAIN_MENU
-#define MAIN_MENU
+#ifndef ADVENTURE_START
+#define ADVENTURE_START
 
 #include "Timer.h"
 
@@ -7,17 +7,17 @@ class BranchManager;
 class Branch;
 class Canvas;
 
+class Character;
 class Text;
 class Frame;
 class Animation;
 class Menu;
 
-class MainMenu : public Branch
+class AdventureStart : public Branch
 {
     public:
-		MainMenu(BranchManager* bm);
-		~MainMenu();
-		void init();
+		AdventureStart(BranchManager* bm);
+		~AdventureStart();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -25,12 +25,10 @@ class MainMenu : public Branch
 		void end(float delta);
 
 	private:
-		Tween *tween;
-		Menu* menu;
-		Frame* title;
-		Animation* sword;
+		Menu *menu;
+		Text *text;
 
-		MainMenu(const MainMenu&);
-		MainMenu& operator=(const MainMenu&);
+		AdventureStart(const AdventureStart&);
+		AdventureStart& operator=(const AdventureStart&);
 };
 #endif

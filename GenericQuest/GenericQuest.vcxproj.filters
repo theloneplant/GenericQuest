@@ -97,6 +97,12 @@
     <Filter Include="Source Files\Actors\Emitters/Particles">
       <UniqueIdentifier>{eadf3bc4-239c-4382-92ea-cc9441538bea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Branches\GenericQuest\Adventure">
+      <UniqueIdentifier>{ccb90973-4cc7-413e-b4a5-5e0414b6a7ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Branches\GenericQuest\Adventure">
+      <UniqueIdentifier>{54edea2a-5cd8-4202-af31-bf6750f13f19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -195,6 +201,15 @@
     <ClCompile Include="ClassChoice.cpp">
       <Filter>Source Files\Branches\GenericQuest</Filter>
     </ClCompile>
+    <ClCompile Include="NameChoice.cpp">
+      <Filter>Source Files\Branches\GenericQuest</Filter>
+    </ClCompile>
+    <ClCompile Include="AdventureStart.cpp">
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter1.cpp">
+      <Filter>Source Files\Actors\Frames\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Branch.h">
@@ -292,6 +307,15 @@
     </ClInclude>
     <ClInclude Include="ClassChoice.h">
       <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="NameChoice.h">
+      <Filter>Header Files\Branches\GenericQuest</Filter>
+    </ClInclude>
+    <ClInclude Include="AdventureStart.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="Chapter1.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

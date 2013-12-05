@@ -8,6 +8,7 @@ class BranchManager;
 class Branch;
 class Canvas;
 
+enum EnemyType;
 class Enemy;
 class Text;
 class Frame;
@@ -19,7 +20,9 @@ class Combat : public Branch
 {
     public:
 		Combat(BranchManager* bm, Branch* newLink);
+		Combat(BranchManager* bm, Branch* newLink, EnemyType eType);
 		~Combat();
+		void init();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Canvas.h"
+#include "Character.h"
 #include "Symbol.h"
 #include "Frame.h"
 #include "Color.h"
@@ -71,6 +72,8 @@ void PauseMenu::start(float delta)
 		else if (input == 1)
 		{
 			state = End;
+			manager->setGameStart(false);
+			Character::player->setInit(false);
 			manager->cleanSwap(new MainMenu(manager));
 		}
 		else if (input == 2)

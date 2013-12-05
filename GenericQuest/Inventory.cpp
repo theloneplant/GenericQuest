@@ -36,6 +36,14 @@ bool Inventory::remove(string itemName)
 	return false;
 }
 
+void Inventory::clear()
+{
+	while (items.size() > 0)
+	{
+		items.pop_back();
+	}
+}
+
 Item Inventory::getItem(unsigned int i)
 {
 	if (i < items.size())

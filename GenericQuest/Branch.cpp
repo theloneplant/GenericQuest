@@ -20,6 +20,11 @@ Branch::~Branch()
 		delete myTweens.at(i);
 }
 
+void Branch::init()
+{
+	//This is mostly to reset timers
+}
+
 void Branch::update(float delta)
 {
 	for (unsigned int i = 0; i < myTweens.size(); i++)

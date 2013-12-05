@@ -15,22 +15,11 @@
 #include "Help.h"
 #include "ClassChoice.h"
 #include "Combat.h"
-#include "PlayerStats.h"
 #include "MainMenu.h"
 
 MainMenu::MainMenu(BranchManager* bm) : Branch(bm)
 {
 	timer.reset();
-
-	int randRole = Random::random(1, 1);
-	if (randRole == 1)
-		Character::player->init(Knight);
-	else if (randRole == 2)
-		Character::player->init(Ranger);
-	else if (randRole == 3)
-		Character::player->init(Wizard);
-
-	manager->setGameStart(true);
 
 	title = new Frame("genericquest.fram", 1, 9);
 	title->setForegroundColor(FG_BLACK);
@@ -51,7 +40,7 @@ MainMenu::MainMenu(BranchManager* bm) : Branch(bm)
 	menu->addMember(option3);
 	menu->setForegroundColor(FG_BLACK);
 
-	Tween* tween = new Tween(SinIn, sword, 37, 1, .75);
+	tween = new Tween(SinIn, sword, 37, 1, .75);
 	tween->play();
 
 	myFrames.push_back(title);
@@ -65,19 +54,15 @@ MainMenu::~MainMenu()
 {
 }
 
+void MainMenu::init()
+{
+	timer.reset();
+	tween->play();
+}
+
 void MainMenu::update(float delta)
 {
 	Branch::update(delta);
-
-	for (unsigned int i = 0; i < myTweens.size(); i++)
-	{
-		myTweens.at(i)->update();
-	}
-
-	for(unsigned int i = 0; i < myFrames.size(); i++)
-	{
-		myFrames.at(i)->update(delta);
-	}
 }
 
 void MainMenu::draw(Canvas* canvas)
@@ -116,7 +101,6 @@ void MainMenu::input(float delta)
 	{
 		if (temp == 0)
 		{
-			MainMenu* link = new MainMenu(manager);
 			ClassChoice* combat = new ClassChoice(manager);
 			manager->swap(combat);
 		}

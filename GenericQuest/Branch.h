@@ -17,6 +17,7 @@ class Branch
     public:
 		Branch(BranchManager* bm = NULL);
 		virtual ~Branch();
+		virtual void init();
 		virtual void update(float delta);
 		virtual void draw(Canvas* canvas);
         virtual void start(float delta);

@@ -240,5 +240,6 @@ void Reward::input(float delta)
 
 void Reward::end(float delta)
 {
+	link->init();
 	manager->swap(link);
 }

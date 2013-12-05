@@ -53,6 +53,7 @@ class Character
 		void setArea(string newArea);
 		void setPet(string newPet);
 		void setPetDmg(int cr);
+		void setInit(bool newInit);
 		Role getRole();
 		Stats getStats();
 		Stats getBaseStats();

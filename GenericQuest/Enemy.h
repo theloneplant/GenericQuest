@@ -18,10 +18,12 @@ class Enemy
 {
 	public:
 		Enemy();
+		Enemy(EnemyType type);
 		Enemy(int level);
 		~Enemy();
 		void inflict (int melee, int ranged, int magic);
 		void changeEnemy(int level);
+		void changeEnemy(EnemyType enemy);
 		void calculateStats();
 		Stats getStats();
 		Stats getBaseStats();

@@ -4,7 +4,12 @@
 
 Enemy::Enemy()
 {
-	changeEnemy(1);
+	changeEnemy(Rat);
+}
+
+Enemy::Enemy(EnemyType enemy)
+{
+	changeEnemy(enemy);
 }
 
 Enemy::Enemy(int level)
@@ -37,182 +42,163 @@ void Enemy::inflict (int melee, int ranged, int magic)
 
 void Enemy::changeEnemy(int level)
 {
+	int rand;
+	EnemyType enemy;
 	if (level <= 2)
 	{
-		int enemy = Random::random(Rat, Wolf);
-		if (enemy == Rat)
-		{
-			name = "Rat";
-			stats.health = 4;
-			stats.strength = 2;
-			stats.dexterity = 5;
-			stats.intelligence = 3;
-			baseStats = stats;
-			Item wep("Bite", Weapon, 1, 0, 1);
-			Item def("Hide", Armor, 0, 4, 0);
-			weapon = wep;
-			armor = def;
-			cr = 1;
-			calculateStats();
-		}
-		else if (enemy == Spider)
-		{
-			name = "Spider";
-			stats.health = 5;
-			stats.strength = 5;
-			stats.dexterity = 3;
-			stats.intelligence = 2;
-			baseStats = stats;
-			Item wep("Bite", Weapon, 2, 0, 1);
-			Item def("Carapace", Armor, 1, 2, 0);
-			weapon = wep;
-			armor = def;
-			cr = 2;
-			calculateStats();
-		}
-		else if (enemy == Wolf)
-		{
-			name = "Wolf";
-			stats.health = 5;
-			stats.strength = 6;
-			stats.dexterity = 3;
-			stats.intelligence = 1;
-			baseStats = stats;
-			Item wep("Bite", Weapon, 3, 0, 0);
-			Item def("Tough Hide", Armor, 1, 3, 0);
-			weapon = wep;
-			armor = def;
-			cr = 2;
-			calculateStats();
-		}
+		rand = Random::random(Rat, Wolf);
+		if (rand == Rat)
+			enemy = Rat;
+		else if (rand == Spider)
+			enemy = Spider;
+		else if (rand == Wolf)
+			enemy = Wolf;
 	}
 	else if (level  <= 4)
 	{
-		int enemy = Random::random(Goblin, Kobold);
-		if (enemy == Goblin)
-		{
-			name = "Goblin";
-			stats.health = 7;
-			stats.strength = 4;
-			stats.dexterity = 5;
-			stats.intelligence = 4;
-			baseStats = stats;
-			Item wep("Bow and Arrow", Weapon, 0, 4, 0);
-			Item def("Leather Armor", Armor, 2, 5, 1);
-			weapon = wep;
-			armor = def;
-			cr = 3;
-			calculateStats();
-		}
-		else if (enemy == Ghoul)
-		{
-			name = "Ghoul";
-			stats.health = 8;
-			stats.strength = 4;
-			stats.dexterity = 7;
-			stats.intelligence = 2;
-			baseStats = stats;
-			Item wep("Bite", Weapon, 3, 0, 2);
-			Item def("Festering Skin", Armor, 1, 5, 2);
-			weapon = wep;
-			armor = def;
-			cr = 4;
-			calculateStats();
-		}
-		else if (enemy == Centaur)
-		{
-			name = "Centaur";
-			stats.health = 9;
-			stats.strength = 4;
-			stats.dexterity = 7;
-			stats.intelligence = 4;
-			baseStats = stats;
-			Item wep("Bow and Arrow", Weapon, 0, 7, 0);
-			Item def("Tough Skin", Armor, 2, 6, 0);
-			weapon = wep;
-			armor = def;
-			cr = 4;
-			calculateStats();
-		}
-		else if (enemy == Kobold)
-		{
-			name = "Kobold";
-			stats.health = 8;
-			stats.strength = 7;
-			stats.dexterity = 4;
-			stats.intelligence = 3;
-			baseStats = stats;
-			Item wep("Shortsword", Weapon, 0, 7, 0);
-			Item def("Crude Armor", Armor, 2, 4, 1);
-			weapon = wep;
-			armor = def;
-			cr = 3;
-			calculateStats();
-		}
-	}
-	else if (level  <= 6)
-	{
-		int enemy = Random::random(Orc, Ogre);
-		if (enemy == Orc)
-		{
-		}
-		else if (enemy == Harpy)
-		{
-		}
-		else if (enemy == Sorcerer)
-		{
-		}
-		else if (enemy == Ogre)
-		{
-		}
-	}
-	else if (level  <= 8)
-	{
-		int enemy = Random::random(Basilisk, Giant);
-		if (enemy == Basilisk)
-		{
-		}
-		else if (enemy == Demon)
-		{
-		}
-		else if (enemy == Elemental)
-		{
-		}
-		else if (enemy == Giant)
-		{
-		}
-	}
-	else if (level  <= 10)
-	{
-		int enemy = Random::random(Succubus, IronGolem);
-		if (enemy == Succubus)
-		{
-		}
-		else if (enemy == Beholder)
-		{
-		}
-		else if (enemy == Wyvern)
-		{
-		}
-		else if (enemy == IronGolem)
-		{
-		}
+		rand = Random::random(Goblin, Kobold);
+		if (rand == Goblin)
+			enemy = Goblin;
+		else if (rand == Ghoul)
+			enemy = Ghoul;
+		else if (rand == Centaur)
+			enemy = Centaur;
+		else if (rand == Kobold)
+			enemy = Kobold;
 	}
 	else
 	{
-		int enemy = Random::random(Chimera, Lich);
-		if (enemy == Chimera)
-		{
-		}
-		else if (enemy == Dragon)
-		{
-		}
-		else if (enemy == Hydra)
-		{
-		}
-		else if (enemy == Lich)
-		{
-		}
+		rand = Random::random(Orc, Ogre);
+		if (rand == Orc)
+			enemy = Orc;
+		else if (rand == Harpy)
+			enemy = Harpy;
+		else if (rand == Sorcerer)
+			enemy = Sorcerer;
+		else if (rand == Ogre)
+			enemy = Ogre;
+	}
+	changeEnemy(enemy);
+}
+
+void Enemy::changeEnemy(EnemyType enemy)
+{
+	if (enemy == Rat)
+	{
+		name = "Rat";
+		stats.health = 4;
+		stats.strength = 2;
+		stats.dexterity = 5;
+		stats.intelligence = 3;
+		baseStats = stats;
+		Item wep("Bite", Weapon, 1, 0, 1);
+		Item def("Hide", Armor, 0, 4, 0);
+		weapon = wep;
+		armor = def;
+		cr = 1;
+		calculateStats();
+	}
+	else if (enemy == Spider)
+	{
+		name = "Spider";
+		stats.health = 5;
+		stats.strength = 5;
+		stats.dexterity = 3;
+		stats.intelligence = 2;
+		baseStats = stats;
+		Item wep("Bite", Weapon, 2, 0, 1);
+		Item def("Carapace", Armor, 1, 2, 0);
+		weapon = wep;
+		armor = def;
+		cr = 2;
+		calculateStats();
+	}
+	else if (enemy == Wolf)
+	{
+		name = "Wolf";
+		stats.health = 5;
+		stats.strength = 6;
+		stats.dexterity = 3;
+		stats.intelligence = 1;
+		baseStats = stats;
+		Item wep("Bite", Weapon, 3, 0, 0);
+		Item def("Tough Hide", Armor, 1, 3, 0);
+		weapon = wep;
+		armor = def;
+		cr = 2;
+		calculateStats();
+	}
+	else if (enemy == Goblin)
+	{
+		name = "Goblin";
+		stats.health = 7;
+		stats.strength = 4;
+		stats.dexterity = 5;
+		stats.intelligence = 4;
+		baseStats = stats;
+		Item wep("Bow and Arrow", Weapon, 0, 4, 0);
+		Item def("Leather Armor", Armor, 2, 5, 1);
+		weapon = wep;
+		armor = def;
+		cr = 3;
+		calculateStats();
+	}
+	else if (enemy == Ghoul)
+	{
+		name = "Ghoul";
+		stats.health = 8;
+		stats.strength = 4;
+		stats.dexterity = 7;
+		stats.intelligence = 2;
+		baseStats = stats;
+		Item wep("Bite", Weapon, 3, 0, 2);
+		Item def("Festering Skin", Armor, 1, 5, 2);
+		weapon = wep;
+		armor = def;
+		cr = 4;
+		calculateStats();
+	}
+	else if (enemy == Centaur)
+	{
+		name = "Centaur";
+		stats.health = 9;
+		stats.strength = 4;
+		stats.dexterity = 7;
+		stats.intelligence = 4;
+		baseStats = stats;
+		Item wep("Bow and Arrow", Weapon, 0, 7, 0);
+		Item def("Tough Skin", Armor, 2, 6, 0);
+		weapon = wep;
+		armor = def;
+		cr = 4;
+		calculateStats();
+	}
+	else if (enemy == Kobold)
+	{
+		name = "Kobold";
+		stats.health = 8;
+		stats.strength = 7;
+		stats.dexterity = 4;
+		stats.intelligence = 3;
+		baseStats = stats;
+		Item wep("Shortsword", Weapon, 0, 7, 0);
+		Item def("Crude Armor", Armor, 2, 4, 1);
+		weapon = wep;
+		armor = def;
+		cr = 3;
+		calculateStats();
+	}
+	else if (enemy == Orc)
+	{
+	}
+	else if (enemy == Harpy)
+	{
+	}
+	else if (enemy == Sorcerer)
+	{
+	}
+	else //enemy == Ogre
+	{
 	}
 }
 

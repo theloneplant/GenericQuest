@@ -18,8 +18,23 @@
 Combat::Combat(BranchManager* bm, Branch* newLink) : Branch(bm)
 {
 	link = newLink;
-
 	enemy = new Enemy(Character::player->getLevel());
+	init();
+}
+
+Combat::Combat(BranchManager* bm, Branch* newLink, EnemyType eType) : Branch(bm)
+{
+	link = newLink;
+	enemy = new Enemy(eType);
+	init();
+}
+
+Combat::~Combat()
+{
+}
+
+void Combat::init()
+{
 	string fileName = "combat/" + enemy->getName() + "Intro.txt";
 	playerDesc = new Text(true, fileName, true, 10, 250, 0, 1);
 	petDesc = new Text(false, "", true, 10, 250, 0, 1);
@@ -124,10 +139,6 @@ Combat::Combat(BranchManager* bm, Branch* newLink) : Branch(bm)
 	myFrames.push_back(enemyName);
 	myFrames.push_back(pHit);
 	myFrames.push_back(dist);
-}
-
-Combat::~Combat()
-{
 }
 
 void Combat::update(float delta)
