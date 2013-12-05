@@ -1,24 +1,23 @@
-#ifndef GAME_OVER
-#define GAME_OVER
+#ifndef NO_ADVENTURE
+#define NO_ADVENTURE
 
 #include "Timer.h"
-#include "Character.h"
 
 class BranchManager;
 class Branch;
 class Canvas;
 
+class Character;
 class Text;
 class Frame;
 class Animation;
-class StatusBar;
 class Menu;
 
-class GameOver : public Branch
+class NoAdventure : public Branch
 {
     public:
-		GameOver(BranchManager* bm);
-		~GameOver();
+		NoAdventure(BranchManager* bm);
+		~NoAdventure();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -26,11 +25,10 @@ class GameOver : public Branch
 		void end(float delta);
 
 	private:
-		Frame *gameOver, *death;
-		Tween *tween;
+		Text *text;
 		Menu *menu;
 
-		GameOver(const GameOver&);
-		GameOver& operator=(const GameOver&);
+		NoAdventure(const NoAdventure&);
+		NoAdventure& operator=(const NoAdventure&);
 };
 #endif

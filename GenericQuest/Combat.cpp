@@ -12,6 +12,7 @@
 #include "BranchManager.h"
 #include "Branch.h"
 #include "Reward.h"
+#include "GameOver.h"
 #include "MainMenu.h"
 #include "Combat.h"
 
@@ -658,19 +659,19 @@ void Combat::end(float delta)
 	int randHit = Random::random(1, 100);
 	if (Character::player->getRole() == Ranger)
 	{
-		if (Random::random(1, 100) > enemy->getStats().dodge)
+		if (randHit > enemy->getStats().dodge)
 		{
 			petHit = true;
 			if (randHit > CRIT)
 			{
 				Character::player->inflict(enemy->getStats().melee * 2, enemy->getStats().range * 2, enemy->getStats().magic * 2);
-				enemyDesc->setText(false, "Your " + Character::player->getPet() + " lets out a roar as it attacks the <LIGHTMAGENTA>" + enemy->getName() 
+				petDesc->setText(false, "Your " + Character::player->getPet() + " lets out a roar as it attacks the <LIGHTMAGENTA>" + enemy->getName() 
 					+ "<LIGHTGRAY>, ripping its knee apart and dealing <LIGHTRED>double damage<LIGHTGRAY>!");
 			}
 			else
 			{
 				Character::player->inflict(enemy->getStats().melee, enemy->getStats().range, enemy->getStats().magic);
-				enemyDesc->setText(false, "Your " + Character::player->getPet() + " attacks the <LIGHTMAGENTA>" + enemy->getName() 
+				petDesc->setText(false, "Your " + Character::player->getPet() + " attacks the <LIGHTMAGENTA>" + enemy->getName() 
 					+ "<LIGHTGRAY>, hitting it in its side.");
 			}
 		}
@@ -1079,6 +1080,9 @@ void Combat::fadeOut()
 {
 	if (timer.getTime() > 0.5f)
 	{
-		manager->swap(new Reward(manager, link, enemy->getCR()));
+		if (Character::player->getStats().health > 0)
+			manager->swap(new Reward(manager, link, enemy->getCR()));
+		else
+			manager->swap(new GameOver(manager));
 	}
 }

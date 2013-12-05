@@ -208,7 +208,22 @@
       <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
     </ClCompile>
     <ClCompile Include="Chapter1.cpp">
-      <Filter>Source Files\Actors\Frames\Animations</Filter>
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="Ch1Travel1.cpp">
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="Ch1Travel2.cpp">
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="Ch1Combat1.cpp">
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="Ch1Box.cpp">
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
+    </ClCompile>
+    <ClCompile Include="NoAdventure.cpp">
+      <Filter>Source Files\Branches\GenericQuest\Adventure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +330,21 @@
       <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
     </ClInclude>
     <ClInclude Include="Chapter1.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="Ch1Travel1.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="Ch1Travel2.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="Ch1Combat1.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="Ch1Box.h">
+      <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
+    </ClInclude>
+    <ClInclude Include="NoAdventure.h">
       <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
     </ClInclude>
   </ItemGroup>

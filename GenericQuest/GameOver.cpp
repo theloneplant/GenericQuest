@@ -9,7 +9,7 @@
 #include "MainMenu.h"
 #include "GameOver.h"
 
-GameOver::GameOver(BranchManager* bm, Branch* newLink) : Branch(bm)
+GameOver::GameOver(BranchManager* bm) : Branch(bm)
 {
 	timer.reset();
 

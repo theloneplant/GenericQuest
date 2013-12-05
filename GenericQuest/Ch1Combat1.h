@@ -1,24 +1,23 @@
-#ifndef GAME_OVER
-#define GAME_OVER
+#ifndef CH1_COMBAT1
+#define CH1_COMBAT1
 
 #include "Timer.h"
-#include "Character.h"
 
 class BranchManager;
 class Branch;
 class Canvas;
 
+class Character;
 class Text;
 class Frame;
 class Animation;
-class StatusBar;
 class Menu;
 
-class GameOver : public Branch
+class Ch1Combat1 : public Branch
 {
     public:
-		GameOver(BranchManager* bm);
-		~GameOver();
+		Ch1Combat1(BranchManager* bm, int input);
+		~Ch1Combat1();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -26,11 +25,10 @@ class GameOver : public Branch
 		void end(float delta);
 
 	private:
-		Frame *gameOver, *death;
-		Tween *tween;
+		Text *text;
 		Menu *menu;
 
-		GameOver(const GameOver&);
-		GameOver& operator=(const GameOver&);
+		Ch1Combat1(const Ch1Combat1&);
+		Ch1Combat1& operator=(const Ch1Combat1&);
 };
 #endif

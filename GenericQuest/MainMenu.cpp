@@ -14,7 +14,6 @@
 #include "Branch.h"
 #include "Help.h"
 #include "ClassChoice.h"
-#include "Combat.h"
 #include "MainMenu.h"
 
 MainMenu::MainMenu(BranchManager* bm) : Branch(bm)
@@ -101,8 +100,7 @@ void MainMenu::input(float delta)
 	{
 		if (temp == 0)
 		{
-			ClassChoice* combat = new ClassChoice(manager);
-			manager->swap(combat);
+			manager->swap(new ClassChoice(manager));
 		}
 		if (temp == 1)
 		{

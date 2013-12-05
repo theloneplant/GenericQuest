@@ -1,24 +1,23 @@
-#ifndef GAME_OVER
-#define GAME_OVER
+#ifndef CH1_TRAVEL2
+#define CH1_TRAVEL2
 
 #include "Timer.h"
-#include "Character.h"
 
 class BranchManager;
 class Branch;
 class Canvas;
 
+class Character;
 class Text;
 class Frame;
 class Animation;
-class StatusBar;
 class Menu;
 
-class GameOver : public Branch
+class Ch1Travel2 : public Branch
 {
     public:
-		GameOver(BranchManager* bm);
-		~GameOver();
+		Ch1Travel2(BranchManager* bm);
+		~Ch1Travel2();
 		void update(float delta);
 		void draw(Canvas* canvas);
         void start(float delta);
@@ -26,11 +25,10 @@ class GameOver : public Branch
 		void end(float delta);
 
 	private:
-		Frame *gameOver, *death;
-		Tween *tween;
+		Text *text;
 		Menu *menu;
 
-		GameOver(const GameOver&);
-		GameOver& operator=(const GameOver&);
+		Ch1Travel2(const Ch1Travel2&);
+		Ch1Travel2& operator=(const Ch1Travel2&);
 };
 #endif

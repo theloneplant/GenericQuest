@@ -186,7 +186,7 @@ void Reward::start(float delta)
 				if (timer.getTime() > 0.5f)
 				{
 					item->setHidden(false);
-					item->setText(false, "You found a <LIGHTCYAN>" + randomItem->getName());
+					item->setText(false, "You found: <LIGHTCYAN>" + randomItem->getName());
 					item->setPosition(CONSOLE_WIDTH / 2 - item->getDimension().x / 2, 20);
 				}
 			}
@@ -232,8 +232,9 @@ void Reward::input(float delta)
 				item.setName(randomItem->getName());
 				item.setStats(randomItem->getStats());
 				Character::player->addItem(item);
-				Character::player->giveGold(cash.gold, cash.silver, cash.copper);
 			}
+			Character::player->earnGold(cash.gold, cash.silver, cash.copper);
+			Character::player->calculateGold();
 		}
 	}
 }
