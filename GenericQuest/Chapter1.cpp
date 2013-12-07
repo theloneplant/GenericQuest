@@ -14,7 +14,7 @@ Chapter1::Chapter1(BranchManager* bm) : Branch(bm)
 
 	text1 = new Text(false, "Chapter 1", true, 50, 500, 0, 1);
 	text1->setPosition(CONSOLE_WIDTH / 2 - text1->getDimension().x / 2, 10);
-	text2 = new Text(false, "Welcome to <LIGHTGREEN>Foggybottom", true, 50, 500, 0, 1);
+	text2 = new Text(false, "Welcome to <AREA>", true, 50, 500, 0, 1);
 	text2->setPosition(CONSOLE_WIDTH / 2 - text2->getDimension().x / 2, 12);
 	text2->setPaused(true);
 

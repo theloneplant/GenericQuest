@@ -41,6 +41,13 @@ ClassChoice::ClassChoice(BranchManager* bm) : Branch(bm)
 	rAnim = new Animation("ranger.anim", 32, -15, true, false, 5);
 	wAnim = new Animation("wizard.anim", 51, -18, true, false, 6);
 
+	knight->setHidden(true);
+	ranger->setHidden(true);
+	wizard->setHidden(true);
+	kAnim->setHidden(true);
+	rAnim->setHidden(true);
+	wAnim->setHidden(true);
+
 	kTween = new Tween(SinOut, kAnim, 11, 6, .5);
 	kTween->add(knight);
 	rTween = new Tween(SinOut, rAnim, 32, 7, .5);
@@ -76,6 +83,7 @@ void ClassChoice::draw(Canvas* canvas)
 
 void ClassChoice::start(float delta)
 {
+
 	updateColors();
 
 	if (timer.getTime() > 1.5f)
@@ -84,16 +92,22 @@ void ClassChoice::start(float delta)
 	}
 	else if (timer.getTime() > 0.5f && !wPlayed)
 	{
+		wizard->setHidden(false);
+		wAnim->setHidden(false);
 		wTween->play();
 		wPlayed = true;
 	}
 	else if (timer.getTime() > 0.25f && !rPlayed)
 	{
+		ranger->setHidden(false);
+		rAnim->setHidden(false);
 		rTween->play();
 		rPlayed = true;
 	}
 	else if (timer.getTime() > 0 && !kPlayed)
 	{
+		knight->setHidden(false);
+		kAnim->setHidden(false);
 		kTween->play();
 		kPlayed = true;
 	}

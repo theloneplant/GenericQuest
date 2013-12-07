@@ -3,26 +3,26 @@
 
 Timer::Timer()
 {
-	start = GetTickCount();
+	start = clock();
 	oldTime = start;
 }
 
 void Timer::reset()
 {
-	start = GetTickCount();
+	start = clock();
 	oldTime = start;
 }
 
 float Timer::getDelta()
 {
-	float delta = ((GetTickCount() - oldTime) / 1000.0f);
-	oldTime = GetTickCount();
+	float delta = ((clock() - oldTime) / 1000.0f);
+	oldTime = clock();
 	return delta;
 }
 
 float Timer::getTime()
 {
-	return ((GetTickCount() - start) / 1000.0f);
+	return ((clock() - start) / 1000.0f);
 }
 
 bool Timer::hasElapsed(float elapsed)

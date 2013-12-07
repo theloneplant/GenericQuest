@@ -19,6 +19,8 @@
 MainMenu::MainMenu(BranchManager* bm) : Branch(bm)
 {
 	timer.reset();
+	manager->setGameStart(false);
+	Character::player->setInit(false);
 
 	title = new Frame("genericquest.fram", 1, 9);
 	title->setForegroundColor(FG_BLACK);
