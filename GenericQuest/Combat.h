@@ -36,7 +36,7 @@ class Combat : public Branch
 		Timer timer;
 		Enemy* enemy;
 		Menu* choice;
-		Text* enemyDesc, *playerDesc, *petDesc, //*dist,
+		Text* enemyDesc, *playerDesc, *petDesc,
 			*playerName, *enemyName, *dist;
 		Animation* playerStunFrame, *playerRootFrame,
 			*enemyStunFrame, *enemyRootFrame, 

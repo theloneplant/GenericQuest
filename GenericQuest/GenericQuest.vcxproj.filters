@@ -103,6 +103,12 @@
     <Filter Include="Header Files\Branches\GenericQuest\Adventure">
       <UniqueIdentifier>{54edea2a-5cd8-4202-af31-bf6750f13f19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\adventure">
+      <UniqueIdentifier>{63ccd092-70e8-4b3d-a3b2-9ce785eb5545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\combat">
+      <UniqueIdentifier>{b015fc05-4231-4e4e-9377-3f9a4f4c66ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -347,5 +353,142 @@
     <ClInclude Include="NoAdventure.h">
       <Filter>Header Files\Branches\GenericQuest\Adventure</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="animation.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="chest.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="combat.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="cursor.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="flash.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="genericsword.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="glitch.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="knight.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="levelup.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ranger.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="test.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="textcursor.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="wizard.anim">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="classchoose.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="death.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="face.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gameover.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="genericquest.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="help.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="inventory.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="knight.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="name.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="pause.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ranger.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="role.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="stats.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="victory.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="wizard.fram">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Test.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="adventure\ch1blacksmith.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\ch1box.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\ch1chapel.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\ch1graveyard.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\ch1inn.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\ch1travel1.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\ch1travel2.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\noadventure.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="adventure\start.txt">
+      <Filter>Resource Files\adventure</Filter>
+    </None>
+    <None Include="combat\GhoulIntro.txt">
+      <Filter>Resource Files\combat</Filter>
+    </None>
+    <None Include="combat\hit.anim">
+      <Filter>Resource Files\combat</Filter>
+    </None>
+    <None Include="combat\RatIntro.txt">
+      <Filter>Resource Files\combat</Filter>
+    </None>
+    <None Include="combat\root.anim">
+      <Filter>Resource Files\combat</Filter>
+    </None>
+    <None Include="combat\SpiderIntro.txt">
+      <Filter>Resource Files\combat</Filter>
+    </None>
+    <None Include="combat\stun.anim">
+      <Filter>Resource Files\combat</Filter>
+    </None>
+    <None Include="combat\WolfIntro.txt">
+      <Filter>Resource Files\combat</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -925,6 +925,12 @@ void Combat::end(float delta)
 	//UPDATE DISTANCE
 	dist->setText(false, "Distance: " + to_string(static_cast<long long>(distance)) + "ft");
 
+	playerDesc->reset();
+	playerDesc->setTypewriter(true);
+	petDesc->reset();
+	petDesc->setTypewriter(true);
+	enemyDesc->reset();
+	enemyDesc->setTypewriter(true);
 	petDesc->setPaused(true);
 	enemyDesc->setPaused(true);
 	state = Start;

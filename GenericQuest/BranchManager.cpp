@@ -10,12 +10,14 @@
 BranchManager::BranchManager()
 {
 	gameStarted = false;
+	menuEnabled = false;
 	inMenu = false;
 }
 
 BranchManager::BranchManager(Branch* branch)
 {
 	gameStarted = false;
+	menuEnabled = false;
 	inMenu = false;
 	branches.push_back(branch);
 }
@@ -30,12 +32,12 @@ void BranchManager::update(float delta)
 {
 	branches.at(branches.size() - 1)->update(delta);
 
-	if (gameStarted && Input::keyHit())
+	if (Input::keyHit())
 	{
 		char input = Input::get();
 		if (input == 's' || input == 'p')
 		{
-			if (!inMenu)
+			if (gameStarted && !inMenu)
 			{
 				PlayerStats* stats = new PlayerStats(this);
 				push(stats);
@@ -44,7 +46,7 @@ void BranchManager::update(float delta)
 		}
 		else if (input == 'i' || input == 'b')
 		{
-			if (!inMenu)
+			if (gameStarted && !inMenu)
 			{
 				PlayerInventory* inv = new PlayerInventory(this);
 				push(inv);
@@ -57,7 +59,7 @@ void BranchManager::update(float delta)
 			{
 				branches.back()->setState(End);
 			}
-			else
+			else if(menuEnabled)
 			{
 				PauseMenu* pause = new PauseMenu(this);
 				push(pause);
@@ -109,6 +111,11 @@ void BranchManager::pop()
 void BranchManager::setGameStart(bool started)
 {
 	gameStarted = started;
+}
+
+void BranchManager::setMenuEnabled(bool enabled)
+{
+	menuEnabled = enabled;
 }
 
 void BranchManager::setInMenu(bool newInMenu)

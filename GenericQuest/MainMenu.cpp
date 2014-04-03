@@ -102,6 +102,7 @@ void MainMenu::input(float delta)
 	{
 		if (temp == 0)
 		{
+			manager->setMenuEnabled(true);
 			manager->swap(new ClassChoice(manager));
 		}
 		if (temp == 1)

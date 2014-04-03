@@ -17,11 +17,12 @@ class BranchManager
 		void push(Branch* newBranch);
 		void pop();
 		void setGameStart(bool started);
+		void setMenuEnabled(bool enabled);
 		void setInMenu(bool newInMenu);
 
 	private:
 		vector<Branch*> branches;
-		bool gameStarted, inMenu;
+		bool gameStarted, menuEnabled, inMenu;
 
 		BranchManager(const BranchManager&);
 		BranchManager& operator=(const BranchManager&);

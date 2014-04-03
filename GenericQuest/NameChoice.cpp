@@ -67,6 +67,7 @@ void NameChoice::draw(Canvas* canvas)
 void NameChoice::start(float delta)
 {
 	title->setHidden(false);
+	welcome->setHidden(true);
 	state = Input;
 }
 
@@ -91,6 +92,9 @@ void NameChoice::input(float delta)
 			if (valid)
 			{
 				title->setHidden(true);
+				welcome->setHidden(false);
+				welcome->setTypewriter(true);
+				welcome->reset();
 				state = End;
 				timer.reset();
 				tween->restart(namePrint->getPosition().x, 10);

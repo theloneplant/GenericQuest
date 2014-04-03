@@ -22,14 +22,21 @@ int main()
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(screen, &cursorInfo);
 
-	BranchManager bm;
-	MainMenu *blah = new MainMenu(&bm);
-	Text * fps = new Text(false, "yo", false, 0, 0, 0, 23);
-	bm.push(blah);
-	Canvas canvas;
+	int targetFPS = 60;
+	float delta = 0;
+	float frameTime = 1.0 / targetFPS;
 	Timer timer;
 	srand(time(0));
-	float delta = 0;
+
+	// Wait 0.1 second before starting
+	while (timer.getTime() < 0.1);
+	timer.reset();
+
+	BranchManager bm;
+	MainMenu *blah = new MainMenu(&bm);
+	Text * fps = new Text(false, "DEFAULT", false, 0, 0, 0, 23);
+	bm.push(blah);
+	Canvas canvas;
 
 	while(true)
 	{
@@ -38,13 +45,13 @@ int main()
 		fps->setText(false, "FPS: " + to_string(static_cast<long double>(frameRate)));
 		fps->update(delta);
 
-		if (frameRate <= 30)
+		if (delta >= frameTime)
 		{
 			Input::refresh();
 			bm.update(delta);
 			bm.draw(&canvas);
 			canvas.draw(screen);
-			fps->draw(&canvas);
+			// fps->draw(&canvas);
 			delta = 0;
 		}
 	}

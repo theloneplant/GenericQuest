@@ -149,6 +149,53 @@
     <ClInclude Include="Tween.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="adventure\ch1blacksmith.txt" />
+    <None Include="adventure\ch1box.txt" />
+    <None Include="adventure\ch1chapel.txt" />
+    <None Include="adventure\ch1graveyard.txt" />
+    <None Include="adventure\ch1inn.txt" />
+    <None Include="adventure\ch1travel1.txt" />
+    <None Include="adventure\ch1travel2.txt" />
+    <None Include="adventure\noadventure.txt" />
+    <None Include="adventure\start.txt" />
+    <None Include="animation.anim" />
+    <None Include="chest.anim" />
+    <None Include="classchoose.fram" />
+    <None Include="combat.anim" />
+    <None Include="combat\GhoulIntro.txt" />
+    <None Include="combat\hit.anim" />
+    <None Include="combat\RatIntro.txt" />
+    <None Include="combat\root.anim" />
+    <None Include="combat\SpiderIntro.txt" />
+    <None Include="combat\stun.anim" />
+    <None Include="combat\WolfIntro.txt" />
+    <None Include="cursor.anim" />
+    <None Include="death.fram" />
+    <None Include="face.fram" />
+    <None Include="flash.anim" />
+    <None Include="gameover.fram" />
+    <None Include="genericquest.fram" />
+    <None Include="genericsword.anim" />
+    <None Include="glitch.anim" />
+    <None Include="help.fram" />
+    <None Include="inventory.fram" />
+    <None Include="knight.anim" />
+    <None Include="knight.fram" />
+    <None Include="levelup.anim" />
+    <None Include="name.fram" />
+    <None Include="pause.fram" />
+    <None Include="ranger.anim" />
+    <None Include="ranger.fram" />
+    <None Include="role.fram" />
+    <None Include="stats.fram" />
+    <None Include="test.anim" />
+    <None Include="Test.txt" />
+    <None Include="textcursor.anim" />
+    <None Include="victory.fram" />
+    <None Include="wizard.anim" />
+    <None Include="wizard.fram" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

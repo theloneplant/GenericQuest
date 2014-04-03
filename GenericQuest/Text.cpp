@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "FileIO.h"
 #include "Symbol.h"
+#include "Color.h"
+#include "Input.h"
 #include "Canvas.h"
 #include "Frame.h"
 #include "Text.h"
@@ -37,6 +39,14 @@ Text::~Text()
 void Text::update(float delta)
 {
 	Actor::update(delta);
+
+	if (Input::keyHit())
+	{
+		if (Input::get() != 27) // Ignore Esc
+		{
+			typewriter = false;
+		}
+	}
 
 	if (typewriter && !paused) //If it's animated
 	{
@@ -120,6 +130,24 @@ void Text::draw(Canvas* canvas)
 		Frame::draw(canvas);
 }
 
+void Text::reset()
+{
+	Symbol replace;
+	replace.setChar(' ');
+	replace.setBackgroundColor(Color::BG_BLACK);
+	replace.setForegroundColor(Color::FG_LIGHTGRAY);
+	cursorX = cursorY = 0;
+	for (int y = 0; y < text.size(); y++)
+	{
+		for (int x = 0; x < text.at(y).size(); x++)
+		{
+			// Reset all symbols
+			setSymbol(replace, x, y);
+		}
+	}
+	finished = false;
+}
+
 void Text::setText(bool useFile, string file)
 {
 	FileIO::buildText(useFile, file, text, dimension);
@@ -138,6 +166,16 @@ void Text::setText(bool useFile, string file)
 void Text::setPaused( bool newPaused)
 {
 	paused = newPaused;
+}
+
+void Text::setTypewriter(bool type)
+{
+	typewriter = type;
+}
+
+void Text::setFinished(bool newFinished)
+{
+	finished = newFinished;
 }
 
 void Text::setForegroundColor(int color)

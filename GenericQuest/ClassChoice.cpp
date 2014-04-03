@@ -83,10 +83,9 @@ void ClassChoice::draw(Canvas* canvas)
 
 void ClassChoice::start(float delta)
 {
-
 	updateColors();
 
-	if (timer.getTime() > 1.5f)
+	if (timer.getTime() > 1.5f && wPlayed && rPlayed && kPlayed)
 	{
 		state = Input;
 	}
