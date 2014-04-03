@@ -41,9 +41,8 @@ Reward::Reward(BranchManager* bm, Branch* newLink, int cr) : Branch(bm)
 	Text* message = new Text(false, "", true, 15, 500, 0, 0);
 	Animation* cursor = new Animation("cursor.anim", 15, 10, true, false, 3);
 	cursor->play();
-	loot = new Text(false, "Loot everything!", false, 0, 0, 0, 0);
+	loot = new Text(false, "DEFAULT", false, 0, 0, 0, 0);
 	menu = new Menu(message, cursor, 0, 0, 72, 80);
-	menu->setPosition(CONSOLE_WIDTH / 2 - loot->getDimension().x / 2, 22);
 	menu->addMember(loot);
 	menu->setHidden(true);
 
@@ -65,7 +64,7 @@ Reward::Reward(BranchManager* bm, Branch* newLink, int cr) : Branch(bm)
 	flash->setHidden(true);
 	levelUp = new Animation("levelup.anim", 18, 10, true, true, 3);
 
-	if (Random::random(1, 100) > 50)
+	if (Random::random(1, 100) > 20)
 		giveItem = true;
 	else
 		giveItem = false;
@@ -185,6 +184,8 @@ void Reward::start(float delta)
 			{
 				if (timer.getTime() > 0.5f)
 				{
+					loot->setText(false, "Mine!");
+					menu->setPosition(CONSOLE_WIDTH / 2 - loot->getDimension().x / 2, 22);
 					item->setHidden(false);
 					item->setText(false, "You found: <LIGHTCYAN>" + randomItem->getName());
 					item->setPosition(CONSOLE_WIDTH / 2 - item->getDimension().x / 2, 20);
@@ -194,6 +195,8 @@ void Reward::start(float delta)
 			{
 				if (timer.getTime() > 0.5f)
 				{
+					loot->setText(false, "Cri evryteim");
+					menu->setPosition(CONSOLE_WIDTH / 2 - loot->getDimension().x / 2, 22);
 					item->setHidden(false);
 					item->setText(false, "You didn't find any new equipment :(");
 					item->setPosition(CONSOLE_WIDTH / 2 - item->getDimension().x / 2, 20);

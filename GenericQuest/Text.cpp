@@ -42,7 +42,9 @@ void Text::update(float delta)
 
 	if (Input::keyHit())
 	{
-		if (Input::get() != 27) // Ignore Esc
+		// Ignore keybound controls
+		char input = Input::get();
+		if (input != 27 && input != 's' && input != 'i' && input != 'b' && input != 'p')
 		{
 			typewriter = false;
 		}

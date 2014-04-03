@@ -131,7 +131,7 @@ void NameChoice::end(float delta)
 	if (tween->isFinished())
 	{
 		welcome->setPaused(false);
-		if (welcome->isFinished() && timer.getTime() > 4)
+		if (welcome->isFinished() && timer.getTime() > 4 || Input::keyHit())
 		{
 			Character::player->setName(name);
 			manager->setGameStart(true);

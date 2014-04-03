@@ -72,6 +72,7 @@ void PauseMenu::start(float delta)
 		else if (input == 1)
 		{
 			state = End;
+			manager->setMenuEnabled(false);
 			manager->setGameStart(false);
 			Character::player->setInit(false);
 			manager->cleanSwap(new MainMenu(manager));
