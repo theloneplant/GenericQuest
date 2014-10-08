@@ -1,5 +1,0 @@
-     You travel to the chapel to see if you can find anyone there. You walk inside the small building and see a podium at the end of the hall. The room smells foul.
-
-     As you observe the podium, you see a <LIGHTMAGENTA>Ghoul<LIGHTGRAY> feasting on a corpse behind it. The <LIGHTMAGENTA>Ghoul<LIGHTGRAY> notices you and charges.
-
-<LIGHTRED>Get ready for combat.

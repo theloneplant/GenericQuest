@@ -1,3 +1,0 @@
-     You travel to the graveyard to see if you can find anyone there. You walk around the barren yard and see a <LIGHTMAGENTA>Ghoul<LIGHTGRAY> scrounging through piles of mud. It notices you and gets ready to attack.
-
-<LIGHTRED>Get ready for combat.

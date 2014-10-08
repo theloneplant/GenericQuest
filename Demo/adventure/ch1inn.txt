@@ -1,5 +1,0 @@
-     You travel to the inn to see if you can find anyone there. You walk through the open door to find nobody inside. After some searching, you hear something walk through the door. 
-
-You turn around to see a <LIGHTMAGENTA>Ghoul<LIGHTGRAY> staring at you. It steadies itself, getting ready to attack.
-
-<LIGHTRED>Get ready for combat.

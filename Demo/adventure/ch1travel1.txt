@@ -1,7 +1,0 @@
-     You begin to walk towards the caravan with some trouble. You approach and get on right as it begins to move toward <AREA>. 
-
-A day passes.
-
-     The caravan is very close to <AREA> now, and should be arriving by evening. But as you begin to see it off in the distance, you hear something approaching you.
-
-<LIGHTRED>Get ready for combat.

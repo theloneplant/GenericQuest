@@ -1,5 +1,0 @@
-     You travel to the blacksmith to see if you can find anyone there. You knock on the door, but no one answers. You hear something behind you. 
-
-     As you turn around, you see a <LIGHTMAGENTA>Ghoul<LIGHTGRAY> approaching.
-
-<LIGHTRED>Get ready for combat.

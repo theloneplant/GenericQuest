@@ -38,7 +38,7 @@ void Chapter1::draw(Canvas* canvas)
 
 void Chapter1::start(float delta)
 {
-	if (timer.getTime() > 1.5 || Input::keyHit())
+	if (timer.getTime() > 1.5)
 	{
 		state = Input;
 		text2->setPaused(false);
@@ -56,6 +56,6 @@ void Chapter1::input(float delta)
 
 void Chapter1::end(float delta)
 {
-	if (timer.getTime() > 1 || Input::keyHit())
+	if (timer.getTime() > 1)
 		manager->swap(new AdventureStart(manager));
 }
