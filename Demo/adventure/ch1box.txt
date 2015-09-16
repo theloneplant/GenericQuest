@@ -1,0 +1,5 @@
+    You defeat the <LIGHTMAGENTA>Ghoul<LIGHTGRAY> and begin searching the area some more.
+
+     As you search, you come across a small box. The box has a note in front of it saying "<YELLOW>Content<LIGHTGRAY>."
+
+What do you do?
